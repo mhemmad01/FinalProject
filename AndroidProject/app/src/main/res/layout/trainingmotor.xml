@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/blue_light2"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/blue_light2"
+
+                android:scaleType="fitStart"
+                app:srcCompat="@android:drawable/ic_popup_sync"
+                tools:srcCompat="@android:drawable/ic_popup_sync" />
+
+            <LinearLayout
+                android:layout_width="682dp"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/btn_star_big_on" />
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/btn_star_big_on" />
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/btn_star_big_off" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/blue_light2"
+                android:scaleType="fitEnd"
+                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
+            android:background="@drawable/my_border3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_border3"
+
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="Level 3"
+                    android:textColor="@color/blue_light"
+                    android:textSize="40sp" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="485dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_border3"
+                    app:srcCompat="@drawable/ss2"
+                    tools:srcCompat="@drawable/ss2_removebg_preview" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_border3"
+                    android:fontFamily="sans-serif-black"
+
+                    android:gravity="center"
+                    android:text="Player"
+                    android:textColor="@color/blue_light"
+                    android:textSize="40sp" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="485dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_border3"
+                    app:srcCompat="@drawable/ss"
+                    tools:srcCompat="@drawable/ss_removebg_preview" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/my_border3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="453dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/blue_light"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center|start"
+                android:text="Mode: Training Motor"
+                android:textColor="@color/white"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="309dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/blue_light"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center|right"
+                android:text="Very Good"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="40sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/blue_light"
+                android:rotationY="180"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/abc_vector_test"
+                tools:srcCompat="@drawable/abc_vector_test" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
