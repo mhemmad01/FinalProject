@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 
@@ -17,12 +18,20 @@ public class MainActivity extends AppCompatActivity{//} implements MyRecyclerVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.diagnosted_mainpage);
+        PaintView SyncDiagnosisView1=new PaintView(this);
+        PaintView SyncDiagnosisView2=new PaintView(this);
+        //setContentView(paintView);
+        setContentView(R.layout.diagnosissync);
+        final ViewGroup SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
+        SyncviewGroup1.addView(SyncDiagnosisView1);
+        final ViewGroup SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
+        SyncviewGroup2.addView(SyncDiagnosisView2);
         getSupportActionBar().hide();
 
 /*        ArrayList<String> animalNames = new ArrayList<>();
         animalNames.add("Mhemmad");
         animalNames.add("Ayman");
+
         animalNames.add("Abdalla");
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.diangosidsList);
