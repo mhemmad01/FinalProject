@@ -16,8 +16,16 @@ public class SelectTrainMode extends AppCompatActivity {
         getSupportActionBar().hide();
     }
     public void StartSyncTrain(View view) {
+        SetTrainMode("Sync");
         Intent intent = new Intent(getApplicationContext(), TrainSync.class);
         startActivity(intent);
     }
-
+    public void StartMotorTrain(View view) {
+        SetTrainMode("Motor");
+        Intent intent = new Intent(getApplicationContext(), TrainMotor.class);
+        startActivity(intent);
+    }
+    public void SetTrainMode(String TrainMode){
+        this.TrainMode=TrainMode;
+    }
 }

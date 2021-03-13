@@ -24,6 +24,8 @@
             android:parentActivityName=".MainDiagnosed"></activity>
         <activity android:name=".TrainSync"
             android:parentActivityName=".SelectTrainMode"></activity>
+        <activity android:name=".TrainMotor"
+            android:parentActivityName=".SelectTrainMode"></activity>
     </application>
 
 </manifest>

@@ -76,6 +76,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/blue_light"
             android:fontFamily="sans-serif-black"
+            android:onClick="StartMotorTrain"
             android:text="Motoric"
             android:textSize="16sp"
             app:backgroundTint="@color/blue_light" />
