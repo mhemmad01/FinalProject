@@ -20,6 +20,10 @@
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainDiagnosed"
             android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".SelectTrainMode"
+            android:parentActivityName=".MainDiagnosed"></activity>
+        <activity android:name=".TrainSync"
+            android:parentActivityName=".SelectTrainMode"></activity>
     </application>
 
 </manifest>

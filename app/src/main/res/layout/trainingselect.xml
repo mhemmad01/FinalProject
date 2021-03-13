@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:alpha="0.8"
     android:background="#ECEBEB"
-    tools:context=".MainActivity">
+    tools:context=".SelectTrainMode">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -63,6 +63,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/blue_light"
             android:fontFamily="sans-serif-black"
+            android:onClick="StartSyncTrain"
             android:text="Synchrozation"
             android:textSize="16sp"
             app:backgroundTint="@color/blue_light" />

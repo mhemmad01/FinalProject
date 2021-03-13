@@ -22,15 +22,15 @@ public class MainActivity extends AppCompatActivity{//} implements MyRecyclerVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // PaintView SyncDiagnosisView1=new PaintView(this);
+        //PaintView SyncDiagnosisView1=new PaintView(this);
         //PaintView SyncDiagnosisView2=new PaintView(this);
         //setContentView(paintView);
         SetJob("Diagnosed");
         setContentView(R.layout.login);
-//        final ViewGroup SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
-//        SyncviewGroup1.addView(SyncDiagnosisView1);
-//        final ViewGroup SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
-//        SyncviewGroup2.addView(SyncDiagnosisView2);
+        //final ViewGroup SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
+        //SyncviewGroup1.addView(SyncDiagnosisView1);
+        //final ViewGroup SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
+        //SyncviewGroup2.addView(SyncDiagnosisView2);
         getSupportActionBar().hide();
 
 /*        ArrayList<String> animalNames = new ArrayList<>();
@@ -48,41 +48,16 @@ public class MainActivity extends AppCompatActivity{//} implements MyRecyclerVie
     public void LogIn(View view) {
     if(Job.equals("Diagnostic")) {
             Intent intent = new Intent(getApplicationContext(), MainDiagnostic.class);
-            //startActivity(intent);
-            startActivityForResult(intent,1);
+            startActivity(intent);
         }
         else if(Job.equals("Diagnosed")){
             Intent intent = new Intent(getApplicationContext(), MainDiagnosed.class);
-            startActivityForResult(intent, 2);
+            startActivity(intent);
         }
 
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-
-        if(data == null)
-            return;
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // check if the request code is same as what is passed  here it is 1
-        if(requestCode==1)
-        {
-            /*
-            String fname =data.getStringExtra("fname");
-            String lname = data.getStringExtra("lname");
-            String gender = data.getStringExtra("gender");
-            if(gender.equals("female")){
-                text.setText("Welcome Back Ms. " + fname + ", " + lname);
-            }else{
-                text.setText("Welcome Back Mr. " + fname + ", " + lname);
-            }
-            register.setText("again...");*/
-        }
-
-    }
     public void SetJob(String Job){
         this.Job=Job;
     }
