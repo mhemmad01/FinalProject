@@ -1,3 +1,5 @@
+git add . && git commit -m "v1" && git push origin mhemmad
+
 $ git pull
 Create the branch on your local machine and switch in this branch :
 

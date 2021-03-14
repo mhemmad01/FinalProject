@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="0.8"
-    tools:context=".MainActivity">
+    tools:context=".RegistrationActivity"
+    android:label="@string/app_name" android:name="registration"
+    >
 
     <ImageView
         android:id="@+id/imageView2"
@@ -45,7 +47,7 @@
             app:srcCompat="@drawable/untitled_removebg_preview__1_" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -59,7 +61,7 @@
 
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress2"
+            android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -72,7 +74,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress3"
+            android:id="@+id/editTextAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -85,6 +87,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -95,23 +98,24 @@
 
 
         <CheckBox
-            android:id="@+id/checkBox9"
+            android:id="@+id/checkBoxDiagnostic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Diagnostic"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:onClick="registration"
             android:text="Register"
             app:backgroundTint="@color/blue_light" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:alpha="0.8"
     android:background="#ECEBEB"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -46,7 +46,7 @@
             app:srcCompat="@drawable/untitled_removebg_preview__1_" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextUsername1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -60,6 +60,7 @@
 
 
         <EditText
+            android:id="@+id/editTextPassword1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -70,16 +71,17 @@
 
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:onClick="login"
             android:text="Login"
             app:backgroundTint="#ff33b5e5 " />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
