@@ -77,6 +77,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:onClick="login"
+
             android:text="Login"
             app:backgroundTint="#ff33b5e5 " />
 

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:alpha="0.8"
     android:background="#ECEBEB"
-    tools:context=".MainActivity">
+    android:onClick="StartTrain"
+    tools:context=".MainDiagnosed">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -48,12 +49,14 @@
             android:textSize="24sp" />
 
         <Button
+            android:id="@+id/o"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
+            android:onClick="StartTrain"
             android:text="Start Training"
             android:textSize="16sp"
             app:backgroundTint="@android:color/holo_blue_light" />

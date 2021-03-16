@@ -19,9 +19,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".RegistrationActivity"/>
         <activity android:name=".LoginActivity"/>
-
+        <activity android:name=".MainDiagnostic"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".MainDiagnosed"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".SelectTrainMode"
+            android:parentActivityName=".MainDiagnosed"></activity>
+        <activity android:name=".TrainSync"
+            android:parentActivityName=".SelectTrainMode"></activity>
+        <activity android:name=".TrainMotor"
+            android:parentActivityName=".SelectTrainMode"></activity>
     </application>
 
 </manifest>
