@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity{//} implements MyRecyclerVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosted_mainpage);
         getSupportActionBar().hide();
-        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent myIntent = new Intent(MainActivity.this, RegistrationActivity.class);
         MainActivity.this.startActivity(myIntent);
     }
 
