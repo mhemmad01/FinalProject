@@ -35,10 +35,13 @@ public class MainActivity extends AppCompatActivity {//} implements MyRecyclerVi
         //final ViewGroup SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
         //SyncviewGroup2.addView(SyncDiagnosisView2);
        // getSupportActionBar().hide();
-        Toast.makeText(getApplicationContext(), "Please xxxx...", Toast.LENGTH_SHORT)
-                .show();
+
+            Toast.makeText(getApplicationContext(), "Please xxxx...", Toast.LENGTH_SHORT)
+                    .show();
+
         Intent myIntent = new Intent(getApplicationContext(), LoginActivity.class);
        startActivity(myIntent);
+
     }
 
 

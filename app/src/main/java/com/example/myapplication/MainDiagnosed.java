@@ -13,6 +13,7 @@ public class MainDiagnosed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosted_mainpage);
         getSupportActionBar().hide();
+
     }
 
     public void StartTrain(View view) {
