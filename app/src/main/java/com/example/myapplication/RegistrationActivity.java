@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,9 @@ import java.sql.Statement;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private static final String url = "jdbc:mysql://sql6.freemysqlhosting.net:3306/sql6398951";
-    private static final String user = "sql6398951";
-    private static final String pass = "FjFtGjHgy1";
+    private static final String url = "jdbc:mysql://freedb.tech:3306/freedbtech_FinalProject";
+    private static final String user = "freedbtech_mhemmad";
+    private static final String pass = "Mhmd12345.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,11 @@ public class RegistrationActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    public void gotoLogin(View view){
+        Intent myIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
+        RegistrationActivity.this.startActivity(myIntent);
+        finish();
+    }
      public void registration(View view){
         String Username = ((EditText)findViewById(R.id.editTextUsername)).getText().toString();
         String FullName = ((EditText)findViewById(R.id.editTextFullName)).getText().toString();

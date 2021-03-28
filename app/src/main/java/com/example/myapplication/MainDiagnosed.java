@@ -15,6 +15,7 @@ public class MainDiagnosed extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+
     public void StartTrain(View view) {
         Intent intent = new Intent(getApplicationContext(), SelectTrainMode.class);
         startActivity(intent);

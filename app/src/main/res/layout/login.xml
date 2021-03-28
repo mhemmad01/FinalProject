@@ -88,6 +88,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:onClick="gotoRegistration"
             android:text="Create Account"
             android:textColor="#ff33b5e5 " />
 
