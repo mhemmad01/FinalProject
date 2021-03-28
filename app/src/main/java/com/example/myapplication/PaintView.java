@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,13 +10,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class PaintView extends View {
     public ViewGroup.LayoutParams params;
     private Path path=new Path();
     private Paint brush=new Paint();
-
+    private Context a;
+    private  boolean flag=true;
     public PaintView(Context context) {
         super(context);
+        flag=true;
+        a=context;
         brush.setAntiAlias(true);
         brush.setColor(Color.BLACK);
         brush.setStyle(Paint.Style.STROKE);
@@ -29,16 +35,21 @@ public class PaintView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         float pointX=event.getX();
         float pointY=event.getY();
-
-        switch (event.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                path.moveTo(pointX,pointY);
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                path.lineTo(pointX,pointY);
-                break;
-            default:
-                return false;
+        if(flag==true) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    path.moveTo(pointX, pointY);
+                    return true;
+                case MotionEvent.ACTION_MOVE:
+                    path.lineTo(pointX, pointY);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    flag=false;
+                    TrainMotor.Instance.drawfinish();
+                    break;
+                default:
+                    return false;
+            }
         }
         postInvalidate();
         return false;

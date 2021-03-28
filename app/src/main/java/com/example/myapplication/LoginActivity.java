@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -29,15 +31,19 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        /*
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+       /* AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.starsdialog, null);
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();*/
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
     public void login(View view){
         String Username = ((EditText)findViewById(R.id.editTextUsername1)).getText().toString();
         String Password = ((EditText)findViewById(R.id.editTextPassword1)).getText().toString();
