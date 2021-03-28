@@ -25,7 +25,7 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
     }
 
     public void login(View view){
@@ -64,6 +64,7 @@ public class LoginActivity  extends AppCompatActivity {
                 ResultSet rs = st.executeQuery("select distinct * from users WHERE username='"+Username+"'");
                 ResultSetMetaData rsmd = rs.getMetaData();
 
+                System.out.println("xs");
                 if (rs.next()) {
                     if(rs.getString(3).equals(Password))
                     {

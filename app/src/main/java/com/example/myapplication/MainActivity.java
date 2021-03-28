@@ -28,15 +28,17 @@ public class MainActivity extends AppCompatActivity {//} implements MyRecyclerVi
         //PaintView SyncDiagnosisView1=new PaintView(this);
         //PaintView SyncDiagnosisView2=new PaintView(this);
         //setContentView(paintView);
-        SetJob("Diagnosed");
-        setContentView(R.layout.login);
+        //SetJob("diagnostic");
+        //setContentView(R.layout.login);
         //final ViewGroup SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
         //SyncviewGroup1.addView(SyncDiagnosisView1);
         //final ViewGroup SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
         //SyncviewGroup2.addView(SyncDiagnosisView2);
-        getSupportActionBar().hide();
-        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
-        MainActivity.this.startActivity(myIntent);
+       // getSupportActionBar().hide();
+        Toast.makeText(getApplicationContext(), "Please xxxx...", Toast.LENGTH_SHORT)
+                .show();
+        Intent myIntent = new Intent(getApplicationContext(), LoginActivity.class);
+       startActivity(myIntent);
     }
 
 
