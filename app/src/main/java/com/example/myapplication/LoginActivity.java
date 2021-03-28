@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,19 +20,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity  extends AppCompatActivity {
 
-    private static final String url = "jdbc:mysql://sql6.freemysqlhosting.net:3306/sql6398951";
-    private static final String user = "sql6398951";
-    private static final String pass = "FjFtGjHgy1";
+    private static final String url = "jdbc:mysql://freedb.tech:3306/freedbtech_FinalProject";
+    private static final String user = "freedbtech_mhemmad";
+    private static final String pass = "Mhmd12345.";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        /*
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.starsdialog, null);
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
-        dialog.show();
+        dialog.show();*/
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
     }
 
@@ -42,6 +46,13 @@ public class LoginActivity  extends AppCompatActivity {
         connectMySql.execute("");
 
     }
+
+    public void gotoRegistration(View view){
+        Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
+        LoginActivity.this.startActivity(myIntent);
+        finish();
+    }
+
     private class ConnectMySql_Registration extends AsyncTask<String, Void, String> {
         String res = "";
         String Username;
@@ -75,6 +86,8 @@ public class LoginActivity  extends AppCompatActivity {
                     if(rs.getString(3).equals(Password))
                     {
                         res= "Connected!!";
+                        User usr = new User(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(4),Integer.parseInt(rs.getString(5))==1,Integer.parseInt(rs.getString(3)));
+                        User.currentUser=usr;
                     }else{
                         res= "Password Are Incorrect";
                     }
@@ -94,7 +107,18 @@ public class LoginActivity  extends AppCompatActivity {
         protected void onPostExecute(String result) {
             Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT)
                     .show();
-            // Log.i("sqlresult", result);
+            if(result=="Connected!!") {
+                //R.string.fullname
+                if (User.currentUser.isDiagnostic()) {
+                    Intent myIntent = new Intent(LoginActivity.this, MainDiagnostic.class);
+                    LoginActivity.this.startActivity(myIntent);
+                    finish();
+                } else {
+                    Intent myIntent = new Intent(LoginActivity.this, MainDiagnosed.class);
+                    LoginActivity.this.startActivity(myIntent);
+                    finish();
+                }
+            }
         }
     }
 

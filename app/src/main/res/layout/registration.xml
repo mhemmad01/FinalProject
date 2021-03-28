@@ -121,6 +121,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:onClick="gotoLogin"
             android:text="Log into an Existing Accont"
             android:textColor="@color/blue_light2" />
 
