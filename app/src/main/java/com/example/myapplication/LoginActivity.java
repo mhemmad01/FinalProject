@@ -31,11 +31,6 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-       /* AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        View mView = getLayoutInflater().inflate(R.layout.starsdialog, null);
-        mBuilder.setView(mView);
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();*/
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
     }
     @Override
@@ -86,8 +81,6 @@ public class LoginActivity  extends AppCompatActivity {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select distinct * from users WHERE username='"+Username+"'");
                 ResultSetMetaData rsmd = rs.getMetaData();
-
-                System.out.println("xs");
                 if (rs.next()) {
                     if(rs.getString(3).equals(Password))
                     {
@@ -101,7 +94,6 @@ public class LoginActivity  extends AppCompatActivity {
                 else{
                     res = "Username Are incorrect";
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
                 res = e.toString();

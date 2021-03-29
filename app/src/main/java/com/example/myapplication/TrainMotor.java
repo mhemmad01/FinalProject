@@ -10,26 +10,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
-
-import static java.lang.Thread.sleep;
 
 public class TrainMotor extends AppCompatActivity {
     public static TrainMotor Instance;
     PaintView MotorDiagnosisView1;
     private String lastLevel2;
     AlertDialog dialog;
+    private TextView level;
     private int[] textureArrayWin = {
             R.drawable.qw,
             R.drawable.ss2,
@@ -38,11 +31,14 @@ public class TrainMotor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ImageView myImageView;
+        int currentlevel;
         Instance=this;
         setContentView(R.layout.trainingmotor);
+        level=(TextView)findViewById(R.id.textView13);
         lastLevel2 = getIntent().getStringExtra("NextLevel");
+        currentlevel=Integer.parseInt(lastLevel2)+1;
+        level.setText("Level "+currentlevel);
         myImageView = (ImageView)findViewById(R.id.imageView4);
         //Drawable drawableId =getResources().getDrawable(textureArrayWin[lastLevel]);
         myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2)]);

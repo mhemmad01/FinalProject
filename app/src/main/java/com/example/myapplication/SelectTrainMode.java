@@ -3,6 +3,8 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +25,7 @@ public class SelectTrainMode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         a=this;
         setContentView(R.layout.trainingselect);
-        getSupportActionBar().hide();
+
     }
     public void StartSyncTrain(View view) {
         SetTrainMode("Sync");
@@ -40,7 +42,12 @@ public class SelectTrainMode extends AppCompatActivity {
         //intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
         //startActivity(intent);
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
