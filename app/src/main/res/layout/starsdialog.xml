@@ -6,7 +6,8 @@
     android:layout_height="400dp"
     android:layout_gravity="center"
     android:background="@drawable/my_border2"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".TrainMotor">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -63,8 +64,9 @@
             android:layout_height="100dp"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="20dp"
-            android:textSize="30dp"
-            android:text="NEXT" />
+            android:onClick="Next"
+            android:text="NEXT"
+            android:textSize="30dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

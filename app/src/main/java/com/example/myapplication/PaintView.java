@@ -57,6 +57,9 @@ public class PaintView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+
         canvas.drawPath(path,brush);
+
     }
 }
