@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical">
+    android:layout_gravity="center_vertical"
+    tools:context=".MyDiagnosed">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="-347dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,11 +62,11 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="580dp">
+            android:layout_height="wrap_content">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:background="@color/blue_light"
                 android:padding="20dp">
 
@@ -101,204 +104,12 @@
                     android:textSize="30sp" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="Ayman Odeh"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="24"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="Ayman91996"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-
-                    android:textSize="20sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="Mehemad Abdalah"
-
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="23"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="mehemad91997"
-                    android:textAllCaps="true"
-
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="Sami Odeh"
-                    android:textAllCaps="true"
-
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="16"
-
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-
-                    android:text="sami123"
-                    android:textAllCaps="true"
-
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="Sami Abod"
-                    android:textAllCaps="true"
-
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:text="18"
-
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_border2"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:padding="40dp"
-
-                    android:text="abod123"
-                    android:textAllCaps="true"
-
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </TableRow>
-
         </TableLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/diagnosedView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <ImageButton
             android:id="@+id/imageButton2"

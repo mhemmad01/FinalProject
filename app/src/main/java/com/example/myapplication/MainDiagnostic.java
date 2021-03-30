@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,13 @@ public class MainDiagnostic extends AppCompatActivity{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.diagnostic_mainpage);
             getSupportActionBar().hide();
+            ((TextView)findViewById(R.id.diagnosticTitle)).setText("Hi "+User.currentUser.getFullName());
         }
+
+    public void gotoMyDiagnosed(View view) {
+        Intent myIntent = new Intent(this, MyDiagnosed.class);
+        this.startActivity(myIntent);
+    }
 /*
         public void backtomain(View view) {
 
