@@ -1,8 +1,14 @@
 package com.example.myapplication;
 
+
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,10 +22,17 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        getSupportActionBar().hide();
-        instance = this;
-    }
 
+        instance = this;
+
+        //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
     public void login(View view){
         String Username = ((EditText)findViewById(R.id.editTextUsername1)).getText().toString();
         String Password = ((EditText)findViewById(R.id.editTextPassword1)).getText().toString();
@@ -41,6 +54,7 @@ public class LoginActivity  extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
                     .show();
         }
+
 
         @Override
         protected Boolean doInBackground(String... params) {
