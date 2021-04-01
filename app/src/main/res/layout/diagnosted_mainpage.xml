@@ -38,6 +38,7 @@
 
 
         <TextView
+            android:id="@+id/diagnosedTitle"
             android:layout_width="252dp"
             android:layout_height="43dp"
             android:layout_gravity="center"

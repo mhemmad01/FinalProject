@@ -83,6 +83,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 else{
                     st.executeUpdate("INSERT INTO users (Username, Password, FullName, isDiagnostic, Age)  VALUES('"+Username+"', '"+Password+"','"+FullName+"','"+isDiagnostic+"','"+Age+"')");
+                    st.executeUpdate("INSERT INTO diagnoseds (diagnosed, diagnostic)  VALUES('"+Username+"', 'admin')");
+
                     res = "Account Registred Successfully, You can login now...";
                 }
 

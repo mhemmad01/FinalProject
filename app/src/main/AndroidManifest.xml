@@ -36,6 +36,7 @@
             android:parentActivityName=".SelectTrainMode"></activity>
         <activity android:name=".TrainMotor"
             android:parentActivityName=".SelectTrainMode"></activity>
+        <activity android:name=".MyDiagnosed"/>
     </application>
 
 </manifest>

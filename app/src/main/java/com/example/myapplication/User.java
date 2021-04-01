@@ -1,7 +1,13 @@
 package com.example.myapplication;
 
+import com.example.myapplication.diagnosed_model.Diagnosed;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class User {
     public static User currentUser;
+    public static ArrayList<Diagnosed> diagnoseds;
     private int id;
     private String username;
     private String fullName;
