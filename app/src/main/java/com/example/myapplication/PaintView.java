@@ -32,6 +32,8 @@ public class PaintView extends View {
         brush.setStrokeJoin(Paint.Join.ROUND);
         brush.setStrokeWidth(8f);
         params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        this.setDrawingCacheEnabled(true);
+
     }
     public Bitmap get(){
         return this.getDrawingCache();

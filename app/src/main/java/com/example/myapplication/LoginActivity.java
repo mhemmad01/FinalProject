@@ -84,6 +84,9 @@ public class LoginActivity  extends AppCompatActivity {
 
 
     }
+
+
+
     public void gotoRegistration(View view){
         Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
         LoginActivity.this.startActivity(myIntent);

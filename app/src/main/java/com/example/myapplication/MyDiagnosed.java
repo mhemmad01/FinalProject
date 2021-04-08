@@ -1,7 +1,13 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -47,4 +53,52 @@ public class MyDiagnosed extends AppCompatActivity{
         }
     };
 
+
+        public void addDiagnosed(View v){
+            AddDiagnosedQuery ex=new AddDiagnosedQuery(User.currentUser.getUsername(),((EditText)findViewById(R.id.editTextTextDiagnosedUsername)).getText().toString());
+            ex.execute();
+        }
+
+
+    private class AddDiagnosedQuery extends AsyncTask<String, Void, Boolean> {
+        String diagnosticUsername;
+        String diagnosedUsername;
+        public AddDiagnosedQuery(String diagnosticUsername, String diagnosedUsername){
+            this.diagnosticUsername=diagnosticUsername;
+            this.diagnosedUsername=diagnosedUsername;
+
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(MyDiagnosed.this, "Please wait...", Toast.LENGTH_SHORT)
+                    .show();
+        }
+
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            return dbConnection.AddDiagnosed(diagnosticUsername,diagnosedUsername);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(result){
+                model.getDiagnoseds().setValue(User.diagnoseds);
+
+                Toast.makeText(MyDiagnosed.this, "User Added Successfully", Toast.LENGTH_SHORT)
+                        .show();
+                Log.i("xx", "onPostExecute: true ");
+            }else {
+                Toast.makeText(MyDiagnosed.this, "Can't add user, its not in system or its already assigned to someone", Toast.LENGTH_SHORT)
+                        .show();
+                Log.i("xx", "onPostExecute: False ");
+
+            }
+
+        }
+
+
     }
+
+}
