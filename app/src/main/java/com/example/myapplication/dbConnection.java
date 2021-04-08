@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
+import android.content.ContentValues;
 import android.util.Log;
 
 import com.example.myapplication.diagnosed_model.Diagnosed;
 
 import java.sql.Array;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -89,6 +91,38 @@ public class dbConnection {
             }
             st.close();
             return users;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+    public static Boolean addmotorlevel(String usr, int stars, int stage, int level, String img, ContentValues values
+    ) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("INSERT INTO motor (username, stage, level, img,stars)  VALUES('"+usr+"', '"+stage+"','"+level+"','"+values+"','"+stars+"')");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+    public static byte[] getimg(String username,int level,int stage) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from motor WHERE username='" + username  + "' AND stage='"+stage+"' AND level='"+level+"'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            if (rs.next()) {
+                Blob temp = rs.getBlob(4);
+                st.close();
+                return temp.getBytes(1,(int)temp.length());
+            }
+            return null;
         } catch (Exception throwables) {
             throwables.printStackTrace();
             return null;

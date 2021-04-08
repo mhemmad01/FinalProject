@@ -19,6 +19,7 @@ public class MainDiagnosed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosted_mainpage);
+        if(User.currentUser!=null)
         ((TextView)findViewById(R.id.diagnosedTitle)).setText("Hi "+User.currentUser.getFullName());
 
     }
