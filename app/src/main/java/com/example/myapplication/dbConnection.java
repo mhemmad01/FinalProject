@@ -56,6 +56,31 @@ public class dbConnection {
         }
         return false;
     }
+    public static boolean AddDiagnosed(String Diagnostic, String Diagnosed){
+        try {
+
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select distinct * from diagnoseds WHERE diagnosed='"+Diagnosed+"' AND diagnostic='admin'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            if (rs.next()) {
+                Log.i("1", "AddDiagnosed: ");
+                st.executeUpdate("UPDATE diagnoseds SET diagnostic ='"+ Diagnostic+ "' WHERE diagnosed='"+Diagnosed+"' AND diagnostic='admin'");
+                st.close();
+                User.diagnoseds=getDiagnosedForUser(Diagnostic);
+                return true;
+            }
+            else{
+                st.close();
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public static User getUser(String username) {
         Statement st = null;

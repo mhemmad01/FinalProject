@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:alpha="0.8"
     android:background="#ECEBEB"
-    tools:context=".MainActivity">
+    tools:context=".SelectDiagnosisMode">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -65,7 +65,7 @@
             android:background="@drawable/my_border2">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/diangosidsList"
+                android:id="@+id/diagnosedsView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +81,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-black"
+            android:onClick="StartSyncTrain"
             android:text="Synchrozation"
             android:textSize="16sp"
             app:backgroundTint="@android:color/holo_blue_light" />
@@ -92,6 +93,7 @@
             android:layout_margin="10dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
+            android:onClick="StartMotorTrain"
             android:text="Motoric"
             android:textSize="16sp"
             app:backgroundTint="@android:color/holo_blue_light" />

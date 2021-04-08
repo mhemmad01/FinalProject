@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TableRow
+        android:id="@+id/diagnosisrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/diagnosedName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/my_border2"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Ayman Odeh"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/diagnosedAge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/my_border2"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="20"
+            android:textAllCaps="true"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/diagnosedUsername"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/my_border2"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Ayman91996"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </TableRow>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -109,16 +109,37 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/diagnosedView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/imageButton2"
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/white"
-            android:scaleType="fitEnd"
-            app:srcCompat="@android:drawable/ic_input_add"
-            tools:srcCompat="@android:drawable/ic_input_add" />
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="122dp"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:onClick="addDiagnosed"
+                android:scaleType="fitEnd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_input_add"
+                tools:srcCompat="@android:drawable/ic_input_add" />
+
+            <EditText
+                android:id="@+id/editTextTextDiagnosedUsername"
+                android:layout_width="338dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

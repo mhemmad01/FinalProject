@@ -108,8 +108,9 @@ public class TrainMotor extends AppCompatActivity {
        // Bitmap bmp=BitmapFactory.decodeByteArray(b , 0, b.length);
         // ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         // bit.compress(Bitmap.CompressFormat.JPEG, 90, b);
-        ImageView image = (ImageView) findViewById(R.id.imageView4);
-        image.setImageBitmap(bitmap3);
+        ImageView image = (ImageView) findViewById(R.id.imageView2);
+        image.setImageBitmap(MotorviewGroup1.getDrawingCache());
+
         /*
         ContentValues values = new ContentValues();
         values.put("img",  b);

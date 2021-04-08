@@ -1,25 +1,29 @@
-package com.example.myapplication.diagnosed_model;
+package com.example.myapplication.diagnosis_model;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.diagnosed_model.Diagnosed;
 
 import java.util.List;
 
 
-public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.ViewHolder> {
+public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.ViewHolder> {
 
     public List<Diagnosed> mDiagnoseds;
-    public static DiagnosedAdapter instance;
+    public static DiagnosisAdapter instance;
     // Pass in the contact array into the constructor
-    public DiagnosedAdapter(List<Diagnosed> diagnoseds) {
+    public DiagnosisAdapter(List<Diagnosed> diagnoseds) {
         mDiagnoseds = diagnoseds;
         instance=this;
     }
@@ -30,7 +34,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // Inflate the custom layout
-        View TransactionrawView = inflater.inflate(R.layout.diagnosed_row, parent, false);
+        View TransactionrawView = inflater.inflate(R.layout.diagnosis_row, parent, false);
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(TransactionrawView);
         return viewHolder;
@@ -72,13 +76,16 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
         @Override
         public boolean onLongClick(View v) { ;
-            removeAt(getAdapterPosition());
+            //removeAt(getAdapterPosition());
+            v.setBackgroundColor(Color.RED);
+            Log.i("longcolor", "onClick: ");
             return true;
         }
 
         @Override
         public void onClick(View v) {
-
+           v.setBackgroundColor(Color.RED);
+            Log.i("color", "onClick: ");
         }
     }
     public void removeAt(int position) {
