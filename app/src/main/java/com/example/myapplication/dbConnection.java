@@ -96,12 +96,11 @@ public class dbConnection {
             return null;
         }
     }
-    public static Boolean addmotorlevel(String usr, int stars, int stage, int level, String img, ContentValues values
-    ) {
+    public static Boolean addmotorlevel(String usr, int stars, int stage, int level, String img) {
         Statement st = null;
         try {
             st = getConnection().createStatement();
-            st.executeUpdate("INSERT INTO motor (username, stage, level, img,stars)  VALUES('"+usr+"', '"+stage+"','"+level+"','"+values+"','"+stars+"')");
+            st.executeUpdate("INSERT INTO motor (username, stage, level, img,stars)  VALUES('"+usr+"', '"+stage+"','"+level+"','"+img+"','"+stars+"')");
             st.close();
             return true;
         } catch (Exception throwables) {
@@ -110,7 +109,7 @@ public class dbConnection {
         }
     }
 
-    public static byte[] getimg(String username,int level,int stage) {
+    public static String getimg(String username,int level,int stage) {
         Statement st = null;
         try {
             st = getConnection().createStatement();
@@ -118,9 +117,10 @@ public class dbConnection {
             ResultSetMetaData rsmd = rs.getMetaData();
 
             if (rs.next()) {
-                Blob temp = rs.getBlob(4);
+                String temp=rs.getString(4);
+                //Blob temp = rs.getBlob(4);
                 st.close();
-                return temp.getBytes(1,(int)temp.length());
+                return temp;//.getBytes(0,(int)temp.length());
             }
             return null;
         } catch (Exception throwables) {

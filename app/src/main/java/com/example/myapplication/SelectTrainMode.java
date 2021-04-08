@@ -20,6 +20,7 @@ public class SelectTrainMode extends AppCompatActivity {
     static String TrainMode;
     SelectTrainMode a;
     static int lastLevel=0;
+    static int lastStage=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class SelectTrainMode extends AppCompatActivity {
         // Start the SecondActivity
         Intent intent = new Intent(SelectTrainMode.this, TrainMotor.class);
         intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
+        intent.putExtra("NextStage", Integer.toString(a.lastStage));
         SelectTrainMode.this.startActivityForResult(intent, 1);
        // Intent intent = new Intent(getApplicationContext(), TrainMotor.class);
         //intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
@@ -61,11 +63,13 @@ public class SelectTrainMode extends AppCompatActivity {
             if(action.equals("RESTART")){
                 Intent intent = new Intent(this, TrainMotor.class);
                 intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
+                intent.putExtra("NextStage", Integer.toString(a.lastStage));
                 startActivityForResult(intent, 1);
             }else if(action.equals("NEXT")){
                 a.lastLevel=a.lastLevel+1;
                 Intent intent = new Intent(this, TrainMotor.class);
                 intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
+                intent.putExtra("NextStage", Integer.toString(a.lastStage));
                 startActivityForResult(intent, 1);
             }
         }

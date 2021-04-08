@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,10 +20,12 @@ public class PaintView extends View {
     private Context a;
     private  boolean flag=true;
     public Canvas c;
+    public Bitmap scaledSprite=null;
     public PaintView(Context context) {
         super(context);
         flag=true;
         a=context;
+        this.setDrawingCacheEnabled(true);
         brush.setAntiAlias(true);
         brush.setColor(Color.RED);
         brush.setStyle(Paint.Style.STROKE);
@@ -30,7 +33,9 @@ public class PaintView extends View {
         brush.setStrokeWidth(8f);
         params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
-
+    public Bitmap get(){
+        return this.getDrawingCache();
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float pointX=event.getX();
@@ -58,6 +63,5 @@ public class PaintView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawPath(path,brush);
-        ;
     }
 }
