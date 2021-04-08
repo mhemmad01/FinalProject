@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -61,31 +62,76 @@ public class TrainMotor extends AppCompatActivity {
         level=(TextView)findViewById(R.id.textView13);
         lastLevel2 = getIntent().getStringExtra("NextLevel");
         lastStage2 = getIntent().getStringExtra("NextStage");
-        currentlevel=Integer.parseInt(lastLevel2)+1;
-        currentStage=Integer.parseInt(lastStage2)+1;
+        currentlevel=Integer.parseInt(lastLevel2);
+        currentStage=Integer.parseInt(lastStage2);
         level.setText("Level "+currentlevel+" Stage "+currentStage);
         myImageView = (ImageView)findViewById(R.id.imageView4);
-        myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2)]);
+        myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2)-1]);
         MotorDiagnosisView1=new PaintView(this);
         MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorTrain);
         MotorviewGroup1.addView(MotorDiagnosisView1);
     }
     public void drawfinish(){
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-            View mView = getLayoutInflater().inflate(R.layout.starsdialog, null);
-            mBuilder.setView(mView);
-            dialog = mBuilder.create();
-            dialog.show();
+        if(currentlevel==3){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Good job you finished stage "+currentStage+" if you have enougth stars " +
+                    "you will move to next stage if you don't you must improve levels to get more stars.");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "FINISH",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                            Intent intent = new Intent();
+                            intent.putExtra("action", "FINISH");
+                            setResult(Activity.RESULT_OK, intent);
+                            TrainMotor.this.finish();
+                        }
+                    });
+            builder1.setNegativeButton(
+                    "RESTART",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                            Intent intent = new Intent();
+                            intent.putExtra("action", "RESTART");
+                            setResult(Activity.RESULT_OK, intent);
+                            TrainMotor.this.finish();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }else {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("NICE");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "RESTART",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                            Restart();
+                        }
+                    });
+            builder1.setNegativeButton(
+                    "NEXT",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                            Next();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
     }
-    public void Restart(View view) {
-        dialog.cancel();
+    public void Restart() {
         Intent intent = new Intent();
         intent.putExtra("action", "RESTART");
         setResult(Activity.RESULT_OK, intent);
         TrainMotor.this.finish();
     }
-    public void Next(View view){
-        dialog.cancel();
+    public void Next(){
         Bitmap mydraw=MotorDiagnosisView1.get();
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
         mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
@@ -187,6 +233,8 @@ public class TrainMotor extends AppCompatActivity {
             }
 
         }
+
+        ///////
 
     }
 
