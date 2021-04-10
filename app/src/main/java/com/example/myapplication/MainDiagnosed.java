@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainDiagnosed extends AppCompatActivity {
     static String Username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,6 @@ public class MainDiagnosed extends AppCompatActivity {
         ((TextView)findViewById(R.id.diagnosedTitle)).setText("Hi "+User.currentUser.getFullName());
 
     }
-    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

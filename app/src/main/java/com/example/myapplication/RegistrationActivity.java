@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,14 +22,20 @@ public class RegistrationActivity extends AppCompatActivity {
     private static final String url = "jdbc:mysql://freedb.tech:3306/freedbtech_FinalProject";
     private static final String user = "freedbtech_mhemmad";
     private static final String pass = "Mhmd12345.";
-
+    static Dialog dialog3=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration);
         getSupportActionBar().hide();
     }
-
+    public void LoadingShow(){
+        // custom dialog
+        dialog3 = new Dialog(this);
+        dialog3.setContentView(R.layout.loadingicon);
+        dialog3.setTitle("Loading");
+        dialog3.show();
+    }
     public void gotoLogin(View view){
         Intent myIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
         RegistrationActivity.this.startActivity(myIntent);
@@ -40,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String Password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
         String Age = ((EditText)findViewById(R.id.editTextAge)).getText().toString();
         int isDiagnostic = (((CheckBox)findViewById(R.id.checkBoxDiagnostic)).isChecked())? 1 : 0;
-
+         LoadingShow();
          ConnectMySql_Registration connectMySql = new ConnectMySql_Registration(Username,FullName,Password,Age,isDiagnostic);
          connectMySql.execute("");
 
@@ -97,6 +104,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            dialog3.dismiss();
             Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT)
                     .show();
            // Log.i("sqlresult", result);

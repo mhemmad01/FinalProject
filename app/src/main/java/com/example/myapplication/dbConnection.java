@@ -121,6 +121,38 @@ public class dbConnection {
             return null;
         }
     }
+    public static Boolean savelastmotorlevel(User usr, int lastmotorlevel, int lastmotorstage) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE diagnoseds SET lasttrainmotorlevel ='"+ lastmotorlevel+ "', lasttrainmotorstage='"+ lastmotorstage+ "' WHERE diagnosed='"+usr.getUsername()+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+    public static int[] getlastmotorStagelevel(User usr) {
+        Statement st = null;
+        try {
+            int[] result=new int[2];
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from diagnoseds WHERE diagnosed='" + usr.getUsername()  + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            if (rs.next()) {
+                result[0]=rs.getInt(3);
+                result[1]=rs.getInt(4);
+                //Blob temp = rs.getBlob(4);
+                st.close();
+                return result;//.getBytes(0,(int)temp.length());
+            }
+            return null;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
     public static Boolean addmotorlevel(String usr, int stars, int stage, int level, String img) {
         Statement st = null;
         try {

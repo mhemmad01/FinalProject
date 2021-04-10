@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -48,6 +49,7 @@ public class TrainMotor extends AppCompatActivity {
     private int currentlevel;
     private int currentStage;
     private int stars;
+    static Dialog dialog3=null;
     private int[] textureArrayWin = {
             R.drawable.qw,
             R.drawable.ss2,
@@ -70,18 +72,30 @@ public class TrainMotor extends AppCompatActivity {
         MotorDiagnosisView1=new PaintView(this);
         MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorTrain);
         MotorviewGroup1.addView(MotorDiagnosisView1);
+        if(dialog3!=null)
+            dialog3.dismiss();
     }
     public void drawfinish(){
         if(currentlevel==3){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Good job you finished stage "+currentStage+" if you have enougth stars " +
                     "you will move to next stage if you don't you must improve levels to get more stars.");
-            builder1.setCancelable(true);
+            //builder1.setCancelable(true);
+
+
             builder1.setPositiveButton(
                     "FINISH",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
+                            LoadingShow();
+                            Bitmap mydraw=MotorDiagnosisView1.get();
+                            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                            mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
+                            byte [] b=baos.toByteArray();
+                            String temp= Base64.encodeToString(b, Base64.DEFAULT);
+                            AddMotorLevel s=new AddMotorLevel(User.currentUser.getUsername(),1,currentStage,currentlevel,temp);
+                            s.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
                             setResult(Activity.RESULT_OK, intent);
@@ -93,6 +107,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
+                            LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTART");
                             setResult(Activity.RESULT_OK, intent);
@@ -100,16 +115,18 @@ public class TrainMotor extends AppCompatActivity {
                         }
                     });
             AlertDialog alert11 = builder1.create();
+            alert11.setCanceledOnTouchOutside(false);
             alert11.show();
         }else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("NICE");
-            builder1.setCancelable(true);
+            //builder1.setCancelable(true);
             builder1.setPositiveButton(
                     "RESTART",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
+                            LoadingShow();
                             Restart();
                         }
                     });
@@ -118,12 +135,21 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
+                            LoadingShow();
                             Next();
                         }
                     });
             AlertDialog alert11 = builder1.create();
+            alert11.setCanceledOnTouchOutside(false);
             alert11.show();
         }
+    }
+    public void LoadingShow(){
+        // custom dialog
+        dialog3 = new Dialog(this);
+        dialog3.setContentView(R.layout.loadingicon);
+        dialog3.setTitle("Loading");
+        dialog3.show();
     }
     public void Restart() {
         Intent intent = new Intent();
@@ -146,6 +172,7 @@ public class TrainMotor extends AppCompatActivity {
         intent.putExtra("action", "NEXT");
         setResult(Activity.RESULT_OK, intent);
         TrainMotor.this.finish();
+
     }
 
     @Override
@@ -186,8 +213,8 @@ public class TrainMotor extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             if (result) {
                 Log.i("hhhh", "ccc");
-                getmotorImg a = new getmotorImg(usr, stage, level);
-                a.execute("");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
             } else {
                 Log.i("hhhh", "ffffff");
             }
