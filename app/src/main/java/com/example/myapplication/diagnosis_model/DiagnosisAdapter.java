@@ -72,6 +72,7 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
             diagnosedUsername=(TextView) itemView.findViewById(R.id.diagnosedUsername);
             this.itemView=itemView;
             itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -85,6 +86,8 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
         @Override
         public void onClick(View v) {
            v.setBackgroundColor(Color.RED);
+            Diagnosed temp = mDiagnoseds.get(getAdapterPosition());
+
             Log.i("color", "onClick: ");
         }
     }

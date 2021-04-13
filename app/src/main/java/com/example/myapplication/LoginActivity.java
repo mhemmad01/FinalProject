@@ -29,22 +29,8 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
-        View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.MATCH_PARENT,
-                Gravity.CENTER);
-        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
-        textviewTitle.setText("LogIn Page");
-        abar.setCustomView(viewActionBar, params);
-        abar.setDisplayShowCustomEnabled(true);
-        abar.setDisplayShowTitleEnabled(false);
-        abar.setDisplayHomeAsUpEnabled(true);
-        abar.setHomeButtonEnabled(true);
         instance = this;
-
+        getSupportActionBar().hide();
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
     }
     public void LoadingShow(){

@@ -65,6 +65,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
     public void StartMotorTrain(View view) {
         SetTrainMode("Motor");
         // Start the SecondActivity
+    //    model.getSelected().getValue().
         Intent intent = new Intent(SelectDiagnosisMode.this, TrainMotor.class);
         intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
         SelectDiagnosisMode.this.startActivityForResult(intent, 1);

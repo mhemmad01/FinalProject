@@ -91,7 +91,8 @@
             android:layout_margin="10dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
-            android:text="Exit"
+            android:onClick="Logout"
+            android:text="Logout"
             android:textSize="16sp"
             app:backgroundTint="@android:color/holo_blue_light" />
 

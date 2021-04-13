@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.TrainMotor;
+import com.example.myapplication.diagnosis_model.Diagnosis;
 
 import java.util.List;
 
