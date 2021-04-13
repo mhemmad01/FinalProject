@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.util.Log;
 
 import com.example.myapplication.diagnosed_model.Diagnosed;
+import com.example.myapplication.trainingresultmotor.MotorResult;
 
 import java.sql.Array;
 import java.sql.Blob;
@@ -153,6 +154,7 @@ public class dbConnection {
             return null;
         }
     }
+
     public static Boolean addmotorlevel(String usr, int stars, int stage, int level, String img) {
         Statement st = null;
         try {
@@ -163,6 +165,34 @@ public class dbConnection {
         } catch (Exception throwables) {
             throwables.printStackTrace();
             return false;
+        }
+    }
+
+    public static ArrayList<MotorResult> getTrainMotorResults(String username){
+        Statement st = null;
+        ArrayList<MotorResult> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+        ResultSet rs = st.executeQuery("select * from motor WHERE username='" + username  + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            Log.i("hhh", "getTrainMotorResults: 0 " + username);
+            while (rs.next()) {
+                Log.i("hhh", "getTrainMotorResults: 1");
+
+                MotorResult t = new MotorResult();
+                t.username = rs.getString(1);
+                t.stage = Integer.parseInt(rs.getString(2));
+                t.level = Integer.parseInt(rs.getString(3));
+                t.stars = Float.parseFloat(rs.getString(5));
+                t.img = rs.getString(4);
+                temp.add(t);
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
         }
     }
 
@@ -186,5 +216,18 @@ public class dbConnection {
         }
     }
 
+
+    public static Boolean updateMotorResultStars(MotorResult result) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE motor SET stars ='"+ result.stars+ "' WHERE username='"+result.username+"' AND stage='"+result.stage+"' AND level='"+result.level+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
 
 }

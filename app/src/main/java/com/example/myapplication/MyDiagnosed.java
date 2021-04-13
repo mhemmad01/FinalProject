@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.diagnosed_model.Diagnosed;
 import com.example.myapplication.diagnosed_model.DiagnosedAdapter;
 import com.example.myapplication.diagnosed_model.DiagnosedViewModel;
+import com.example.myapplication.trainingresultmotor.MotorResult;
 
 import java.util.ArrayList;
 
@@ -27,13 +28,13 @@ public class MyDiagnosed extends AppCompatActivity{
         public static ArrayList<Diagnosed> diagnoseds;
         public static DiagnosedAdapter adapter;
         public static Context context;
+        public static MyDiagnosed instance;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.mydiagnosed);
-            getSupportActionBar().hide();
-
+            instance=this;
             diagnoseds = User.diagnoseds;
             adapter = new DiagnosedAdapter(diagnoseds);
             rvDiagnosed = (RecyclerView) findViewById(R.id.diagnosedView);
@@ -99,6 +100,43 @@ public class MyDiagnosed extends AppCompatActivity{
         }
 
 
+    }
+
+
+
+
+    private class LoadResults extends AsyncTask<String, Void, ArrayList<MotorResult>> {
+        String usr;
+
+
+        public LoadResults(String usr) {
+            this.usr = usr;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected ArrayList<MotorResult> doInBackground(String... params) {
+            return dbConnection.getTrainMotorResults(usr);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<MotorResult>  result) {
+            if (result.size()>0) {
+                Log.i("hhhh", "ccc");
+                MotorResult.selected=result;
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Diagnosed extends User {
+    public static Diagnosed selected;
 
     public Diagnosed(User user){
         super(user.getId(),user.getUsername(),user.getFullName(),user.isDiagnostic(),user.getAge());

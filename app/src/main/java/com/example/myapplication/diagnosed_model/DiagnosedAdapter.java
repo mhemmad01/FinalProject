@@ -1,16 +1,28 @@
 package com.example.myapplication.diagnosed_model;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.LoginActivity;
+import com.example.myapplication.MainDiagnostic;
+import com.example.myapplication.MyDiagnosed;
 import com.example.myapplication.R;
+import com.example.myapplication.ViewDiagnosisResults;
+import com.example.myapplication.dbConnection;
+import com.example.myapplication.trainingresultmotor.MotorResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,7 +66,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener{
 
         public View itemView;
         public TextView diagnosedName;
@@ -68,16 +80,28 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
             diagnosedUsername=(TextView) itemView.findViewById(R.id.diagnosedUsername);
             this.itemView=itemView;
             itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public boolean onLongClick(View v) { ;
-            removeAt(getAdapterPosition());
+//            itemView.setBackgroundColor(Color.RED);
+//            Diagnosed.selected= mDiagnoseds.get(getAdapterPosition());
+//            Log.i("color", "onClick: ");
+//            Intent myIntent = new Intent(MyDiagnosed.instance, ViewDiagnosisResults.class);
+//            MyDiagnosed.instance.startActivity(myIntent);
             return true;
         }
 
         @Override
         public void onClick(View v) {
+            LoadResults lr = new LoadResults(mDiagnoseds.get(getAdapterPosition()).getUsername());
+            lr.execute("");
+            itemView.setBackgroundColor(Color.RED);
+            Diagnosed.selected= mDiagnoseds.get(getAdapterPosition());
+            Log.i("color", "onClick: ");
+//            Intent myIntent = new Intent(MyDiagnosed.instance, ViewDiagnosisResults.class);
+//            MyDiagnosed.instance.startActivity(myIntent);
 
         }
     }
@@ -107,4 +131,41 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
     public void updateList(){
 
     }
+
+    private class LoadResults extends AsyncTask<String, Void, ArrayList<MotorResult>> {
+        String usr;
+
+
+        public LoadResults(String usr) {
+            this.usr = usr;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected ArrayList<MotorResult> doInBackground(String... params) {
+            return dbConnection.getTrainMotorResults(usr);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<MotorResult>  result) {
+            if (result.size()>0) {
+                Log.i("hhhh", "ccc");
+                MotorResult.selected=result;
+                Intent myIntent = new Intent(MyDiagnosed.instance, ViewDiagnosisResults.class);
+                MyDiagnosed.instance.startActivity(myIntent);
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
+
 }

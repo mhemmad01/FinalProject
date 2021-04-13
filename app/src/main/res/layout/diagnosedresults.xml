@@ -335,7 +335,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/imageView37"
+                    android:id="@+id/originalMotorImage"
                     android:layout_width="454dp"
                     android:layout_height="match_parent"
 
@@ -343,7 +343,7 @@
                     app:srcCompat="@drawable/ss2" />
 
                 <ImageView
-                    android:id="@+id/imageView38"
+                    android:id="@+id/MotorResultImage"
                     android:layout_width="515dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/my_border3"

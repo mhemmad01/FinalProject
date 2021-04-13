@@ -23,9 +23,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegistrationActivity"/>
-        <activity android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".RegistrationActivity" android:parentActivityName=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".MainDiagnostic"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainDiagnosed"
@@ -36,8 +35,9 @@
             android:parentActivityName=".SelectTrainMode"></activity>
         <activity android:name=".TrainMotor"
             android:parentActivityName=".SelectTrainMode"></activity>
-        <activity android:name=".MyDiagnosed"/>
-        <activity android:name=".SelectDiagnosisMode"/>
+        <activity android:name=".MyDiagnosed"  android:parentActivityName=".MainDiagnostic"></activity>
+        <activity android:name=".SelectDiagnosisMode"  android:parentActivityName=".MainDiagnostic"></activity>
+        <activity android:name=".ViewDiagnosisResults"  android:parentActivityName=".MyDiagnosed"></activity>
     </application>
 
 </manifest>
