@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -61,6 +64,21 @@ public class TrainMotor extends AppCompatActivity {
         ImageView myImageView;
         Instance=this;
         setContentView(R.layout.trainingmotor);
+        //getSupportActionBar().setTitle("Training Motor");
+        final ActionBar abar = getSupportActionBar();
+        abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
+        View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
+        textviewTitle.setText("Training Motor");
+        abar.setCustomView(viewActionBar, params);
+        abar.setDisplayShowCustomEnabled(true);
+        abar.setDisplayShowTitleEnabled(false);
+        abar.setDisplayHomeAsUpEnabled(true);
+        abar.setHomeButtonEnabled(true);
         level=(TextView)findViewById(R.id.textView13);
         lastLevel2 = getIntent().getStringExtra("NextLevel");
         lastStage2 = getIntent().getStringExtra("NextStage");
@@ -94,7 +112,7 @@ public class TrainMotor extends AppCompatActivity {
                             mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
                             byte [] b=baos.toByteArray();
                             String temp= Base64.encodeToString(b, Base64.DEFAULT);
-                            AddMotorLevel s=new AddMotorLevel(User.currentUser.getUsername(),1,currentStage,currentlevel,temp);
+                            AddMotorLevel s=new AddMotorLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp);
                             s.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
@@ -166,7 +184,7 @@ public class TrainMotor extends AppCompatActivity {
         MotorviewGroup1.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
          MotorviewGroup1.layout(0, 0, MotorviewGroup1.getMeasuredWidth(), MotorviewGroup1.getMeasuredHeight());
-        AddMotorLevel s=new AddMotorLevel(User.currentUser.getUsername(),1,currentStage,currentlevel,temp);
+        AddMotorLevel s=new AddMotorLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp);
         s.execute("");
         Intent intent = new Intent();
         intent.putExtra("action", "NEXT");
@@ -179,6 +197,7 @@ public class TrainMotor extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+
         return true;
     }
     private class AddMotorLevel extends AsyncTask<String, Void, Boolean> {
@@ -221,6 +240,7 @@ public class TrainMotor extends AppCompatActivity {
 
         }
     }
+
         private class getmotorImg extends AsyncTask<String, Void, String> {
             String usr;
             int stage;

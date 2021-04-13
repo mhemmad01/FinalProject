@@ -57,6 +57,7 @@ public class dbConnection {
         }
         return false;
     }
+
     public static boolean AddDiagnosed(String Diagnostic, String Diagnosed){
         try {
 
@@ -82,7 +83,24 @@ public class dbConnection {
         return false;
     }
 
+    public static float getstars(User user){
+        Statement st = null;
+        float stars=0;
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select stars from motor WHERE username='" + user.getUsername() + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
 
+            while (rs.next()) {
+                stars+=Float.parseFloat(rs.getString(1));
+            }
+            st.close();
+            return stars;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+    }
     public static User getUser(String username) {
         Statement st = null;
         try {

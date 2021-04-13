@@ -2,16 +2,20 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
@@ -25,15 +29,29 @@ public class SelectTrainMode extends AppCompatActivity {
     SelectTrainMode a;
     private int lastLevel=1;
     private int lastStage=1;
-    private int previous_stage_stars=0;
+    private float stars=0;
+    static Dialog dialog3=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a=this;
         setContentView(R.layout.trainingselect);
-        lastLevel=LoginActivity.MotorStageAndLevel[0];
-        lastStage=LoginActivity.MotorStageAndLevel[1];
-        Log.i("hhhh", ""+lastLevel+" "+lastStage);
+        final androidx.appcompat.app.ActionBar abar = getSupportActionBar();
+        abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
+        View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
+        androidx.appcompat.app.ActionBar.LayoutParams params = new androidx.appcompat.app.ActionBar.LayoutParams(//Center the textview in the ActionBar !
+                androidx.appcompat.app.ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
+        textviewTitle.setText("Selecting Page");
+        abar.setCustomView(viewActionBar, params);
+        abar.setDisplayShowCustomEnabled(true);
+        abar.setDisplayShowTitleEnabled(false);
+        abar.setDisplayHomeAsUpEnabled(true);
+        abar.setHomeButtonEnabled(true);
+
+
     }
     public void setLastLevel(int lastLevel){
         this.lastLevel=lastLevel;
@@ -56,35 +74,23 @@ public class SelectTrainMode extends AppCompatActivity {
         startActivity(intent);
     }
     public void StartMotorTrain(View view) {
-        if(lastLevel==1 &&lastStage>1&&previous_stage_stars<6){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("You don't have enougth stars to start stage "+lastStage+" " +
-                    "please improve some of previous levels of stage "+(lastStage-1)+" " +
-                    "or wait until you get your stars from the diagnosis.");
-            builder1.setCancelable(true);
-            builder1.setPositiveButton(
-                    "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog2, int id) {
-                            dialog2.cancel();
-                        }
-                    });
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-        else {
-            SetTrainMode("Motor");
-            // Start the SecondActivity
-            Intent intent = new Intent(SelectTrainMode.this, TrainMotor.class);
-            intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
-            intent.putExtra("NextStage", Integer.toString(a.lastStage));
-            SelectTrainMode.this.startActivityForResult(intent, 1);
-        }
+        LoadingShow();
+        getStarsMotor s=new getStarsMotor(User.currentUser);
+        s.execute();
+
+    }
+    public void LoadingShow(){
+        // custom dialog
+        dialog3 = new Dialog(this);
+        dialog3.setContentView(R.layout.loadingicon);
+        dialog3.setTitle("Loading");
+        dialog3.show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+
         return true;
     }
     @Override
@@ -107,6 +113,8 @@ public class SelectTrainMode extends AppCompatActivity {
                 if(TrainMotor.dialog3!=null)
                     TrainMotor.dialog3.dismiss();
                 a.lastLevel=a.lastLevel+1;
+                SaveLastStageLevel s=new SaveLastStageLevel(User.currentUser,lastLevel,lastStage);
+                s.execute();
                 Intent intent = new Intent(this, TrainMotor.class);
                 intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
                 intent.putExtra("NextStage", Integer.toString(a.lastStage));
@@ -119,7 +127,7 @@ public class SelectTrainMode extends AppCompatActivity {
                 lastStage=lastStage+1;
                 SaveLastStageLevel s=new SaveLastStageLevel(User.currentUser,lastLevel,lastStage);
                 s.execute();
-                previous_stage_stars=5;
+                //previous_stage_stars=5;
             }
         }
     }
@@ -150,7 +158,102 @@ public class SelectTrainMode extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
+
                 Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
+    private class GetLastStageLevel extends AsyncTask<String, Void, int[]> {
+        User usr;
+
+        public GetLastStageLevel(User usr) {
+            this.usr = usr;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected int[] doInBackground(String... params) {
+            return dbConnection.getlastmotorStagelevel(usr);
+        }
+
+        @Override
+        protected void onPostExecute(int[] result) {
+            if (result!=null) {
+                lastLevel=result[0];
+                lastStage=result[1];
+                if(lastLevel==1 &&lastStage>1&&stars<(lastStage-1)*6+(lastStage-1)){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
+                    builder1.setMessage("You don't have enougth stars to start stage "+lastStage+" " +
+                            "please improve some of previous levels of stage "+(lastStage-1)+" " +
+                            "or wait until you get your stars from the diagnosis.");
+                    builder1.setCancelable(true);
+                    builder1.setPositiveButton(
+                            "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog2, int id) {
+                                    dialog2.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+                else {
+                    SetTrainMode("Motor");
+                    // Start the SecondActivity
+                    Intent intent = new Intent(SelectTrainMode.this, TrainMotor.class);
+                    intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
+                    intent.putExtra("NextStage", Integer.toString(a.lastStage));
+                    SelectTrainMode.this.startActivityForResult(intent, 1);
+                }
+                dialog3.dismiss();
+                Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
+    private class getStarsMotor extends AsyncTask<String, Void, Float> {
+        User usr;
+
+        public getStarsMotor(User usr) {
+            this.usr = usr;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected Float doInBackground(String... params) {
+            return dbConnection.getstars(usr);
+        }
+
+        @Override
+        protected void onPostExecute(Float result) {
+            if (result!=-1) {
+                stars=result;
+                GetLastStageLevel s=new GetLastStageLevel(User.currentUser);
+                s.execute();
+                Log.i("hhhh", "ccc"+stars);
                 //getmotorImg a = new getmotorImg(usr, stage, level);
                 //a.execute("");
             } else {

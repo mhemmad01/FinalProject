@@ -8,12 +8,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity  extends AppCompatActivity {
@@ -26,7 +29,20 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        final ActionBar abar = getSupportActionBar();
+        abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
+        View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
+        textviewTitle.setText("LogIn Page");
+        abar.setCustomView(viewActionBar, params);
+        abar.setDisplayShowCustomEnabled(true);
+        abar.setDisplayShowTitleEnabled(false);
+        abar.setDisplayHomeAsUpEnabled(true);
+        abar.setHomeButtonEnabled(true);
         instance = this;
 
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
@@ -83,12 +99,11 @@ public class LoginActivity  extends AppCompatActivity {
                         finish();
                         dialog3.dismiss();
                     }else {
-                        GetLastStageLevel s=new GetLastStageLevel(User.currentUser);
-                        s.execute();
-                       // Intent myIntent = new Intent(LoginActivity.this, MainDiagnosed.class);
-                        //LoginActivity.this.startActivity(myIntent);
-                       // finish();
-                       // dialog3.dismiss();
+
+                        Intent myIntent = new Intent(LoginActivity.this, MainDiagnosed.class);
+                        LoginActivity.this.startActivity(myIntent);
+                        finish();
+                        dialog3.dismiss();
 
                     }
 
@@ -110,43 +125,6 @@ public class LoginActivity  extends AppCompatActivity {
         Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
         LoginActivity.this.startActivity(myIntent);
         finish();
-    }
-    private class GetLastStageLevel extends AsyncTask<String, Void, int[]> {
-        User usr;
-
-        public GetLastStageLevel(User usr) {
-            this.usr = usr;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
-            //    .show();
-        }
-
-
-        @Override
-        protected int[] doInBackground(String... params) {
-            return dbConnection.getlastmotorStagelevel(usr);
-        }
-
-        @Override
-        protected void onPostExecute(int[] result) {
-            if (result!=null) {
-                MotorStageAndLevel=result;
-                Intent myIntent = new Intent(LoginActivity.this, MainDiagnosed.class);
-                LoginActivity.this.startActivity(myIntent);
-                finish();
-                dialog3.dismiss();
-                Log.i("hhhh", "ccc");
-                //getmotorImg a = new getmotorImg(usr, stage, level);
-                //a.execute("");
-            } else {
-                Log.i("hhhh", "ffffff");
-            }
-
-        }
     }
 
 }
