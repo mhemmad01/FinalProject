@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.TrainMotor;
 
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
         Bitmap bmp= BitmapFactory.decodeByteArray(b , 0, b.length);
         ImageView image =  holder.img;
         image.setImageBitmap(bmp);
+
+        ImageView original =  holder.original;
+        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.level-1]);
+
         if(motorResults.get(position).stars>=0)
             holder.motorStars.setRating(motorResults.get(position).stars);
 

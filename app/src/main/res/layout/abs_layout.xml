@@ -15,7 +15,7 @@
         android:focusable="false"
         android:longClickable="false"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>
