@@ -40,6 +40,7 @@
         <activity android:name=".MyDiagnosed"  android:parentActivityName=".MainDiagnostic"></activity>
         <activity android:name=".SelectDiagnosisMode"  android:parentActivityName=".MainDiagnostic"></activity>
         <activity android:name=".ViewDiagnosisResults"  android:parentActivityName=".MyDiagnosed"></activity>
+        <activity android:name=".Levels"  android:parentActivityName=".MainDiagnosed"></activity>
     </application>
 
 </manifest>

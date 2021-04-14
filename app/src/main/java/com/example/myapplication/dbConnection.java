@@ -232,6 +232,36 @@ public class dbConnection {
         }
     }
 
+
+    public static ArrayList<com.example.myapplication.improvelevel_model.MotorResult> getTrainMotorResultsImprove(String username){
+        Statement st = null;
+        ArrayList<com.example.myapplication.improvelevel_model.MotorResult> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from motor WHERE username='" + username  + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            Log.i("hhh", "getTrainMotorResults: 0 " + username);
+            while (rs.next()) {
+                Log.i("hhh", "getTrainMotorResults: 1");
+
+                com.example.myapplication.improvelevel_model.MotorResult t = new com.example.myapplication.improvelevel_model.MotorResult();
+                t.username = rs.getString(1);
+                t.stage = Integer.parseInt(rs.getString(2));
+                t.level = Integer.parseInt(rs.getString(3));
+                t.stars = Float.parseFloat(rs.getString(5));
+                t.img = rs.getString(4);
+                temp.add(t);
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+
     public static ArrayList<MotorResult> getTrainMotorResults(String username){
         Statement st = null;
         ArrayList<MotorResult> temp = new ArrayList<>();
