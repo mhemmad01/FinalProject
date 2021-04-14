@@ -1,6 +1,7 @@
 package com.example.myapplication.improvelevel_model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -14,15 +15,21 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DiagnosisMotor;
+import com.example.myapplication.Levels;
 import com.example.myapplication.R;
+import com.example.myapplication.SelectDiagnosisMode;
+import com.example.myapplication.SelectTrainMode;
 import com.example.myapplication.TrainMotor;
+import com.example.myapplication.User;
 
 import java.util.List;
 
 
-public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.ViewHolder> {
+public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.ViewHolder>  {
 
     public List<MotorResult> motorResults;
     public static MotorResultAdapter instance;
@@ -53,7 +60,7 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
         image.setImageBitmap(bmp);
 
         ImageView original =  holder.original;
-        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.level-1]);
+        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.stage-1]);
 
         if(motorResults.get(position).stars>=0)
             holder.motorStars.setRating(motorResults.get(position).stars);
@@ -67,7 +74,10 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
                 //Here Code For Improve Button
                 // you Can use "current" to get details
                 Log.i("ImproveLevel", "onClick: stage: " + current.stage + ", level: " + current.level);
-                
+                current.stars=0;
+                motorResults.set(position,current);
+                holder.motorStars.setRating(0);
+                transfer s=new transfer(current);
 
             }
         });
@@ -80,7 +90,20 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
     }
 
 
+    public class  transfer extends AppCompatActivity{
+        MotorResult current;
+        public transfer(MotorResult current) {
+            this.current=current;
+            Intent intent = new Intent(Levels.instance, TrainMotor.class);
+            intent.putExtra("Type","improve");
+            intent.putExtra("username", current.username);
+            intent.putExtra("levelnum", Integer.toString(current.level));
+            intent.putExtra("stagenum", Integer.toString(current.stage));
+            // intent.putExtra("NextStage", Integer.toString(a.lastStage));
+            Levels.instance.startActivityForResult(intent, 1);
+        }
 
+    }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
 
         public ImageView img;

@@ -52,7 +52,8 @@ public class TrainMotor extends AppCompatActivity {
     private int currentlevel;
     private int currentStage;
     private int stars;
-    static Dialog dialog3=null;
+    public static Dialog dialog3=null;
+    static String Type=null;
     public static int[][] textureArrayWin = {
             {R.drawable.qw,
             R.drawable.ss2,
@@ -91,21 +92,73 @@ public class TrainMotor extends AppCompatActivity {
         abar.setDisplayHomeAsUpEnabled(true);
         abar.setHomeButtonEnabled(true);
         level=(TextView)findViewById(R.id.textView13);
-        lastLevel2 = getIntent().getStringExtra("NextLevel");
-        lastStage2 = getIntent().getStringExtra("NextStage");
-        currentlevel=Integer.parseInt(lastLevel2);
-        currentStage=Integer.parseInt(lastStage2);
-        level.setText("Level "+currentlevel+" Stage "+currentStage);
-        myImageView = (ImageView)findViewById(R.id.imageView4);
-        myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2)-1][Integer.parseInt(lastStage2)-1]);
-        MotorDiagnosisView1=new PaintView(this);
-        MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorTrain);
-        MotorviewGroup1.addView(MotorDiagnosisView1);
-        if(dialog3!=null)
-            dialog3.dismiss();
+        if(getIntent().getStringExtra("Type").equals("improve")){
+            Type="improve";
+            lastLevel2=getIntent().getStringExtra("levelnum");
+            lastStage2=getIntent().getStringExtra("stagenum");
+        }else {
+            Type="Train";
+            lastLevel2 = getIntent().getStringExtra("NextLevel");
+            lastStage2 = getIntent().getStringExtra("NextStage");
+        }
+            currentlevel = Integer.parseInt(lastLevel2);
+            currentStage = Integer.parseInt(lastStage2);
+            level.setText("Level " + currentlevel + " Stage " + currentStage);
+            myImageView = (ImageView) findViewById(R.id.imageView4);
+            myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2) - 1][Integer.parseInt(lastStage2) - 1]);
+            MotorDiagnosisView1 = new PaintView(this);
+            MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorTrain);
+            MotorviewGroup1.addView(MotorDiagnosisView1);
+            if (dialog3 != null)
+                dialog3.dismiss();
+
     }
     public void drawfinish(){
-        if(currentlevel==3){
+        if(Type.equals("improve")){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Good job");
+            //builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "FINISH",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                            LoadingShow();
+                            Bitmap mydraw=MotorDiagnosisView1.get();
+                            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                            mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
+                            byte [] b=baos.toByteArray();
+                            String temp= Base64.encodeToString(b, Base64.DEFAULT);
+                            EditMotorLevel s=new EditMotorLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp);
+                            s.execute("");
+                            Intent intent = new Intent();
+                            intent.putExtra("action", "FINISH");
+
+                            setResult(Activity.RESULT_OK, intent);
+                            TrainMotor.this.finish();
+                        }
+                    });
+            builder1.setNegativeButton(
+                    "RESTART",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                            LoadingShow();
+                            Intent intent = new Intent();
+                            intent.putExtra("action", "RESTART");
+                            intent.putExtra("username", User.currentUser.getUsername());
+                            intent.putExtra("levelnum", lastLevel2);
+                            intent.putExtra("stagenum", lastStage2);
+                            setResult(Activity.RESULT_OK, intent);
+                            TrainMotor.this.finish();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.setCanceledOnTouchOutside(false);
+            alert11.show();
+        }
+        else if(currentlevel==3){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Good job you finished stage "+currentStage+" if you have enougth stars " +
                     "you will move to next stage if you don't you must improve levels to get more stars.");
@@ -291,7 +344,46 @@ public class TrainMotor extends AppCompatActivity {
             }
 
         }
+    private class EditMotorLevel extends AsyncTask<String, Void, Boolean> {
+        String usr;
+        int stars;
+        int stage;
+        int level;
+        String img;
 
+        public EditMotorLevel(String usr, int stars, int stage, int level, String img) {
+            this.usr = usr;
+            this.stars = stars;
+            this.stage = stage;
+            this.img = img;
+            this.level = level;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            return dbConnection.editmotorlevel(usr, stars, stage, level, img);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
         ///////
 
     }
