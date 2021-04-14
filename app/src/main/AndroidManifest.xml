@@ -25,6 +25,8 @@
 
         <activity android:name=".RegistrationActivity" android:parentActivityName=".LoginActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".DiagnosisMotor"
+            android:parentActivityName=".SelectDiagnosisMode"></activity>>
         <activity android:name=".MainDiagnostic"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainDiagnosed"

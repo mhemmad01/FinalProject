@@ -21,6 +21,10 @@ public class PaintView extends View {
     private  boolean flag=true;
     public Canvas c;
     public Bitmap scaledSprite=null;
+    private int flag2;
+    public void setFlag2(int flag2){
+        this.flag2=flag2;
+    }
     public PaintView(Context context) {
         super(context);
         flag=true;
@@ -52,7 +56,11 @@ public class PaintView extends View {
                     break;
                 case MotionEvent.ACTION_UP:
                     flag=false;
-                    TrainMotor.Instance.drawfinish();
+                    if(flag2==1){
+                        DiagnosisMotor.Instance.drawfinish();
+                    }else {
+                        TrainMotor.Instance.drawfinish();
+                    }
                     break;
                 default:
                     return false;

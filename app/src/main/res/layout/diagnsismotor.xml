@@ -13,49 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/my_border3"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/blue_light2"
-                android:scaleType="fitStart"
-
-                app:srcCompat="@android:drawable/ic_popup_sync"
-                tools:srcCompat="@android:drawable/ic_popup_sync" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/blue_light2"
-
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                android:text="Diagnosis"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/blue_light2"
-                android:scaleType="fitEnd"
-                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="580dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -92,67 +50,28 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:background="@drawable/my_border3"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/my_border3"
-                        android:fontFamily="sans-serif-black"
-                        android:gravity="center"
+                    android:text="Diagnosed"
+                    android:textColor="@color/blue_light"
+                    android:textSize="40sp" />
 
-                        android:text="Diagnosed"
-                        android:textColor="@color/blue_light"
-                        android:textSize="40sp" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView5"
+                <LinearLayout
+                    android:id="@+id/MotorDiagnosis"
                     android:layout_width="match_parent"
-                    android:layout_height="945dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/my_border3"
-
-                    app:srcCompat="@drawable/ss" />
+                    android:orientation="vertical"></LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/my_border3"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="819dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@color/blue_light"
-                android:fontFamily="sans-serif-black"
-
-                android:gravity="center|right"
-                android:text="You can do Better"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/blue_light"
-                android:rotationY="180"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/abc_vector_test"
-                tools:srcCompat="@drawable/abc_vector_test" />
-
         </LinearLayout>
 
     </LinearLayout>

@@ -22,6 +22,7 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
 
     public List<Diagnosed> mDiagnoseds;
     public static DiagnosisAdapter instance;
+    public static Diagnosed temp=null;
     // Pass in the contact array into the constructor
     public DiagnosisAdapter(List<Diagnosed> diagnoseds) {
         mDiagnoseds = diagnoseds;
@@ -86,11 +87,12 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
         @Override
         public void onClick(View v) {
            v.setBackgroundColor(Color.RED);
-            Diagnosed temp = mDiagnoseds.get(getAdapterPosition());
+            temp = mDiagnoseds.get(getAdapterPosition());
 
-            Log.i("color", "onClick: ");
+            Log.i("color", "onClick: "+temp.getUsername());
         }
     }
+
     public void removeAt(int position) {
         mDiagnoseds.remove(position);
         notifyItemRemoved(position);

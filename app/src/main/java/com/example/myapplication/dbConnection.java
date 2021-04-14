@@ -57,7 +57,53 @@ public class dbConnection {
         }
         return false;
     }
+    public static boolean savelastdiagnosisimg(String usr, int diagnosisnum, int imgnum){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE diagnoseds SET lastdiagnosismotorimg ='"+ imgnum+ "', lastdiagnosisnum='"+ diagnosisnum+ "' WHERE diagnosed='"+usr+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean addmotordiagnosisimg(String usr, int diagnosisnum, int imgnum, String img){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("INSERT INTO diagnosismotor (username, diagnosisnum, imgnum, img,accept)  VALUES('"+usr+"', '"+diagnosisnum+"','"+imgnum+"','"+img+"','"+(-1)+"')");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+    public static int[] getlastdiagnosismotorimg(String user){
+        try {
 
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from diagnoseds WHERE diagnosed='"+user+"'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int[] result=new int[2];
+            if (rs.next()) {
+                result[0]=rs.getInt(5);
+                result[1]=rs.getInt(6);
+                st.close();
+                return result;
+            }
+            else{
+                st.close();
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public static boolean AddDiagnosed(String Diagnostic, String Diagnosed){
         try {
 
