@@ -151,6 +151,23 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
         @Override
         protected ArrayList<MotorResult> doInBackground(String... params) {
+            com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds= dbConnection.getDiagnosisIds(usr);
+            int score=0;
+            int total=com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.size();
+            for( String id: com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds){
+                com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis.put(id,  dbConnection.getDiagnosisMotorResults(usr,id));
+                for(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult i : com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis.get(id)){
+                    if(i.score>0) {
+                        score++;
+                    }
+                    total++;
+                }
+            }
+            com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.totalScore=score;
+            com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.total=total;
+            Log.d("x", "doInBackground: "+ com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis);
+            Log.d("x", "doInBackground: "+ com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds);
+
             return dbConnection.getTrainMotorResults(usr);
         }
 

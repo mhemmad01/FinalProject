@@ -2,11 +2,15 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -110,6 +114,10 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
                 Levels.instance.startActivityForResult(intent, 1);
             }
             else if (action.equals("FINISH")){
+                String img=data.getStringExtra("img");
+                byte[] b= Base64.decode(img,Base64.DEFAULT);
+                Bitmap bmp= BitmapFactory.decodeByteArray(b , 0, b.length);
+                MotorResultAdapter.toImprove.img.setImageBitmap(bmp);
                 if(TrainMotor.dialog3!=null)
                     TrainMotor.dialog3.dismiss();
 

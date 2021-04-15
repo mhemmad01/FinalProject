@@ -20,26 +20,42 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trainings" />
+            android:text="Trainings"
+            android:onClick="viewTrainingResults"
+            android:tag="1"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Diagnosis" />
+            android:text="Diagnosis"
+            android:onClick="viewDiagnosisResults"
+            android:tag="2"/>
 
     </com.google.android.material.tabs.TabLayout>
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.myapplication.TrainingResultsFragment"
-        android:layout_width="1198dp"
-        android:layout_height="485dp"
-        android:layout_marginTop="8dp"
+    <FrameLayout
+        android:id="@+id/fragContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        tools:layout="@layout/trainingresultsfragment" />
+        app:layout_constraintVertical_bias="0.134">
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.myapplication.TrainingResultsFragment"
+            android:layout_width="1198dp"
+            android:layout_height="485dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+            tools:layout="@layout/trainingresultsfragment" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/selectedDiagnosedUsername"
@@ -57,11 +73,37 @@
         android:id="@+id/saveButton"
         android:layout_width="283dp"
         android:layout_height="55dp"
-        android:layout_marginTop="8dp"
         android:onClick="saveAll"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/fragContainer" />
+
+    <TextView
+        android:id="@+id/scoreTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Score:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toBottomOf="@+id/fragContainer" />
+
+    <TextView
+        android:id="@+id/totalScoreTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Total:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/scoreTextview"
+        app:layout_constraintTop_toBottomOf="@+id/fragContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

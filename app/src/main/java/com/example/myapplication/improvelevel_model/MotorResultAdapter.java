@@ -32,7 +32,9 @@ import java.util.List;
 public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.ViewHolder>  {
 
     public List<MotorResult> motorResults;
+
     public static MotorResultAdapter instance;
+    public static ViewHolder toImprove;
     // Pass in the contact array into the constructor
     public MotorResultAdapter(List<MotorResult> results) {
         motorResults = results;
@@ -73,6 +75,7 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
             public void onClick(View v) {
                 //Here Code For Improve Button
                 // you Can use "current" to get details
+                toImprove=holder;
                 Log.i("ImproveLevel", "onClick: stage: " + current.stage + ", level: " + current.level);
                 current.stars=0;
                 motorResults.set(position,current);

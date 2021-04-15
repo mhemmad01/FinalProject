@@ -8,10 +8,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="1083dp"
+        android:layout_height="516dp"
         android:layout_margin="20dp"
-        android:background="#00BCD4"
+        android:background="#F44336"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +34,6 @@
                 android:text="Synchronozation"
                 android:textColor="@color/blue_light"
                 android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -68,13 +63,8 @@
                 android:textColor="@color/blue_light"
                 android:textSize="18sp" />
 
-            <Spinner
-                android:id="@+id/diagnosisSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/MotorResults"
+                android:id="@+id/DiagnosisMotorResults"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
