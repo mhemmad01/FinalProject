@@ -106,6 +106,7 @@ public class SelectTrainMode extends AppCompatActivity {
             if(action.equals("RESTART")){
 
                 Intent intent = new Intent(this, TrainMotor.class);
+                intent.putExtra("Type", "Train");
                 intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
                 intent.putExtra("NextStage", Integer.toString(a.lastStage));
                 startActivityForResult(intent, 1);
@@ -116,6 +117,7 @@ public class SelectTrainMode extends AppCompatActivity {
                 SaveLastStageLevel s=new SaveLastStageLevel(User.currentUser,lastLevel,lastStage);
                 s.execute();
                 Intent intent = new Intent(this, TrainMotor.class);
+                intent.putExtra("Type", "Train");
                 intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
                 intent.putExtra("NextStage", Integer.toString(a.lastStage));
                 startActivityForResult(intent, 1);
@@ -213,6 +215,7 @@ public class SelectTrainMode extends AppCompatActivity {
                     SetTrainMode("Motor");
                     // Start the SecondActivity
                     Intent intent = new Intent(SelectTrainMode.this, TrainMotor.class);
+                    intent.putExtra("Type", "Train");
                     intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
                     intent.putExtra("NextStage", Integer.toString(a.lastStage));
                     SelectTrainMode.this.startActivityForResult(intent, 1);

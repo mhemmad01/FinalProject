@@ -3,8 +3,13 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,6 +37,20 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.levels);
+        final ActionBar abar = getSupportActionBar();
+        abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
+        View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
+        textviewTitle.setText("Improve Levels");
+        abar.setCustomView(viewActionBar, params);
+        abar.setDisplayShowCustomEnabled(true);
+        abar.setDisplayShowTitleEnabled(false);
+        abar.setDisplayHomeAsUpEnabled(true);
+        abar.setHomeButtonEnabled(true);
         instance=this;
         context=this;
         if(MotorResult.selected==null) {
@@ -56,13 +75,48 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
         }
     };
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
 
+        return true;
+    }
     public void gotoMyDiagnosed(View view) {
         Intent myIntent = new Intent(this, MyDiagnosed.class);
         this.startActivity(myIntent);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(data == null)
+            return;
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 1
+        if(requestCode==1)
+        {
+            String action =data.getStringExtra("action");
+            String username =data.getStringExtra("username");
+            String levelnum =data.getStringExtra("levelnum");
+            String stagenum =data.getStringExtra("stagenum");
 
+            if(action.equals("RESTART")){
+                Intent intent = new Intent(Levels.instance, TrainMotor.class);
+                intent.putExtra("Type","improve");
+                intent.putExtra("username", username);
+                intent.putExtra("levelnum", levelnum);
+                intent.putExtra("stagenum", stagenum);
+                Levels.instance.startActivityForResult(intent, 1);
+            }
+            else if (action.equals("FINISH")){
+                if(TrainMotor.dialog3!=null)
+                    TrainMotor.dialog3.dismiss();
+
+                //previous_stage_stars=5;
+            }
+        }
+    }
 
 
 

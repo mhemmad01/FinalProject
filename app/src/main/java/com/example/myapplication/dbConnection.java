@@ -35,7 +35,18 @@ public class dbConnection {
             }
         return conn;
     }
-
+    public static boolean editmotorlevel(String usr, int stars, int stage, int level, String img){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE motor SET img ='"+ img+ "', stars='"+ stars+ "' WHERE username='"+usr+"' AND stage='"+stage+"' AND level='"+level+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
     public static boolean validatePassword(String username, String password){
         try {
 
