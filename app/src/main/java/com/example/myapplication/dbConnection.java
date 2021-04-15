@@ -301,6 +301,51 @@ public class dbConnection {
         }
     }
 
+
+    public static ArrayList<String> getDiagnosisIds(String username ){
+        Statement st = null;
+        ArrayList<String> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select distinct diagnosisnum from diagnosismotor WHERE username='" + username  + "'");//*************
+            ResultSetMetaData rsmd = rs.getMetaData();
+            while (rs.next()) {
+                temp.add(rs.getString(1));
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ArrayList<com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult> getDiagnosisMotorResults(String username, String diagnosisID ){
+        Statement st = null;
+        ArrayList<com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from diagnosismotor WHERE username='" + username  + "' AND diagnosisnum='"+diagnosisID+"'");//*************
+            ResultSetMetaData rsmd = rs.getMetaData();
+            while (rs.next()) {
+                com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult t = new com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult();
+                t.username = rs.getString(1);
+                t.stage = Integer.parseInt(rs.getString(2));
+                t.level = Integer.parseInt(rs.getString(3));
+                t.score = Integer.parseInt(rs.getString(5));
+                t.img = rs.getString(4);
+                temp.add(t);
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getimg(String username,int level,int stage) {
         Statement st = null;
         try {
@@ -327,6 +372,18 @@ public class dbConnection {
         try {
             st = getConnection().createStatement();
             st.executeUpdate("UPDATE motor SET stars ='"+ result.stars+ "' WHERE username='"+result.username+"' AND stage='"+result.stage+"' AND level='"+result.level+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+    public static Boolean updateDiagnosisMotorScore(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult result) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE diagnosismotor SET accept ='"+ result.score+ "' WHERE username='"+result.username+"' AND diagnosisnum='"+result.stage+"' AND imgnum='"+result.level+"'");
             st.close();
             return true;
         } catch (Exception throwables) {

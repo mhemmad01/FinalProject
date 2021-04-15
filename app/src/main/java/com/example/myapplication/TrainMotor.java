@@ -134,7 +134,7 @@ public class TrainMotor extends AppCompatActivity {
                             s.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
-
+                            intent.putExtra("img", temp);
                             setResult(Activity.RESULT_OK, intent);
                             TrainMotor.this.finish();
                         }
