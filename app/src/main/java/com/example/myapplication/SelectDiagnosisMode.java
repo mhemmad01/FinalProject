@@ -114,6 +114,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
             LoadingShow();
             DiagnosedUsername=DiagnosisAdapter.temp.getUsername();
             DiagnosisAdapter.temp=null;
+            Log.i("hhhh", DiagnosedUsername);
             GetLastdiagnosisimg s = new GetLastdiagnosisimg(DiagnosedUsername);
             s.execute();
         }

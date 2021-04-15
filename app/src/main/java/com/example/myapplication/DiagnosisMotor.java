@@ -33,27 +33,13 @@ public class DiagnosisMotor extends AppCompatActivity {
     private ViewGroup MotorviewGroup1;
     static Dialog dialog3=null;
     static  DiagnosisMotor Instance;
-    public static int[][] textureArrayWin = {
-            {R.drawable.qw,
+    public static int[] textureArrayWin = {
+            R.drawable.qw,
                     R.drawable.ss2,
                     R.drawable.qw,
                     R.drawable.ss2,
                     R.drawable.qw,
-            },
-            {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-            },
-            {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-            }
+
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +67,7 @@ public class DiagnosisMotor extends AppCompatActivity {
         diagnosisnum=Integer.parseInt(getIntent().getStringExtra("diagnosisnum"));
         level.setText("Image "+imgnum +" Diagnosis "+diagnosisnum);
         myImageView = (ImageView)findViewById(R.id.imageView4);
-        myImageView.setImageResource(textureArrayWin[diagnosisnum-1][imgnum-1]);
+        myImageView.setImageResource(textureArrayWin[imgnum-1]);
         MotorDiagnosisView1=new PaintView(this);
         MotorDiagnosisView1.setFlag2(1);
         MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorDiagnosis);
@@ -112,7 +98,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                             mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
                             byte [] b=baos.toByteArray();
                             String temp= Base64.encodeToString(b, Base64.DEFAULT);
-                            AddMotorDiagnosisImg s=new AddMotorDiagnosisImg(User.currentUser.getUsername(),diagnosisnum,imgnum,temp);
+                            AddMotorDiagnosisImg s=new AddMotorDiagnosisImg(SelectDiagnosisMode.DiagnosedUsername,diagnosisnum,imgnum,temp);
                             s.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
@@ -184,7 +170,7 @@ public class DiagnosisMotor extends AppCompatActivity {
         MotorviewGroup1.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         MotorviewGroup1.layout(0, 0, MotorviewGroup1.getMeasuredWidth(), MotorviewGroup1.getMeasuredHeight());
-        AddMotorDiagnosisImg s=new AddMotorDiagnosisImg(User.currentUser.getUsername(),diagnosisnum,imgnum,temp);
+        AddMotorDiagnosisImg s=new AddMotorDiagnosisImg(SelectDiagnosisMode.DiagnosedUsername,diagnosisnum,imgnum,temp);
         s.execute("");
         Intent intent = new Intent();
         intent.putExtra("action", "NEXT");
