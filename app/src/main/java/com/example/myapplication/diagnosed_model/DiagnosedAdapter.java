@@ -1,5 +1,6 @@
 package com.example.myapplication.diagnosed_model;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
     public List<Diagnosed> mDiagnoseds;
     public static DiagnosedAdapter instance;
+    public static Dialog dialog3=null;
     // Pass in the contact array into the constructor
     public DiagnosedAdapter(List<Diagnosed> diagnoseds) {
         mDiagnoseds = diagnoseds;
@@ -95,6 +97,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
         @Override
         public void onClick(View v) {
+            LoadingShow();
             LoadResults lr = new LoadResults(mDiagnoseds.get(getAdapterPosition()).getUsername());
             lr.execute("");
             itemView.setBackgroundColor(Color.RED);
@@ -104,6 +107,13 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 //            MyDiagnosed.instance.startActivity(myIntent);
 
         }
+    }
+    public void LoadingShow(){
+        // custom dialog
+        dialog3 = new Dialog(MyDiagnosed.instance);
+        dialog3.setContentView(R.layout.loadingicon);
+        dialog3.setTitle("Loading");
+        dialog3.show();
     }
     public void removeAt(int position) {
         mDiagnoseds.remove(position);
@@ -176,6 +186,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
             if (result.size()>0) {
                 Log.i("hhhh", "ccc");
                 MotorResult.selected=result;
+                //dialog3.dismiss();
                 Intent myIntent = new Intent(MyDiagnosed.instance, ViewDiagnosisResults.class);
                 MyDiagnosed.instance.startActivity(myIntent);
             } else {

@@ -158,7 +158,9 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
             }
         });
 
-
+        if(DiagnosedAdapter.dialog3!=null){
+            DiagnosedAdapter.dialog3.dismiss();
+        }
     }
 
 

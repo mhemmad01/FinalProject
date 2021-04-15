@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DiagnosisMotor;
 import com.example.myapplication.R;
 import com.example.myapplication.TrainMotor;
 import com.example.myapplication.ViewDiagnosisResults;
@@ -61,7 +62,7 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
         if(current.score>0){
             holder.score.setChecked(true);
         }
-//        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.level-1]);
+        original.setImageResource(DiagnosisMotor.textureArrayWin[current.level-1]);
 
 
 
