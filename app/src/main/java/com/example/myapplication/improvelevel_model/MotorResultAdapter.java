@@ -67,7 +67,7 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
                 //Here Code For Improve Button
                 // you Can use "current" to get details
                 Log.i("ImproveLevel", "onClick: stage: " + current.stage + ", level: " + current.level);
-                
+
 
             }
         });
