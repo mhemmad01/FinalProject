@@ -23,6 +23,7 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
     public List<Diagnosed> mDiagnoseds;
     public static DiagnosisAdapter instance;
     public static Diagnosed temp=null;
+    public static View last;
     // Pass in the contact array into the constructor
     public DiagnosisAdapter(List<Diagnosed> diagnoseds) {
         mDiagnoseds = diagnoseds;
@@ -62,6 +63,7 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
 
         public View itemView;
+
         public TextView diagnosedName;
         public TextView diagnosedAge;
         public TextView diagnosedUsername;
@@ -87,6 +89,9 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
         @Override
         public void onClick(View v) {
            v.setBackgroundColor(Color.RED);
+           if(last!=null)
+                last.setBackgroundColor(Color.BLACK);
+            last=v;
             temp = mDiagnoseds.get(getAdapterPosition());
 
             Log.i("color", "onClick: "+temp.getUsername());

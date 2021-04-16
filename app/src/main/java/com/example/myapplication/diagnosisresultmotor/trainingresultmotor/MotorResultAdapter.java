@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.DiagnosisMotor;
@@ -62,6 +64,10 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
         if(current.score>0){
             holder.score.setChecked(true);
         }
+        else
+        {
+            holder.score.setChecked(false);
+        }
         original.setImageResource(DiagnosisMotor.textureArrayWin[current.level-1]);
 
 
@@ -91,6 +97,7 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
             itemView.setOnLongClickListener(this);
             score.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     MotorResult m = motorResults.get(getAdapterPosition());
@@ -99,7 +106,35 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
                     else
                         m.score=0;
                     UpdateMotorStars t = new UpdateMotorStars(m);
+                    motorResults.set((getAdapterPosition()),m);
+                    MotorResult.diagnosis.replace(MotorResult.diagnosisIds.get(ViewDiagnosisResults.spSelectedPos),(ArrayList<MotorResult>)motorResults);
                     t.execute();
+
+                    int count=0;
+                    int count1=0;
+                    for(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult x : com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected){
+                        if(x.score>0){
+                            count++;
+                        }
+                        count1++;
+                    }
+                    ViewDiagnosisResults.scoreT.setText("Score: "+count+"/"+count1);
+
+                    int score=0;
+                    int total=0;
+                    for( String id: com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds){
+                        for(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult i : com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis.get(id)){
+                            if(i.score>0) {
+                                score++;
+                            }
+                            total++;
+                        }
+                    }
+                    com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.totalScore=score;
+                    com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.total=total;
+
+                    ViewDiagnosisResults.totalScoreT.setText("Total Score: "+score+"/"+total);
+
                 }
             });
         }
