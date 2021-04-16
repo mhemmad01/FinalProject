@@ -40,8 +40,9 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
     MotorResultViewModel model;
     Spinner sp1;
 
-    TextView scoreT;
-    TextView totalScoreT;
+    public static int spSelectedPos=0;
+    public static TextView scoreT;
+    public static TextView totalScoreT;
 
     public static ArrayList<MotorResult> motorResults;
     public static MotorResultAdapter adapter;
@@ -94,6 +95,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spSelectedPos=position;
                 com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected = com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis.get(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.get(position));
                 if(adapterD!=null&&com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected!=null) {
                     adapterD.motorResults = com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected;
@@ -109,7 +111,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
                         }
                         count1++;
                     }
-                    scoreT.setText("Score: "+count+"/"+count1);
+                    scoreT.setText( "Score: "+count+"/"+count1);
                 }
             }
 

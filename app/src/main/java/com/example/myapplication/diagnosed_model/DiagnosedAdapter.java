@@ -163,7 +163,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
         protected ArrayList<MotorResult> doInBackground(String... params) {
             com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds= dbConnection.getDiagnosisIds(usr);
             int score=0;
-            int total=com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.size();
+            int total=0;//com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.size();
             for( String id: com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds){
                 com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis.put(id,  dbConnection.getDiagnosisMotorResults(usr,id));
                 for(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult i : com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis.get(id)){
@@ -191,6 +191,8 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
                 MyDiagnosed.instance.startActivity(myIntent);
             } else {
                 Log.i("hhhh", "ffffff");
+                Intent myIntent = new Intent(MyDiagnosed.instance, ViewDiagnosisResults.class);
+                MyDiagnosed.instance.startActivity(myIntent);
             }
 
         }
