@@ -158,6 +158,24 @@ public class dbConnection {
             return -1;
         }
     }
+    public static float getstarssync(User user){
+        Statement st = null;
+        float stars=0;
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select stars from sync WHERE username='" + user.getUsername() + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            while (rs.next()) {
+                stars+=Float.parseFloat(rs.getString(1));
+            }
+            st.close();
+            return stars;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+    }
     public static User getUser(String username) {
         Statement st = null;
         try {
@@ -207,6 +225,26 @@ public class dbConnection {
         } catch (Exception throwables) {
             throwables.printStackTrace();
             return false;
+        }
+    }
+    public static int[] getlastsyncStagelevel(User usr) {
+        Statement st = null;
+        try {
+            int[] result=new int[2];
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from diagnoseds WHERE diagnosed='" + usr.getUsername()  + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            if (rs.next()) {
+                result[0]=rs.getInt(7);
+                result[1]=rs.getInt(8);
+                //Blob temp = rs.getBlob(4);
+                st.close();
+                return result;//.getBytes(0,(int)temp.length());
+            }
+            return null;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
         }
     }
     public static int[] getlastmotorStagelevel(User usr) {
