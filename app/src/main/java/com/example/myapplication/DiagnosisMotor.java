@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.diagnosis_model.Diagnosis;
+import com.example.myapplication.diagnosis_model.DiagnosisAdapter;
 
 import java.io.ByteArrayOutputStream;
 
@@ -68,7 +70,7 @@ public class DiagnosisMotor extends AppCompatActivity {
         level.setText("Image "+imgnum +" Diagnosis "+diagnosisnum);
         myImageView = (ImageView)findViewById(R.id.imageView4);
         myImageView.setImageResource(textureArrayWin[imgnum-1]);
-        MotorDiagnosisView1=new PaintView(this);
+        MotorDiagnosisView1=new PaintView(this,"motor");
         MotorDiagnosisView1.setFlag2(1);
         MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorDiagnosis);
         MotorviewGroup1.addView(MotorDiagnosisView1);
@@ -104,6 +106,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                             intent.putExtra("action", "FINISH");
                             setResult(Activity.RESULT_OK, intent);
                             DiagnosisMotor.this.finish();
+                            DiagnosisAdapter.last.setBackgroundColor(Color.BLACK);
                         }
                     });
             builder1.setNegativeButton(

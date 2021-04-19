@@ -47,6 +47,19 @@ public class dbConnection {
             return false;
         }
     }
+    public static boolean editmotorlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE sync SET img1 ='"+ img1+ "', stars='"+ stars+ "', img2='"+img2+"', percent='"+percent+"' WHERE username='"+usr+"' AND stage='"+stage+"' AND level='"+level+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean validatePassword(String username, String password){
         try {
 
@@ -227,6 +240,19 @@ public class dbConnection {
             return false;
         }
     }
+    public static Boolean savelastmotorlevelSync(User usr, int lastsynclevel, int lastsyncstage) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE diagnoseds SET lasttrainsynclevel ='"+ lastsynclevel+ "', lasttrainsyncstage='"+ lastsyncstage+ "' WHERE diagnosed='"+usr.getUsername()+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
     public static int[] getlastsyncStagelevel(User usr) {
         Statement st = null;
         try {
@@ -281,7 +307,18 @@ public class dbConnection {
         }
     }
 
-
+    public static Boolean addmotorlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("INSERT INTO sync (username, stage, level, img1,img2,stars,percent)  VALUES('"+usr+"', '"+stage+"','"+level+"','"+img1+"','"+img2+"','"+stars+"','"+percent+"')");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
     public static ArrayList<com.example.myapplication.improvelevel_model.MotorResult> getTrainMotorResultsImprove(String username){
         Statement st = null;
         ArrayList<com.example.myapplication.improvelevel_model.MotorResult> temp = new ArrayList<>();

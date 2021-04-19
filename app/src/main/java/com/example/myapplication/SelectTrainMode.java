@@ -85,11 +85,7 @@ public class SelectTrainMode extends AppCompatActivity {
     }
     public void StartSyncTrain(View view) {
         SetTrainMode("Sync");
-        Intent intent = new Intent(SelectTrainMode.this, TrainSync.class);
-        intent.putExtra("Type", "Sync");
-        intent.putExtra("NextLevel", Integer.toString(a.lastSyncLevel));
-        intent.putExtra("NextStage", Integer.toString(a.lastSyncStage));
-        SelectTrainMode.this.startActivityForResult(intent, 1);
+
         LoadingShow();
         getStarsSync s=new getStarsSync(User.currentUser);
         s.execute();
@@ -152,6 +148,36 @@ public class SelectTrainMode extends AppCompatActivity {
                 s.execute();
                 //previous_stage_stars=5;
             }
+        }else{
+            String action =data.getStringExtra("action");
+            if(action.equals("RESTART")){
+
+                Intent intent = new Intent(this, TrainSync.class);
+                intent.putExtra("Type", "Train");
+                intent.putExtra("NextLevel", Integer.toString(a.lastSyncLevel));
+                intent.putExtra("NextStage", Integer.toString(a.lastSyncStage));
+                startActivityForResult(intent, 2);
+            }else if(action.equals("NEXT")){
+                if(TrainSync.dialog3!=null)
+                    TrainSync.dialog3.dismiss();
+                a.lastSyncLevel=a.lastSyncLevel+1;
+                SaveLastStageLevelSync s=new SaveLastStageLevelSync(User.currentUser,lastSyncLevel,lastSyncStage);
+                s.execute();
+                Intent intent = new Intent(this, TrainSync.class);
+                intent.putExtra("Type", "Train");
+                intent.putExtra("NextLevel", Integer.toString(a.lastSyncLevel));
+                intent.putExtra("NextStage", Integer.toString(a.lastSyncStage));
+                startActivityForResult(intent, 2);
+            }
+            else if (action.equals("FINISH")){
+                if(TrainSync.dialog3!=null)
+                    TrainSync.dialog3.dismiss();
+                lastSyncLevel=1;
+                lastSyncStage=lastSyncStage+1;
+                SaveLastStageLevelSync s=new SaveLastStageLevelSync(User.currentUser,lastSyncLevel,lastSyncStage);
+                s.execute();
+                //previous_stage_stars=5;
+            }
         }
     }
     private class SaveLastStageLevel extends AsyncTask<String, Void, Boolean> {
@@ -176,6 +202,43 @@ public class SelectTrainMode extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... params) {
             return dbConnection.savelastmotorlevel(usr, lastmotorlevel, lastmotorstage);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+
+                Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
+    private class SaveLastStageLevelSync extends AsyncTask<String, Void, Boolean> {
+        User usr;
+        int lastsynclevel;
+        int lastsyncstage;
+
+        public SaveLastStageLevelSync(User usr,int lastsynclevel,int lastsyncstage) {
+            this.usr = usr;
+            this.lastsynclevel = lastsynclevel;
+            this.lastsyncstage = lastsyncstage;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            return dbConnection.savelastmotorlevelSync(usr, lastsynclevel, lastsyncstage);
         }
 
         @Override
@@ -348,8 +411,8 @@ public class SelectTrainMode extends AppCompatActivity {
                 lastSyncStage=result[1];
                 if(lastSyncLevel==1 &&lastSyncStage>1&&syncstars<(lastSyncStage-1)*6+(lastSyncStage-1)){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
-                    builder1.setMessage("You don't have enougth stars to start stage "+lastStage+" " +
-                            "please improve some of previous levels of stage "+(lastStage-1)+" " +
+                    builder1.setMessage("You don't have enougth stars to start stage "+lastSyncStage+" " +
+                            "please improve some of previous levels of stage "+(lastSyncStage-1)+" " +
                             "or wait until you get your stars from the diagnosis.");
                     builder1.setCancelable(true);
                     builder1.setPositiveButton(
@@ -363,13 +426,13 @@ public class SelectTrainMode extends AppCompatActivity {
                     alert11.show();
                 }
                 else {
-                    SetTrainMode("Motor");
+
                     // Start the SecondActivity
                     Intent intent = new Intent(SelectTrainMode.this, TrainSync.class);
                     intent.putExtra("Type", "Train");
                     intent.putExtra("NextLevel", Integer.toString(a.lastSyncLevel));
                     intent.putExtra("NextStage", Integer.toString(a.lastSyncStage));
-                    SelectTrainMode.this.startActivityForResult(intent, 1);
+                    SelectTrainMode.this.startActivityForResult(intent, 2);
                 }
                 dialog3.dismiss();
                 Log.i("hhhh", "ccc");
