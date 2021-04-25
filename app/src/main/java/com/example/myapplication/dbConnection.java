@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.ContentValues;
+import com.example.myapplication.trainingresultsync.trainingresultmotor.SyncResult;
 import android.util.Log;
 
 import com.example.myapplication.diagnosed_model.Diagnosed;
@@ -377,12 +378,90 @@ public class dbConnection {
     }
 
 
+    public static ArrayList<SyncResult> getTrainSyncResults(String username){
+        Statement st = null;
+        ArrayList<SyncResult> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from sync WHERE username='" + username  + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            Log.i("hhh", "getTrainMotorResults: 0 " + username);
+            while (rs.next()) {
+                Log.i("hhh", "getTrainMotorResults: 1");
+
+                SyncResult t = new SyncResult();
+                t.username = rs.getString(1);
+                t.stage = Integer.parseInt(rs.getString(2));
+                t.level = Integer.parseInt(rs.getString(3));
+                t.stars = Float.parseFloat(rs.getString(6));
+                t.img = rs.getString(4);
+                t.img2 = rs.getString(5);
+                t.percent =  rs.getString(7);
+                temp.add(t);
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ArrayList<com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult> getTrainSyncResults_ImproveLever(String username){
+        Statement st = null;
+        ArrayList<com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from sync WHERE username='" + username  + "'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            Log.i("hhh", "getTrainMotorResults: 0 " + username);
+            while (rs.next()) {
+                Log.i("hhh", "getTrainMotorResults: 1");
+
+                com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult t = new com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult();
+                t.username = rs.getString(1);
+                t.stage = Integer.parseInt(rs.getString(2));
+                t.level = Integer.parseInt(rs.getString(3));
+                t.stars = Float.parseFloat(rs.getString(6));
+                t.img = rs.getString(4);
+                t.img2 = rs.getString(5);
+                t.percent =  rs.getString(7);
+                temp.add(t);
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
     public static ArrayList<String> getDiagnosisIds(String username ){
         Statement st = null;
         ArrayList<String> temp = new ArrayList<>();
         try {
             st = getConnection().createStatement();
             ResultSet rs = st.executeQuery("select distinct diagnosisnum from diagnosismotor WHERE username='" + username  + "'");//*************
+            ResultSetMetaData rsmd = rs.getMetaData();
+            while (rs.next()) {
+                temp.add(rs.getString(1));
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ArrayList<String> getDiagnosisIdsSync(String username ){
+        Statement st = null;
+        ArrayList<String> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select distinct diagnosisnum from diagnosissync WHERE username='" + username  + "'");//*************
             ResultSetMetaData rsmd = rs.getMetaData();
             while (rs.next()) {
                 temp.add(rs.getString(1));
@@ -410,6 +489,35 @@ public class dbConnection {
                 t.level = Integer.parseInt(rs.getString(3));
                 t.score = Integer.parseInt(rs.getString(5));
                 t.img = rs.getString(4);
+                temp.add(t);
+            }
+            st.close();
+
+            return temp;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+    public static ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult> getDiagnosisSyncResults(String username, String diagnosisID ){
+        Statement st = null;
+        ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult> temp = new ArrayList<>();
+        try {
+            st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from diagnosissync WHERE username='" + username  + "' AND diagnosisnum='"+diagnosisID+"'");//*************
+            ResultSetMetaData rsmd = rs.getMetaData();
+            while (rs.next()) {
+                com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult t = new com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult();
+                t.username = rs.getString(1);
+                t.stage = Integer.parseInt(rs.getString(2));
+                t.level = Integer.parseInt(rs.getString(3));
+                t.score = Integer.parseInt(rs.getString(7));
+                t.img = rs.getString(4);
+                t.img2 = rs.getString(5);
+                t.percent = rs.getString(6);
                 temp.add(t);
             }
             st.close();
@@ -459,6 +567,34 @@ public class dbConnection {
         try {
             st = getConnection().createStatement();
             st.executeUpdate("UPDATE diagnosismotor SET accept ='"+ result.score+ "' WHERE username='"+result.username+"' AND diagnosisnum='"+result.stage+"' AND imgnum='"+result.level+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+    public static Boolean updateSyncResultStars(SyncResult result) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE sync SET stars ='"+ result.stars+ "' WHERE username='"+result.username+"' AND stage='"+result.stage+"' AND level='"+result.level+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+    public static Boolean updateDiagnosisSyncScore(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult result) {
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE diagnosissync SET accept ='"+ result.score+ "' WHERE username='"+result.username+"' AND diagnosisnum='"+result.stage+"' AND imgnum='"+result.level+"'");
             st.close();
             return true;
         } catch (Exception throwables) {

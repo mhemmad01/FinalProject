@@ -18,6 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.improvelevel_model.MotorResult;
+import com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult;
 
 import java.util.ArrayList;
 
@@ -74,6 +75,7 @@ public class MainDiagnosed extends AppCompatActivity {
 
         @Override
         protected ArrayList<MotorResult> doInBackground(String... params) {
+            SyncResult.selected=dbConnection.getTrainSyncResults_ImproveLever(usr);
             return dbConnection.getTrainMotorResultsImprove(usr);
         }
 

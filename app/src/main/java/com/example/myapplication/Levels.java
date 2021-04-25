@@ -23,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.improvelevel_model.MotorResult;
 import com.example.myapplication.improvelevel_model.MotorResultAdapter;
 import com.example.myapplication.improvelevel_model.MotorResultViewModel;
+import com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult;
+import com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResultAdapter;
+import com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResultViewModel;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,12 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
     public static MotorResultAdapter adapter;
     public static Context context;
     public static Levels instance;
+
+    RecyclerView rvSyncResult;
+    SyncResultViewModel modelSync;
+    public static ArrayList<SyncResult> syncResults;
+    public static SyncResultAdapter adapterSync;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +69,20 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
         if(MotorResult.selected==null) {
             MotorResult.selected = new ArrayList<>();
         }
+
         motorResults = MotorResult.selected;
         adapter = new MotorResultAdapter(motorResults);
         rvMotorResult = (RecyclerView) findViewById(R.id.MotorLevels1);
         model =new ViewModelProvider(this).get(MotorResultViewModel.class);
         model.init(motorResults);
         model.getResults().observe(this, diagnosedListUpdateObserver);
+
+        syncResults = SyncResult.selected;
+        adapterSync = new SyncResultAdapter(syncResults);
+        rvSyncResult = (RecyclerView) findViewById(R.id.SyncLevel);
+        modelSync =new ViewModelProvider(this).get(SyncResultViewModel.class);
+        modelSync.init(syncResults);
+        modelSync.getResults().observe(this, diagnosedListUpdateObserverSync);
     }
 
 
@@ -75,6 +92,15 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
             adapter = new MotorResultAdapter(motorResults);
             rvMotorResult.setLayoutManager(new LinearLayoutManager(context));
             rvMotorResult.setAdapter(adapter);
+
+        }
+    };
+    Observer<ArrayList<SyncResult>> diagnosedListUpdateObserverSync = new Observer<ArrayList<SyncResult>>() {
+        @Override
+        public void onChanged(ArrayList<SyncResult> syncResults) {
+            adapterSync = new SyncResultAdapter(syncResults);
+            rvSyncResult.setLayoutManager(new LinearLayoutManager(context));
+            rvSyncResult.setAdapter(adapterSync);
 
         }
     };

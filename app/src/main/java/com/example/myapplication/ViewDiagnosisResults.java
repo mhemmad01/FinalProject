@@ -28,6 +28,9 @@ import com.example.myapplication.diagnosed_model.DiagnosedViewModel;
 import com.example.myapplication.trainingresultmotor.MotorResult;
 import com.example.myapplication.trainingresultmotor.MotorResultAdapter;
 import com.example.myapplication.trainingresultmotor.MotorResultViewModel;
+import com.example.myapplication.trainingresultsync.trainingresultmotor.SyncResult;
+import com.example.myapplication.trainingresultsync.trainingresultmotor.SyncResultAdapter;
+import com.example.myapplication.trainingresultsync.trainingresultmotor.SyncResultViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -39,10 +42,16 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
     RecyclerView rvMotorResult;
     MotorResultViewModel model;
     Spinner sp1;
+    Spinner spSync;
 
     public static int spSelectedPos=0;
     public static TextView scoreT;
     public static TextView totalScoreT;
+
+
+    public static int spSelectedPosSync=0;
+    public static TextView scoreTSync;
+    public static TextView totalScoreTSync;
 
     public static ArrayList<MotorResult> motorResults;
     public static MotorResultAdapter adapter;
@@ -53,6 +62,16 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
     com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResultViewModel modelD;
     public static ArrayList<com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult> motorResultsD;
     public static com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResultAdapter adapterD;
+
+
+    RecyclerView rvSyncResult;
+    SyncResultViewModel syncModel;
+    public static ArrayList<SyncResult> SyncResults;
+    public static SyncResultAdapter syncAdapter;
+
+    com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResultViewModel syncModelD;
+    public static ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult> SyncResultsD;
+    public static com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResultAdapter syncAdapterD;
 
 
     @Override
@@ -79,6 +98,10 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
                  new ArrayAdapter<String>(this,
                         android.R.layout.simple_spinner_item, com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds));
 
+        ((Spinner) findViewById(R.id.diagnosisSpinnerSync)).setAdapter(
+                 new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosisIds));
+
 
         sp1= (Spinner) findViewById(R.id.diagnosisSpinner);
         scoreT= (TextView) findViewById(R.id.scoreTextview);
@@ -88,7 +111,16 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
         scoreT.setVisibility(View.INVISIBLE);
         totalScoreT.setVisibility(View.INVISIBLE);
 
+        spSync= (Spinner) findViewById(R.id.diagnosisSpinnerSync);
+        scoreTSync= (TextView) findViewById(R.id.scoreTextviewSync);
+        totalScoreTSync= (TextView) findViewById(R.id.totalScoreTextviewSync);
+
+        spSync.setVisibility(View.INVISIBLE);
+        scoreTSync.setVisibility(View.INVISIBLE);
+        totalScoreTSync.setVisibility(View.INVISIBLE);
+
         totalScoreT.setText("Total Score: "+com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.totalScore+"/"+com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.total);
+        totalScoreTSync.setText("Total Score: "+ com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.totalScore+"/"+ com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.total);
 
 
         ((Spinner) findViewById(R.id.diagnosisSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -121,6 +153,36 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
             }
         });
 
+        ((Spinner) findViewById(R.id.diagnosisSpinnerSync)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spSelectedPos=position;
+                com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected = com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosis.get(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.get(position));
+                if(syncAdapterD!=null&&com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected!=null) {
+                    syncAdapterD.syncResults = com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected;
+                    syncAdapterD.notifyDataSetChanged();
+                }
+
+                if(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected!=null){
+                    int count=0;
+                    int count1=0;
+                    for(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult t : com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected){
+                        if(t.score>0){
+                            count++;
+                        }
+                        count1++;
+                    }
+                    scoreTSync.setText( "Score: "+count+"/"+count1);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
                 ((TabLayout)findViewById(R.id.tabLayout)).addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -131,9 +193,22 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
                    model =new ViewModelProvider(ViewDiagnosisResults.this).get(MotorResultViewModel.class);
                    model.init(motorResults);
                    model.getResults().observe(ViewDiagnosisResults.this, diagnosedListUpdateObserver);
+
+
+                   SyncResults = SyncResult.selected;
+                   syncAdapter = new SyncResultAdapter(SyncResults);
+                   rvSyncResult = (RecyclerView) findViewById(R.id.SynchronozationResults);
+                   syncModel = new ViewModelProvider(ViewDiagnosisResults.this).get(SyncResultViewModel.class);
+                   syncModel.init(SyncResults);
+                   syncModel.getResults().observe(ViewDiagnosisResults.this, syncDiagnosedListUpdateObserver);
+
                    sp1.setVisibility(View.INVISIBLE);
                    scoreT.setVisibility(View.INVISIBLE);
                    totalScoreT.setVisibility(View.INVISIBLE);
+
+                   spSync.setVisibility(View.INVISIBLE);
+                   scoreTSync.setVisibility(View.INVISIBLE);
+                   totalScoreTSync.setVisibility(View.INVISIBLE);
                }else {
                    //viewDiagnosisResults(null);
                    motorResultsD = com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected;
@@ -142,9 +217,20 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
                    modelD =new ViewModelProvider(ViewDiagnosisResults.this).get(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResultViewModel.class);
                    modelD.init(motorResultsD);
                    modelD.getResults().observe(ViewDiagnosisResults.this, diagnosedListUpdateObserverD);
+
+                   SyncResultsD = com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected;
+                   syncAdapterD = new com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResultAdapter(SyncResultsD);
+                   syncModelD = new ViewModelProvider(ViewDiagnosisResults.this).get(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResultViewModel.class);
+                   syncModelD.init(SyncResultsD);
+                   syncModelD.getResults().observe(ViewDiagnosisResults.this, syncDiagnosedListUpdateObserverD);
+
                    sp1.setVisibility(View.VISIBLE);
                    scoreT.setVisibility(View.VISIBLE);
                    totalScoreT.setVisibility(View.VISIBLE);
+
+                   spSync.setVisibility(View.VISIBLE);
+                   scoreTSync.setVisibility(View.VISIBLE);
+                   totalScoreTSync.setVisibility(View.VISIBLE);
 
                }
             }
@@ -163,8 +249,42 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
         if(DiagnosedAdapter.dialog3!=null){
             DiagnosedAdapter.dialog3.dismiss();
         }
+
+
+
+       ///////////////////////////////Sync Part////////////////////////////////////
+
+        SyncResults = SyncResult.selected;
+        syncAdapter = new SyncResultAdapter(SyncResults);
+        rvSyncResult = (RecyclerView) findViewById(R.id.SynchronozationResults);
+        syncModel = new ViewModelProvider(this).get(SyncResultViewModel.class);
+        syncModel.init(SyncResults);
+        syncModel.getResults().observe(this, syncDiagnosedListUpdateObserver);
+
+
+
+
     }
 
+
+    Observer<ArrayList<SyncResult>> syncDiagnosedListUpdateObserver = new Observer<ArrayList<SyncResult>>() {
+        @Override
+        public void onChanged(ArrayList<SyncResult> syncResults) {
+            syncAdapter = new SyncResultAdapter(syncResults);
+            rvSyncResult.setLayoutManager(new LinearLayoutManager(context));
+            rvSyncResult.setAdapter(syncAdapter);
+
+        }
+    };
+    Observer<ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult>> syncDiagnosedListUpdateObserverD = new Observer<ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult>>() {
+        @Override
+        public void onChanged(ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult> syncResults) {
+            syncAdapterD = new com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResultAdapter(syncResults);
+            rvSyncResult.setLayoutManager(new LinearLayoutManager(context));
+            rvSyncResult.setAdapter(syncAdapterD);
+
+        }
+    };
 
     Observer<ArrayList<MotorResult>> diagnosedListUpdateObserver = new Observer<ArrayList<MotorResult>>() {
         @Override
@@ -210,7 +330,9 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
 
     private class UpdateMotorStars extends AsyncTask<MotorResult, Void, Boolean> {
         ArrayList<MotorResult> toUpdate;
-        public UpdateMotorStars(ArrayList<MotorResult> toUpdate){
+        ArrayList<SyncResult> toUpdateSync;
+        public UpdateMotorStars(ArrayList<MotorResult> toUpdate, ArrayList<SyncResult> toUpdateSync ){
+            this.toUpdateSync=toUpdateSync;
             this.toUpdate=toUpdate;
         }
 
@@ -219,6 +341,9 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
             boolean toreturn=true;
             for (int i=0; i< toUpdate.size(); i++) {
                 toreturn&=dbConnection.updateMotorResultStars(toUpdate.get(i));
+            }
+            for (int i=0; i< toUpdateSync.size(); i++) {
+                toreturn&=dbConnection.updateSyncResultStars(toUpdateSync.get(i));
             }
             return toreturn;
         }
@@ -244,7 +369,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
     }
 
     public void saveAll(View view) {
-        UpdateMotorStars updater= new UpdateMotorStars((ArrayList)adapter.motorResults);
+        UpdateMotorStars updater= new UpdateMotorStars((ArrayList)adapter.motorResults,(ArrayList)syncAdapter.syncResults);
         updater.execute();
     }
 

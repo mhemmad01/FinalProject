@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/stageTextView"
+                android:id="@+id/stageTextViewSync"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -31,7 +31,7 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/levelTextView4"
+                android:id="@+id/levelTextViewSync"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -39,6 +39,16 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Level: "
                 android:textSize="17sp" />
+
+            <ImageButton
+                android:id="@+id/improveLevelButtonSync"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:background="@color/blue_light2"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/refresh"
+                tools:srcCompat="@drawable/refresh" />
         </LinearLayout>
 
         <TableRow
@@ -47,7 +57,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/originalTraningMotorImage"
+                android:id="@+id/originalTraningSyncImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -56,7 +66,15 @@
                 app:srcCompat="@drawable/ss2" />
 
             <ImageView
-                android:id="@+id/MotorTrainingResultImage"
+                android:id="@+id/SyncTrainingResultImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/my_border3"
+                app:srcCompat="@drawable/ll" />
+
+            <ImageView
+                android:id="@+id/SyncTrainingResultImage2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -67,10 +85,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:padding="3dp">
 
                 <RatingBar
-                    android:id="@+id/motorTrainingStars"
+                    android:id="@+id/SyncTrainingStars"
                     android:layout_width="143dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -80,20 +99,21 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SyncPercentImprove"
+                    app:layout_constraintVertical_bias="0.787" />
+
+                <TextView
+                    android:id="@+id/SyncPercentImprove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Sync:"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageButton
-                android:id="@+id/improveLevelButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp"
-                android:layout_weight="1.2"
-                android:background="@color/blue_light2"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/refresh"
-                tools:srcCompat="@drawable/refresh" />
 
         </TableRow>
     </LinearLayout>

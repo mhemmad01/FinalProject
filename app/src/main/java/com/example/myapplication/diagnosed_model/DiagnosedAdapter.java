@@ -22,6 +22,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.ViewDiagnosisResults;
 import com.example.myapplication.dbConnection;
 import com.example.myapplication.trainingresultmotor.MotorResult;
+import com.example.myapplication.trainingresultsync.trainingresultmotor.SyncResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,8 +176,27 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
             }
             com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.totalScore=score;
             com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.total=total;
-            Log.d("x", "doInBackground: "+ com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosis);
-            Log.d("x", "doInBackground: "+ com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds);
+
+
+
+            SyncResult.selected = dbConnection.getTrainSyncResults(usr);
+            com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosisIds= dbConnection.getDiagnosisIdsSync(usr);
+            int score1=0;
+            int total1=0;//com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.size();
+            for( String id: com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosisIds){
+                com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosis.put(id,  dbConnection.getDiagnosisSyncResults(usr,id));
+                for(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult i : com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosis.get(id)){
+                    if(i.score>0) {
+                        score1++;
+                    }
+                    total1++;
+                }
+            }
+            com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.totalScore=score1;
+            com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.total=total1;
+
+
+
 
             return dbConnection.getTrainMotorResults(usr);
         }
@@ -197,5 +217,4 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
         }
     }
-
 }
