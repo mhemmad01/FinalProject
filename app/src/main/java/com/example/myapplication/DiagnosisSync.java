@@ -6,61 +6,52 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.diagnosis_model.DiagnosisAdapter;
+
 import java.io.ByteArrayOutputStream;
 
-public class TrainSync extends AppCompatActivity {
-    public static TrainSync Instance;
-    static String Type=null;
-    public static Dialog dialog3=null;
+public class DiagnosisSync extends AppCompatActivity {
+    int imgnum;
+    int diagnosisnum;
     PaintView SyncDiagnosisView1;
     PaintView SyncDiagnosisView2;
-    private String lastLevel2;
-    private String lastStage2;
-    AlertDialog dialog;
-    private TextView level;
+    TextView level;
     private ViewGroup SyncviewGroup1;
     private ViewGroup SyncviewGroup2;
-    private LinearLayout parent;
-    Bitmap b1;
-    private int currentlevel;
-    private int currentStage;
-    private int stars;
-    public static int[][] textureArrayWin = {
-            {R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-            },
-            {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-            },
-            {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-            }
+
+    static Dialog dialog3=null;
+    static  DiagnosisSync Instance;
+    public static int[] textureArrayWin = {
+            R.drawable.qw,
+            R.drawable.ss2,
+            R.drawable.qw,
+            R.drawable.ss2,
+            R.drawable.qw,
+
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.traningsync);
-        Instance=this;
         ImageView myImageView;
+        Instance=this;
+        setContentView(R.layout.diagnosissync);
+        //getSupportActionBar().setTitle("Training Motor");
         final ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
@@ -69,94 +60,42 @@ public class TrainSync extends AppCompatActivity {
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
-        textviewTitle.setText("Training Sync");
+        textviewTitle.setText("Diagnosis Sync");
         abar.setCustomView(viewActionBar, params);
         abar.setDisplayShowCustomEnabled(true);
         abar.setDisplayShowTitleEnabled(false);
         abar.setDisplayHomeAsUpEnabled(true);
         abar.setHomeButtonEnabled(true);
         level=(TextView)findViewById(R.id.textView8);
-        if(getIntent().getStringExtra("Type").equals("improve")){
-            Type="improve";
-            lastLevel2=getIntent().getStringExtra("levelnum");
-            lastStage2=getIntent().getStringExtra("stagenum");
-        }else {
-            Type="Train";
-            lastLevel2 = getIntent().getStringExtra("NextLevel");
-            lastStage2 = getIntent().getStringExtra("NextStage");
-        }
-        currentlevel = Integer.parseInt(lastLevel2);
-        currentStage = Integer.parseInt(lastStage2);
-        level.setText("Level " + currentlevel + " Stage " + currentStage);
-        myImageView = (ImageView) findViewById(R.id.imageView17);
-        myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2) - 1][Integer.parseInt(lastStage2) - 1]);
+        imgnum = Integer.parseInt(getIntent().getStringExtra("imgnum"));
+        diagnosisnum=Integer.parseInt(getIntent().getStringExtra("diagnosisnum"));
+        level.setText("Image "+imgnum +" Diagnosis "+diagnosisnum);
+        System.out.println(imgnum);
+        myImageView = (ImageView)findViewById(R.id.imageView8);
+        myImageView.setImageResource(textureArrayWin[imgnum-1]);
         SyncDiagnosisView1=new PaintView(this,"Sync");
         SyncDiagnosisView1.setFlag2(2);
         SyncDiagnosisView2=new PaintView(this,"Sync");
         SyncDiagnosisView2.setFlag2(2);
-        SyncviewGroup1 = (ViewGroup) findViewById(R.id.SyncTrain1);
+        SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
         SyncviewGroup1.addView(SyncDiagnosisView1);
-        SyncviewGroup2 = (ViewGroup) findViewById(R.id.SyncTrain2);
+        SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
         SyncviewGroup2.addView(SyncDiagnosisView2);
-        if (dialog3 != null)
+        if(dialog3!=null)
             dialog3.dismiss();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return true;
     }
     public void drawfinish(){
         int percent=0;
-        if(Type.equals("improve")){
+        if(imgnum==5){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Good job");
-            //builder1.setCancelable(true);
-
-            builder1.setPositiveButton(
-                    "FINISH",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog2, int id) {
-                            dialog2.cancel();
-                            LoadingShow();
-                            Bitmap mydraw1=SyncDiagnosisView1.get();
-                            Bitmap mydraw2=SyncDiagnosisView2.get();
-                            ByteArrayOutputStream baos1=new ByteArrayOutputStream();
-                            mydraw1.compress(Bitmap.CompressFormat.PNG,100, baos1);
-                            byte [] b1=baos1.toByteArray();
-                            String temp1= Base64.encodeToString(b1, Base64.DEFAULT);
-                            ByteArrayOutputStream baos2=new ByteArrayOutputStream();
-                            mydraw2.compress(Bitmap.CompressFormat.PNG,100, baos2);
-                            byte [] b2=baos2.toByteArray();
-                            String temp2= Base64.encodeToString(b2, Base64.DEFAULT);
-                            TrainSync.EditSyncLevel s1=new TrainSync.EditSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent);
-                            s1.execute("");
-                            Intent intent = new Intent();
-                            intent.putExtra("action", "FINISH");
-                            intent.putExtra("img1", temp1);
-                            intent.putExtra("img2", temp2);
-                            setResult(Activity.RESULT_OK, intent);
-                            TrainSync.this.finish();
-                        }
-                    });
-            builder1.setNegativeButton(
-                    "RESTART",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog2, int id) {
-                            dialog2.cancel();
-                            LoadingShow();
-                            Intent intent = new Intent();
-                            intent.putExtra("action", "RESTART");
-                            intent.putExtra("username", User.currentUser.getUsername());
-                            intent.putExtra("levelnum", lastLevel2);
-                            intent.putExtra("stagenum", lastStage2);
-                            setResult(Activity.RESULT_OK, intent);
-                            TrainSync.this.finish();
-                        }
-                    });
-            AlertDialog alert11 = builder1.create();
-            alert11.setCanceledOnTouchOutside(false);
-            alert11.show();
-        }
-        else if(currentlevel==3){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Good job you finished stage "+currentStage+" if you have enougth stars " +
-                    "you will move to next stage if you don't you must improve levels to get more stars.");
+            builder1.setMessage("Good job you finished the diagnosis");
             //builder1.setCancelable(true);
 
 
@@ -176,12 +115,12 @@ public class TrainSync extends AppCompatActivity {
                             mydraw2.compress(Bitmap.CompressFormat.PNG,100, baos2);
                             byte [] b2=baos2.toByteArray();
                             String temp2= Base64.encodeToString(b2, Base64.DEFAULT);
-                            TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent);
+                            DiagnosisSync.AddSyncLevel s=new DiagnosisSync.AddSyncLevel(SelectDiagnosisMode.DiagnosedUsername,diagnosisnum,imgnum,temp1,temp2,percent);
                             s.execute("");
                             Intent intent = new Intent();
-                            intent.putExtra("action", "FINISH");
+                            intent.putExtra("action", "FINISHSYNC");
                             setResult(Activity.RESULT_OK, intent);
-                            TrainSync.this.finish();
+                            DiagnosisSync.this.finish();
                         }
                     });
             builder1.setNegativeButton(
@@ -191,9 +130,9 @@ public class TrainSync extends AppCompatActivity {
                             dialog2.cancel();
                             LoadingShow();
                             Intent intent = new Intent();
-                            intent.putExtra("action", "RESTART");
+                            intent.putExtra("action", "RESTARTSYNC");
                             setResult(Activity.RESULT_OK, intent);
-                            TrainSync.this.finish();
+                            DiagnosisSync.this.finish();
                         }
                     });
             AlertDialog alert11 = builder1.create();
@@ -218,7 +157,7 @@ public class TrainSync extends AppCompatActivity {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
                             LoadingShow();
-                            Next();
+                            Next(percent);
                         }
                     });
             AlertDialog alert11 = builder1.create();
@@ -235,12 +174,11 @@ public class TrainSync extends AppCompatActivity {
     }
     public void Restart() {
         Intent intent = new Intent();
-        intent.putExtra("action", "RESTART");
+        intent.putExtra("action", "RESTARTSYNC");
         setResult(Activity.RESULT_OK, intent);
-        TrainSync.this.finish();
+        DiagnosisSync.this.finish();
     }
-    public void Next(){
-        int percent1=0;
+    public void Next(int percent){
         Bitmap mydraw1=SyncDiagnosisView1.get();
         Bitmap mydraw2=SyncDiagnosisView2.get();
         ByteArrayOutputStream baos1=new ByteArrayOutputStream();
@@ -257,29 +195,27 @@ public class TrainSync extends AppCompatActivity {
         SyncviewGroup2.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         SyncviewGroup2.layout(0, 0, SyncviewGroup2.getMeasuredWidth(), SyncviewGroup2.getMeasuredHeight());
-        TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent1);
+        DiagnosisSync.AddSyncLevel s=new DiagnosisSync.AddSyncLevel(SelectDiagnosisMode.DiagnosedUsername,diagnosisnum,imgnum,temp1,temp2,percent);
         s.execute("");
         Intent intent = new Intent();
-        intent.putExtra("action", "NEXT");
+        intent.putExtra("action", "NEXTSYNC");
         setResult(Activity.RESULT_OK, intent);
-        TrainSync.this.finish();
+        DiagnosisSync.this.finish();
 
     }
     private class AddSyncLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
-        int stars;
-        int stage;
-        int level;
+        int diagnosisnum;
+        int imgnum;
         String img1;
         String img2;
         int percent;
-        public AddSyncLevel(String usr, int stars, int stage, int level, String img1,String img2,int percent) {
+        public AddSyncLevel(String usr, int diagnosisnum, int imgnum, String img1,String img2,int percent) {
             this.usr = usr;
-            this.stars = stars;
-            this.stage = stage;
+            this.diagnosisnum = diagnosisnum;
             this.img1 = img1;
             this.img2 = img2;
-            this.level = level;
+            this.imgnum = imgnum;
             this.percent=percent;
         }
 
@@ -293,50 +229,8 @@ public class TrainSync extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return dbConnection.addtrainlevelSync(usr, stars, stage, level, img1,img2,percent);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if (result) {
-                Log.i("hhhh", "ccc");
-                //getmotorImg a = new getmotorImg(usr, stage, level);
-                //a.execute("");
-            } else {
-                Log.i("hhhh", "ffffff");
-            }
-
-        }
-    }
-    private class EditSyncLevel extends AsyncTask<String, Void, Boolean> {
-        String usr;
-        int stars;
-        int stage;
-        int level;
-        String img1;
-        String img2;
-        int percent;
-        public EditSyncLevel(String usr, int stars, int stage, int level, String img1,String img2,int percent) {
-            this.usr = usr;
-            this.stars = stars;
-            this.stage = stage;
-            this.img1 = img1;
-            this.img2 = img2;
-            this.level = level;
-            this.percent=percent;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
-            //    .show();
-        }
-
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            return dbConnection.edittrainlevelSync(usr, stars, stage, level, img1,img2,percent);
+            System.out.println(usr+""+diagnosisnum+""+imgnum+""+percent);
+            return dbConnection.adddiagnosisSync(usr, diagnosisnum, imgnum, img1,img2,percent);
         }
 
         @Override
@@ -352,3 +246,4 @@ public class TrainSync extends AppCompatActivity {
         }
     }
 }
+

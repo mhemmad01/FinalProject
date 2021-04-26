@@ -43,6 +43,8 @@ public class SelectDiagnosisMode extends AppCompatActivity {
     static String DiagnosedUsername;
     private int lastimgnummotor=1;
     private int lastdiagnosisnum=1;
+    private int lastimgnumsync=1;
+    private int lastdiagnosisnumsync=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +82,31 @@ public class SelectDiagnosisMode extends AppCompatActivity {
         }
     };
 
-    public void StartSyncTrain(View view) {
+    public void StartSyncDiagnosis(View view) {
         SetDiagnosisMode("Sync");
-        Intent intent = new Intent(getApplicationContext(), TrainSync.class);
-        startActivity(intent);
+        if(DiagnosisAdapter.temp==null){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Please Select diagnosed from the list above.");
+            //builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog2, int id) {
+                            dialog2.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.setCanceledOnTouchOutside(false);
+            alert11.show();
+        }
+        else {
+            LoadingShow();
+            DiagnosedUsername=DiagnosisAdapter.temp.getUsername();
+            DiagnosisAdapter.temp=null;
+            Log.i("hhhh", DiagnosedUsername);
+            GetLastdiagnosissyncimg s = new GetLastdiagnosissyncimg(DiagnosedUsername);
+            s.execute();
+        }
     }
     public void LoadingShow(){
         // custom dialog
@@ -93,7 +116,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
         dialog3.show();
     }
 
-    public void StartMotorTrain(View view) {
+    public void StartMotorDiagnosis(View view) {
         SetDiagnosisMode("Motor");
         if(DiagnosisAdapter.temp==null){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -163,6 +186,26 @@ public class SelectDiagnosisMode extends AppCompatActivity {
                 a.lastdiagnosisnum=a.lastdiagnosisnum+1;
                 SaveLastdiagnosisimg s=new SaveLastdiagnosisimg(a.DiagnosedUsername,a.lastimgnummotor,lastdiagnosisnum);
                 s.execute();
+            }else if(action.equals("FINISHSYNC")){
+                if(DiagnosisSync.dialog3!=null)
+                    DiagnosisSync.dialog3.dismiss();
+                a.lastimgnumsync=1;
+                a.lastdiagnosisnumsync=a.lastdiagnosisnumsync+1;
+                SaveLastdiagnosisimgsync s=new SaveLastdiagnosisimgsync(a.DiagnosedUsername,a.lastimgnumsync,lastdiagnosisnumsync);
+                s.execute();
+            }else if(action.equals("RESTARTSYNC")){
+                Intent intent = new Intent(this, DiagnosisSync.class);
+                intent.putExtra("imgnum", Integer.toString(lastimgnumsync));
+                intent.putExtra("diagnosisnum", Integer.toString(lastdiagnosisnumsync));
+                startActivityForResult(intent, 1);
+            }else if(action.equals("NEXTSYNC")){
+                a.lastimgnumsync=a.lastimgnumsync+1;
+                SaveLastdiagnosisimgsync s=new SaveLastdiagnosisimgsync(a.DiagnosedUsername,a.lastimgnumsync,lastdiagnosisnumsync);
+                s.execute();
+                Intent intent = new Intent(this, DiagnosisSync.class);
+                intent.putExtra("imgnum", Integer.toString(lastimgnumsync));
+                intent.putExtra("diagnosisnum", Integer.toString(lastdiagnosisnumsync));
+                startActivityForResult(intent, 1);
             }
         }
     }
@@ -212,6 +255,48 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
         }
     }
+    private class GetLastdiagnosissyncimg extends AsyncTask<String, Void, int[]> {
+        String usr;
+
+        public GetLastdiagnosissyncimg(String usr) {
+            this.usr = usr;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected int[] doInBackground(String... params) {
+            return dbConnection.getlastdiagnosissyncimg(usr);
+        }
+
+        @Override
+        protected void onPostExecute(int[] result) {
+            if (result!=null) {
+                lastimgnumsync=result[0];
+                lastdiagnosisnumsync=result[1];
+                SetDiagnosisMode("Sync");
+                // Start the SecondActivity
+                Intent intent = new Intent(SelectDiagnosisMode.this, DiagnosisSync.class);
+                intent.putExtra("imgnum", Integer.toString(lastimgnumsync));
+                intent.putExtra("diagnosisnum", Integer.toString(lastdiagnosisnumsync));
+                // intent.putExtra("NextStage", Integer.toString(a.lastStage));
+                SelectDiagnosisMode.this.startActivityForResult(intent, 1);
+                dialog3.dismiss();
+                Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
     private class SaveLastdiagnosisimg extends AsyncTask<String, Void, Boolean> {
         String usr;
         int lastimgnum;
@@ -234,6 +319,43 @@ public class SelectDiagnosisMode extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... params) {
             return dbConnection.savelastdiagnosisimg(usr, lastdiagnosisnum,lastimgnum);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+
+                Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
+    private class SaveLastdiagnosisimgsync extends AsyncTask<String, Void, Boolean> {
+        String usr;
+        int lastimgnumsync;
+        int lastdiagnosisnumsync;
+
+        public SaveLastdiagnosisimgsync(String usr,int lastimgnumsync,int lastdiagnosisnumsync) {
+            this.usr = usr;
+            this.lastimgnumsync = lastimgnumsync;
+            this.lastdiagnosisnumsync = lastdiagnosisnumsync;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            return dbConnection.savelastdiagnosisimgsync(usr, lastdiagnosisnumsync,lastimgnumsync);
         }
 
         @Override

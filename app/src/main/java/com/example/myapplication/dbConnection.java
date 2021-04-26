@@ -48,7 +48,7 @@ public class dbConnection {
             return false;
         }
     }
-    public static boolean editmotorlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent){
+    public static boolean edittrainlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent){
         Statement st = null;
         try {
             st = getConnection().createStatement();
@@ -94,11 +94,36 @@ public class dbConnection {
             return false;
         }
     }
+    public static boolean savelastdiagnosisimgsync(String usr, int diagnosisnum, int imgnum){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("UPDATE diagnoseds SET lastdiagnosissyncimg ='"+ imgnum+ "', lastdiagnosissyncnum='"+ diagnosisnum+ "' WHERE diagnosed='"+usr+"'");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean addmotordiagnosisimg(String usr, int diagnosisnum, int imgnum, String img){
         Statement st = null;
         try {
             st = getConnection().createStatement();
             st.executeUpdate("INSERT INTO diagnosismotor (username, diagnosisnum, imgnum, img,accept)  VALUES('"+usr+"', '"+diagnosisnum+"','"+imgnum+"','"+img+"','"+(-1)+"')");
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean adddiagnosisSync(String usr, int diagnosisnum, int imgnum, String img1,String img2,int percent){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            st.executeUpdate("INSERT INTO diagnosissync (username, diagnosisnum, imgnum, img,img2,percent,accept)  VALUES('"+usr+"', '"+diagnosisnum+"', '"+imgnum+"', '"+img1+"', '"+img2+"', '"+percent+"','"+(-1)+"')");
             st.close();
             return true;
         } catch (Exception throwables) {
@@ -116,6 +141,29 @@ public class dbConnection {
             if (rs.next()) {
                 result[0]=rs.getInt(5);
                 result[1]=rs.getInt(6);
+                st.close();
+                return result;
+            }
+            else{
+                st.close();
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static int[] getlastdiagnosissyncimg(String user){
+        try {
+
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select * from diagnoseds WHERE diagnosed='"+user+"'");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int[] result=new int[2];
+            if (rs.next()) {
+                result[0]=rs.getInt(9);
+                result[1]=rs.getInt(10);
                 st.close();
                 return result;
             }
@@ -308,7 +356,7 @@ public class dbConnection {
         }
     }
 
-    public static Boolean addmotorlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent) {
+    public static Boolean addtrainlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent) {
         Statement st = null;
         try {
             st = getConnection().createStatement();

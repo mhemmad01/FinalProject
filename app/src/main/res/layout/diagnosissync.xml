@@ -12,46 +12,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/my_border3"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/blue_light2"
-                android:scaleType="fitStart"
-                app:srcCompat="@android:drawable/ic_popup_sync" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/blue_light2"
-
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                android:text="Diagnosis"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/blue_light2"
-                android:scaleType="fitEnd"
-                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal">
 
@@ -85,7 +45,7 @@
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/my_border3"
@@ -124,16 +84,6 @@
 
                     android:background="@drawable/my_border3"
                     app:srcCompat="@drawable/ss2" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="294dp"
-                    android:layout_height="66dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="NEXT"
-                    android:textSize="24sp"
-                    app:backgroundTint="@android:color/holo_blue_light" />
 
             </LinearLayout>
 

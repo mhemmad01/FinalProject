@@ -25,7 +25,11 @@ public class MainDiagnostic extends AppCompatActivity{
         Intent myIntent = new Intent(this, MyDiagnosed.class);
         this.startActivity(myIntent);
     }
-
+    public void Logout(View view) {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
     public void gotoSelectDiagnosisMode(View view) {
         Intent myIntent = new Intent(this, SelectDiagnosisMode.class);
         this.startActivity(myIntent);

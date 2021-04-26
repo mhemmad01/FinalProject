@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.diagnosis_model.Diagnosis;
+
 public class PaintView extends View {
     public ViewGroup.LayoutParams params;
     private Path path=new Path();
@@ -30,6 +32,7 @@ public class PaintView extends View {
     private String Type;
     static int counter=0;
     private Context context;
+    static int holdflag=-1;
     public void setFlag2(int flag2){
         this.flag2=flag2;
     }
@@ -77,6 +80,7 @@ public class PaintView extends View {
 
                                 @Override
                                 public void onFinish() {
+                                    holdflag=0;
                                     alert.dismiss();
                                 }
                             }.start();
@@ -84,16 +88,27 @@ public class PaintView extends View {
                         path.moveTo(pointX, pointY);
                         return true;
                     case MotionEvent.ACTION_MOVE:
-                        path.lineTo(pointX, pointY);
-                        break;
+                        if(holdflag==0) {
+                            path.lineTo(pointX, pointY);
+                        }
+                            break;
                     case MotionEvent.ACTION_UP:
                         flag = false;
                         if (flag2 == 1) {
                             DiagnosisMotor.Instance.drawfinish();
-                        } else {
+                        }else if(flag2==2){
                             counter--;
                             if(counter==0){
+                                holdflag=-1;
+                                DiagnosisSync.Instance.drawfinish();
+
+                            }
+                        }else {
+                            counter--;
+                            if(counter==0){
+                                holdflag=-1;
                                 TrainSync.Instance.drawfinish();
+
                             }
                         }
                         break;

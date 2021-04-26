@@ -81,7 +81,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-black"
-            android:onClick="StartSyncTrain"
+            android:onClick="StartSyncDiagnosis"
             android:text="Synchrozation"
             android:textSize="16sp"
             app:backgroundTint="@android:color/holo_blue_light" />
@@ -93,7 +93,7 @@
             android:layout_margin="10dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
-            android:onClick="StartMotorTrain"
+            android:onClick="StartMotorDiagnosis"
             android:text="Motoric"
             android:textSize="16sp"
             app:backgroundTint="@android:color/holo_blue_light" />

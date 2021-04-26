@@ -47,9 +47,9 @@ public class TrainingResultsFragment extends Fragment implements OnClickListener
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()){
-			case R.id.button5:
+//			case R.id.button5:
 				//calculatePlus();
-				break;
+			//	break;
 		}
 		listener.OnClickEvent();
 	}
