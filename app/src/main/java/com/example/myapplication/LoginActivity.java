@@ -50,7 +50,7 @@ public class LoginActivity  extends AppCompatActivity {
         String Username = ((EditText)findViewById(R.id.editTextUsername1)).getText().toString();
         String Password = ((EditText)findViewById(R.id.editTextPassword1)).getText().toString();
         LoadingShow();
-        Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
         CheckUsernamePassword check = new CheckUsernamePassword(Username,Password);
         check.execute("");
 

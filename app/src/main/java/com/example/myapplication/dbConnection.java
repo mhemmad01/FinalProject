@@ -69,6 +69,7 @@ public class dbConnection {
             ResultSetMetaData rsmd = rs.getMetaData();
 
             if (rs.next()) {
+                    System.out.println("sxxx");
                     User usr = new User(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(4), Integer.parseInt(rs.getString(5)) == 1, Integer.parseInt(rs.getString(6)));
                     User.currentUser = usr;
                     if(usr.isDiagnostic()){
@@ -76,6 +77,7 @@ public class dbConnection {
                     }
                     return true;
             }
+            System.out.println("uuuu");
             st.close();
         } catch (Exception e) {
             e.printStackTrace();

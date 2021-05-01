@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Levels;
 import com.example.myapplication.R;
 import com.example.myapplication.TrainMotor;
+import com.example.myapplication.TrainSync;
 
 import java.util.List;
 
@@ -98,13 +99,13 @@ public class SyncResultAdapter extends RecyclerView.Adapter<SyncResultAdapter.Vi
         SyncResult current;
         public transfer(SyncResult current) {
             this.current=current;
-            Intent intent = new Intent(Levels.instance, TrainMotor.class);
+            Intent intent = new Intent(Levels.instance, TrainSync.class);
             intent.putExtra("Type","improve");
             intent.putExtra("username", current.username);
             intent.putExtra("levelnum", Integer.toString(current.level));
             intent.putExtra("stagenum", Integer.toString(current.stage));
             // intent.putExtra("NextStage", Integer.toString(a.lastStage));
-            Levels.instance.startActivityForResult(intent, 1);
+            Levels.instance.startActivityForResult(intent, 2);
         }
 
     }

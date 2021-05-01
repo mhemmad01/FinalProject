@@ -73,14 +73,34 @@
                 android:background="@drawable/my_border3"
                 android:orientation="vertical"></LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageView17"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:layout_weight="1"
-                android:background="@drawable/my_border3"
-                app:srcCompat="@drawable/ss2" />
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/my_border3"
+                    app:srcCompat="@drawable/ss2" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Both players must click on the screen and wait until count down finish then they can start draw"
+                    android:textStyle="bold"
+                    android:textSize="40sp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:background="@drawable/my_border3"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/SyncTrain2"

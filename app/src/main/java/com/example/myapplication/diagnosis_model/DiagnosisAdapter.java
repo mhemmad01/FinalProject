@@ -88,9 +88,10 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.View
 
         @Override
         public void onClick(View v) {
-           v.setBackgroundColor(Color.RED);
-           if(last!=null)
+            if(last!=null && last!=v)
                 last.setBackgroundColor(Color.BLACK);
+           v.setBackgroundColor(Color.RED);
+
             last=v;
             temp = mDiagnoseds.get(getAdapterPosition());
 

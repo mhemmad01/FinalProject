@@ -162,6 +162,19 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
 
         @Override
         protected ArrayList<MotorResult> doInBackground(String... params) {
+//            if (MotorResult.selected == null) {
+//                MotorResult.selected = new ArrayList<>();
+//            }
+//            if (SyncResult.selected == null) {
+//                SyncResult.selected = new ArrayList<>();
+//            }
+//            if (com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected == null) {
+//                com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected = new ArrayList<>();
+//            }
+//            if (com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected == null) {
+//                com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected = new ArrayList<>();
+//            }
+            com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected=null;
             com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds= dbConnection.getDiagnosisIds(usr);
             int score=0;
             int total=0;//com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.size();

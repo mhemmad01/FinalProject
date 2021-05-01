@@ -11,10 +11,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +35,8 @@ public class PaintView extends View {
     static int counter=0;
     private Context context;
     static int holdflag=-1;
+    static Toast mToast = null;
+    private int viewnumber=0;
     public void setFlag2(int flag2){
         this.flag2=flag2;
     }
@@ -50,7 +54,13 @@ public class PaintView extends View {
         brush.setStrokeWidth(8f);
         params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         this.setDrawingCacheEnabled(true);
-
+        if(counter==1) {
+            mToast = Toast.makeText(context, "Don't move up your hand please wait for the second user and for the time to finish", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+    }
+    public void setviewnumber(int i){
+        this.viewnumber=i;
     }
     public Bitmap get(){
         return this.getDrawingCache();
@@ -65,50 +75,67 @@ public class PaintView extends View {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         counter++;
-                        if(counter==2) {
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle("Time left");
-                            builder.setMessage("start time");
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Time left");
+                        builder.setMessage("start time");
 
-                            final AlertDialog alert = builder.create();
-                            alert.show();
-                            new CountDownTimer(3000, 1000) {
+                        final AlertDialog alert = builder.create();
+                        if(counter==2) {
+                            mToast.cancel();
+                            new CountDownTimer(6000,1000) {
                                 @Override
                                 public void onTick(long l) {
-                                    alert.setMessage("left: " + l);
+                                            if(counter==2) {
+                                                alert.setMessage("left: " + l / 1000);
+                                                alert.show();
+                                            }else{
+                                                alert.dismiss();
+                                                cancel();
+                                            }
                                 }
 
                                 @Override
                                 public void onFinish() {
+
                                     holdflag=0;
                                     alert.dismiss();
                                 }
                             }.start();
+
+                        }
+
+                        if(counter==1){
+                            mToast=Toast.makeText(context, "Don't move up your hand please wait for the second user", Toast.LENGTH_SHORT);
+                            mToast.show();
                         }
                         path.moveTo(pointX, pointY);
                         return true;
                     case MotionEvent.ACTION_MOVE:
                         if(holdflag==0) {
                             path.lineTo(pointX, pointY);
+                        }else{
+                            path.moveTo(pointX, pointY);
                         }
                             break;
                     case MotionEvent.ACTION_UP:
                         flag = false;
-                        if (flag2 == 1) {
-                            DiagnosisMotor.Instance.drawfinish();
-                        }else if(flag2==2){
+                         if(flag2==2){
                             counter--;
-                            if(counter==0){
+                            if(counter==0 && holdflag==0){
                                 holdflag=-1;
                                 DiagnosisSync.Instance.drawfinish();
 
+                            } else if(holdflag!=0){
+                                DiagnosisSync.Instance.addviewfun(viewnumber);
                             }
                         }else {
                             counter--;
-                            if(counter==0){
+                            if(counter==0&&holdflag==0){
                                 holdflag=-1;
                                 TrainSync.Instance.drawfinish();
-
+                            }
+                            else if(holdflag!=0){
+                                TrainSync.Instance.addviewfun(viewnumber);
                             }
                         }
                         break;

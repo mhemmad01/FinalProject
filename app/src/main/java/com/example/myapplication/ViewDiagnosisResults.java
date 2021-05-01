@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,8 +84,15 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
         if (MotorResult.selected == null) {
             MotorResult.selected = new ArrayList<>();
         }
-
-
+        if (SyncResult.selected == null) {
+            SyncResult.selected = new ArrayList<>();
+        }
+        if (com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected == null) {
+            com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected = new ArrayList<>();
+        }
+        if (com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected == null) {
+            com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected = new ArrayList<>();
+        }
         motorResults = MotorResult.selected;
         adapter = new MotorResultAdapter(motorResults);
         rvMotorResult = (RecyclerView) findViewById(R.id.MotorResults);
@@ -158,7 +166,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spSelectedPos=position;
-                com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected = com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosis.get(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.diagnosisIds.get(position));
+                com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected = com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosis.get(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.diagnosisIds.get(position));
                 if(syncAdapterD!=null&&com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected!=null) {
                     syncAdapterD.syncResults = com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult.selected;
                     syncAdapterD.notifyDataSetChanged();
@@ -209,6 +217,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
                    spSync.setVisibility(View.INVISIBLE);
                    scoreTSync.setVisibility(View.INVISIBLE);
                    totalScoreTSync.setVisibility(View.INVISIBLE);
+                   ((Button)findViewById(R.id.saveButton)).setVisibility(View.VISIBLE);
                }else {
                    //viewDiagnosisResults(null);
                    motorResultsD = com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult.selected;
@@ -231,6 +240,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
                    spSync.setVisibility(View.VISIBLE);
                    scoreTSync.setVisibility(View.VISIBLE);
                    totalScoreTSync.setVisibility(View.VISIBLE);
+                   ((Button)findViewById(R.id.saveButton)).setVisibility(View.INVISIBLE);
 
                }
             }

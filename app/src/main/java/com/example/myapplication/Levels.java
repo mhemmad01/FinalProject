@@ -149,6 +149,33 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
 
                 //previous_stage_stars=5;
             }
+        }else if(requestCode==2){
+            String action =data.getStringExtra("action");
+            String username =data.getStringExtra("username");
+            String levelnum =data.getStringExtra("levelnum");
+            String stagenum =data.getStringExtra("stagenum");
+            if(action.equals("RESTART")){
+                Intent intent = new Intent(Levels.instance, TrainSync.class);
+                intent.putExtra("Type","improve");
+                intent.putExtra("username", username);
+                intent.putExtra("levelnum", levelnum);
+                intent.putExtra("stagenum", stagenum);
+                Levels.instance.startActivityForResult(intent, 2);
+            }
+            else if (action.equals("FINISH")){
+                String img1=data.getStringExtra("img1");
+                String img2=data.getStringExtra("img2");
+                byte[] b1= Base64.decode(img1,Base64.DEFAULT);
+                byte[] b2= Base64.decode(img2,Base64.DEFAULT);
+                Bitmap bmp1= BitmapFactory.decodeByteArray(b1 , 0, b1.length);
+                Bitmap bmp2= BitmapFactory.decodeByteArray(b2 , 0, b2.length);
+                SyncResultAdapter.toImprove.img.setImageBitmap(bmp1);
+                SyncResultAdapter.toImprove.img2.setImageBitmap(bmp2);
+                if(TrainSync.dialog3!=null)
+                    TrainSync.dialog3.dismiss();
+
+                //previous_stage_stars=5;
+            }
         }
     }
 

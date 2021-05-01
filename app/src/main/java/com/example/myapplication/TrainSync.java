@@ -26,8 +26,8 @@ public class TrainSync extends AppCompatActivity {
     public static TrainSync Instance;
     static String Type=null;
     public static Dialog dialog3=null;
-    PaintView SyncDiagnosisView1;
-    PaintView SyncDiagnosisView2;
+    static PaintView SyncTrainView1;
+    static PaintView SyncTrainView2;
     private String lastLevel2;
     private String lastStage2;
     AlertDialog dialog;
@@ -39,6 +39,7 @@ public class TrainSync extends AppCompatActivity {
     private int currentlevel;
     private int currentStage;
     private int stars;
+    static int counter222=0;
     public static int[][] textureArrayWin = {
             {R.drawable.qw,
                     R.drawable.ss2,
@@ -90,16 +91,33 @@ public class TrainSync extends AppCompatActivity {
         level.setText("Level " + currentlevel + " Stage " + currentStage);
         myImageView = (ImageView) findViewById(R.id.imageView17);
         myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2) - 1][Integer.parseInt(lastStage2) - 1]);
-        SyncDiagnosisView1=new PaintView(this,"Sync");
-        SyncDiagnosisView1.setFlag2(2);
-        SyncDiagnosisView2=new PaintView(this,"Sync");
-        SyncDiagnosisView2.setFlag2(2);
+        SyncTrainView1=new PaintView(this,"Sync");
+        SyncTrainView1.setFlag2(1);
+        SyncTrainView1.setviewnumber(1);
+        SyncTrainView2=new PaintView(this,"Sync");
+        SyncTrainView2.setFlag2(1);
+        SyncTrainView2.setviewnumber(2);
         SyncviewGroup1 = (ViewGroup) findViewById(R.id.SyncTrain1);
-        SyncviewGroup1.addView(SyncDiagnosisView1);
+        SyncviewGroup1.addView(SyncTrainView1);
         SyncviewGroup2 = (ViewGroup) findViewById(R.id.SyncTrain2);
-        SyncviewGroup2.addView(SyncDiagnosisView2);
+        SyncviewGroup2.addView(SyncTrainView2);
         if (dialog3 != null)
             dialog3.dismiss();
+    }
+    public void addviewfun(int viewnumber){
+        if(viewnumber==1){
+            SyncviewGroup1.removeView(SyncTrainView1);
+            SyncTrainView1=new PaintView(this,"Sync");
+            SyncTrainView1.setFlag2(1);
+            SyncTrainView1.setviewnumber(1);
+            SyncviewGroup1.addView(SyncTrainView1);
+        }else{
+            SyncviewGroup2.removeView(SyncTrainView2);
+            SyncTrainView2=new PaintView(this,"Sync");
+            SyncTrainView2.setFlag2(1);
+            SyncTrainView2.setviewnumber(2);
+            SyncviewGroup2.addView(SyncTrainView2);
+        }
     }
     public void drawfinish(){
         int percent=0;
@@ -114,8 +132,8 @@ public class TrainSync extends AppCompatActivity {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
                             LoadingShow();
-                            Bitmap mydraw1=SyncDiagnosisView1.get();
-                            Bitmap mydraw2=SyncDiagnosisView2.get();
+                            Bitmap mydraw1=SyncTrainView1.get();
+                            Bitmap mydraw2=SyncTrainView2.get();
                             ByteArrayOutputStream baos1=new ByteArrayOutputStream();
                             mydraw1.compress(Bitmap.CompressFormat.PNG,100, baos1);
                             byte [] b1=baos1.toByteArray();
@@ -166,8 +184,8 @@ public class TrainSync extends AppCompatActivity {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
                             LoadingShow();
-                            Bitmap mydraw1=SyncDiagnosisView1.get();
-                            Bitmap mydraw2=SyncDiagnosisView2.get();
+                            Bitmap mydraw1=SyncTrainView1.get();
+                            Bitmap mydraw2=SyncTrainView2.get();
                             ByteArrayOutputStream baos1=new ByteArrayOutputStream();
                             mydraw1.compress(Bitmap.CompressFormat.PNG,100, baos1);
                             byte [] b1=baos1.toByteArray();
@@ -241,8 +259,8 @@ public class TrainSync extends AppCompatActivity {
     }
     public void Next(){
         int percent1=0;
-        Bitmap mydraw1=SyncDiagnosisView1.get();
-        Bitmap mydraw2=SyncDiagnosisView2.get();
+        Bitmap mydraw1=SyncTrainView1.get();
+        Bitmap mydraw2=SyncTrainView2.get();
         ByteArrayOutputStream baos1=new ByteArrayOutputStream();
         mydraw1.compress(Bitmap.CompressFormat.PNG,100, baos1);
         byte [] b1=baos1.toByteArray();

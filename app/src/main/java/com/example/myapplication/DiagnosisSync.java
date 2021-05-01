@@ -29,8 +29,8 @@ import java.io.ByteArrayOutputStream;
 public class DiagnosisSync extends AppCompatActivity {
     int imgnum;
     int diagnosisnum;
-    PaintView SyncDiagnosisView1;
-    PaintView SyncDiagnosisView2;
+    static PaintView SyncDiagnosisView1;
+    static PaintView SyncDiagnosisView2;
     TextView level;
     private ViewGroup SyncviewGroup1;
     private ViewGroup SyncviewGroup2;
@@ -75,8 +75,10 @@ public class DiagnosisSync extends AppCompatActivity {
         myImageView.setImageResource(textureArrayWin[imgnum-1]);
         SyncDiagnosisView1=new PaintView(this,"Sync");
         SyncDiagnosisView1.setFlag2(2);
+        SyncDiagnosisView1.setviewnumber(1);
         SyncDiagnosisView2=new PaintView(this,"Sync");
         SyncDiagnosisView2.setFlag2(2);
+        SyncDiagnosisView2.setviewnumber(2);
         SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
         SyncviewGroup1.addView(SyncDiagnosisView1);
         SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
@@ -90,6 +92,21 @@ public class DiagnosisSync extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
 
         return true;
+    }
+    public void addviewfun(int viewnumber){
+        if(viewnumber==1){
+            SyncviewGroup1.removeView(SyncDiagnosisView1);
+            SyncDiagnosisView1=new PaintView(this,"Sync");
+            SyncDiagnosisView1.setFlag2(2);
+            SyncDiagnosisView1.setviewnumber(1);
+            SyncviewGroup1.addView(SyncDiagnosisView1);
+        }else{
+            SyncviewGroup2.removeView(SyncDiagnosisView2);
+            SyncDiagnosisView2=new PaintView(this,"Sync");
+            SyncDiagnosisView2.setFlag2(2);
+            SyncDiagnosisView2.setviewnumber(2);
+            SyncviewGroup2.addView(SyncDiagnosisView2);
+        }
     }
     public void drawfinish(){
         int percent=0;

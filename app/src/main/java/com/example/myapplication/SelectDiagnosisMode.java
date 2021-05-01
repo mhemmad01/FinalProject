@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -207,7 +208,11 @@ public class SelectDiagnosisMode extends AppCompatActivity {
                 intent.putExtra("diagnosisnum", Integer.toString(lastdiagnosisnumsync));
                 startActivityForResult(intent, 1);
             }
+            if(DiagnosisAdapter.last!=null)
+                DiagnosisAdapter.last.setBackgroundColor(Color.BLACK);
+            DiagnosisAdapter.last=null;
         }
+
     }
     public void SetDiagnosisMode(String DiagnosisMode){
         this.DiagnosisMode=DiagnosisMode;
