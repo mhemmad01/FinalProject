@@ -82,7 +82,7 @@ public class PaintView extends View {
                         final AlertDialog alert = builder.create();
                         if(counter==2) {
                             mToast.cancel();
-                            new CountDownTimer(6000,1000) {
+                            new CountDownTimer(3000,1000) {
                                 @Override
                                 public void onTick(long l) {
                                             if(counter==2) {

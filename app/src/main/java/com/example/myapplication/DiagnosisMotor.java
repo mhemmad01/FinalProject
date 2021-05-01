@@ -94,7 +94,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Bitmap mydraw=MotorDiagnosisView1.get();
                             ByteArrayOutputStream baos=new ByteArrayOutputStream();
                             mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
@@ -106,6 +106,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                             intent.putExtra("action", "FINISH");
                             setResult(Activity.RESULT_OK, intent);
                             DiagnosisMotor.this.finish();
+                            if(DiagnosisAdapter.last!=null)
                             DiagnosisAdapter.last.setBackgroundColor(Color.BLACK);
                         }
                     });
@@ -114,7 +115,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTART");
                             setResult(Activity.RESULT_OK, intent);
@@ -133,7 +134,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                           // LoadingShow();
                             Restart();
                         }
                     });
@@ -142,7 +143,7 @@ public class DiagnosisMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Next();
                         }
                     });

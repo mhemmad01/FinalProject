@@ -38,6 +38,7 @@ public class LoginActivity  extends AppCompatActivity {
         dialog3 = new Dialog(this);
         dialog3.setContentView(R.layout.loadingicon);
         dialog3.setTitle("Loading");
+        dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
     @Override

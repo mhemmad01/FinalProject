@@ -121,7 +121,7 @@ public class DiagnosisSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Bitmap mydraw1=SyncDiagnosisView1.get();
                             Bitmap mydraw2=SyncDiagnosisView2.get();
                             ByteArrayOutputStream baos1=new ByteArrayOutputStream();
@@ -145,7 +145,7 @@ public class DiagnosisSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTARTSYNC");
                             setResult(Activity.RESULT_OK, intent);
@@ -164,7 +164,7 @@ public class DiagnosisSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Restart();
                         }
                     });
@@ -173,7 +173,7 @@ public class DiagnosisSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Next(percent);
                         }
                     });

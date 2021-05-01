@@ -114,6 +114,7 @@ public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.View
         dialog3 = new Dialog(MyDiagnosed.instance);
         dialog3.setContentView(R.layout.loadingicon);
         dialog3.setTitle("Loading");
+        dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
     public void removeAt(int position) {

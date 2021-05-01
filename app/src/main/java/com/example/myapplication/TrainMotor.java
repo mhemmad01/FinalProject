@@ -124,7 +124,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Bitmap mydraw=MotorDiagnosisView1.get();
                             ByteArrayOutputStream baos=new ByteArrayOutputStream();
                             mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
@@ -144,7 +144,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                           // LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTART");
                             intent.putExtra("username", User.currentUser.getUsername());
@@ -170,7 +170,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Bitmap mydraw=MotorDiagnosisView1.get();
                             ByteArrayOutputStream baos=new ByteArrayOutputStream();
                             mydraw.compress(Bitmap.CompressFormat.PNG,100, baos);
@@ -189,7 +189,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTART");
                             setResult(Activity.RESULT_OK, intent);
@@ -208,7 +208,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Restart();
                         }
                     });
@@ -217,7 +217,7 @@ public class TrainMotor extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Next();
                         }
                     });

@@ -131,7 +131,7 @@ public class TrainSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Bitmap mydraw1=SyncTrainView1.get();
                             Bitmap mydraw2=SyncTrainView2.get();
                             ByteArrayOutputStream baos1=new ByteArrayOutputStream();
@@ -157,7 +157,7 @@ public class TrainSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTART");
                             intent.putExtra("username", User.currentUser.getUsername());
@@ -183,7 +183,7 @@ public class TrainSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Bitmap mydraw1=SyncTrainView1.get();
                             Bitmap mydraw2=SyncTrainView2.get();
                             ByteArrayOutputStream baos1=new ByteArrayOutputStream();
@@ -207,7 +207,7 @@ public class TrainSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Intent intent = new Intent();
                             intent.putExtra("action", "RESTART");
                             setResult(Activity.RESULT_OK, intent);
@@ -226,7 +226,7 @@ public class TrainSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Restart();
                         }
                     });
@@ -235,7 +235,7 @@ public class TrainSync extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog2, int id) {
                             dialog2.cancel();
-                            LoadingShow();
+                            //LoadingShow();
                             Next();
                         }
                     });
