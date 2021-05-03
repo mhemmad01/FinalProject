@@ -80,9 +80,9 @@ public class PaintView extends View {
                         builder.setMessage("start time");
 
                         final AlertDialog alert = builder.create();
-                        if(counter==2) {
+                        if(counter==2 && holdflag!=0) {
                             mToast.cancel();
-                            new CountDownTimer(3000,1000) {
+                            new CountDownTimer(4000,1000) {
                                 @Override
                                 public void onTick(long l) {
                                             if(counter==2) {
@@ -96,16 +96,15 @@ public class PaintView extends View {
 
                                 @Override
                                 public void onFinish() {
-
-                                    holdflag=0;
                                     alert.dismiss();
+                                    holdflag=0;
                                 }
                             }.start();
 
                         }
 
                         if(counter==1){
-                            mToast=Toast.makeText(context, "Don't move up your hand please wait for the second user", Toast.LENGTH_SHORT);
+                            mToast=Toast.makeText(context, "Don't move up your hand please wait for the second user and for the time to finish", Toast.LENGTH_SHORT);
                             mToast.show();
                         }
                         path.moveTo(pointX, pointY);
