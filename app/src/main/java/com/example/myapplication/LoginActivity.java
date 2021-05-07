@@ -29,6 +29,7 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
         instance = this;
         getSupportActionBar().hide();
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();

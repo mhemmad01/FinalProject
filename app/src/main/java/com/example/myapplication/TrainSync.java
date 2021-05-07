@@ -91,12 +91,12 @@ public class TrainSync extends AppCompatActivity {
         level.setText("Level " + currentlevel + " Stage " + currentStage);
         myImageView = (ImageView) findViewById(R.id.imageView17);
         myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2) - 1][Integer.parseInt(lastStage2) - 1]);
-        SyncTrainView1=new PaintView(this,"Sync");
+        SyncTrainView1=new PaintView(this,"Sync",1);
         SyncTrainView1.setFlag2(1);
-        SyncTrainView1.setviewnumber(1);
-        SyncTrainView2=new PaintView(this,"Sync");
+        //SyncTrainView1.setviewnumber(1);
+        SyncTrainView2=new PaintView(this,"Sync",2);
         SyncTrainView2.setFlag2(1);
-        SyncTrainView2.setviewnumber(2);
+        //SyncTrainView2.setviewnumber(2);
         SyncviewGroup1 = (ViewGroup) findViewById(R.id.SyncTrain1);
         SyncviewGroup1.addView(SyncTrainView1);
         SyncviewGroup2 = (ViewGroup) findViewById(R.id.SyncTrain2);
@@ -120,7 +120,9 @@ public class TrainSync extends AppCompatActivity {
         }
     }
     public void drawfinish(){
-        int percent=0;
+        float percent=PaintView.getsyncvalue();
+        TextView percent_view=(findViewById(R.id.textView12));
+        percent_view.setText(percent+"");
         if(Type.equals("improve")){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Good job");
@@ -142,7 +144,7 @@ public class TrainSync extends AppCompatActivity {
                             mydraw2.compress(Bitmap.CompressFormat.PNG,100, baos2);
                             byte [] b2=baos2.toByteArray();
                             String temp2= Base64.encodeToString(b2, Base64.DEFAULT);
-                            TrainSync.EditSyncLevel s1=new TrainSync.EditSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent);
+                            TrainSync.EditSyncLevel s1=new TrainSync.EditSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,(int)percent);
                             s1.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
@@ -194,7 +196,7 @@ public class TrainSync extends AppCompatActivity {
                             mydraw2.compress(Bitmap.CompressFormat.PNG,100, baos2);
                             byte [] b2=baos2.toByteArray();
                             String temp2= Base64.encodeToString(b2, Base64.DEFAULT);
-                            TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent);
+                            TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,(int)percent);
                             s.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
