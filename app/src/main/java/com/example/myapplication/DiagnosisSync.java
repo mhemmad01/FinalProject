@@ -73,12 +73,10 @@ public class DiagnosisSync extends AppCompatActivity {
         System.out.println(imgnum);
         myImageView = (ImageView)findViewById(R.id.imageView8);
         myImageView.setImageResource(textureArrayWin[imgnum-1]);
-        SyncDiagnosisView1=new PaintView(this,"Sync");
+        SyncDiagnosisView1=new PaintView(this,"Sync",1,imgnum);
         SyncDiagnosisView1.setFlag2(2);
-        SyncDiagnosisView1.setviewnumber(1);
-        SyncDiagnosisView2=new PaintView(this,"Sync");
+        SyncDiagnosisView2=new PaintView(this,"Sync",2,imgnum);
         SyncDiagnosisView2.setFlag2(2);
-        SyncDiagnosisView2.setviewnumber(2);
         SyncviewGroup1 = (ViewGroup) findViewById(R.id.view);
         SyncviewGroup1.addView(SyncDiagnosisView1);
         SyncviewGroup2 = (ViewGroup) findViewById(R.id.view3);
@@ -96,20 +94,18 @@ public class DiagnosisSync extends AppCompatActivity {
     public void addviewfun(int viewnumber){
         if(viewnumber==1){
             SyncviewGroup1.removeView(SyncDiagnosisView1);
-            SyncDiagnosisView1=new PaintView(this,"Sync");
+            SyncDiagnosisView1=new PaintView(this,"Sync",1,imgnum);
             SyncDiagnosisView1.setFlag2(2);
-            SyncDiagnosisView1.setviewnumber(1);
             SyncviewGroup1.addView(SyncDiagnosisView1);
         }else{
             SyncviewGroup2.removeView(SyncDiagnosisView2);
-            SyncDiagnosisView2=new PaintView(this,"Sync");
+            SyncDiagnosisView2=new PaintView(this,"Sync",2,imgnum);
             SyncDiagnosisView2.setFlag2(2);
-            SyncDiagnosisView2.setviewnumber(2);
             SyncviewGroup2.addView(SyncDiagnosisView2);
         }
     }
     public void drawfinish(){
-        int percent=0;
+        int percent=PaintView.getsyncvalue();
         if(imgnum==5){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Good job you finished the diagnosis");

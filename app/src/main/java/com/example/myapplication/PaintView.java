@@ -48,19 +48,14 @@ public class PaintView extends View {
     static long starttime=-1;
     private long previoustime=-1;
     private float different_time=100;
-    static float percent=0;
+    static int percent=0;
+    private int stagenum=0;
     public void setFlag2(int flag2){
         this.flag2=flag2;
     }
+
     public PaintView(Context context,String Type) {
         super(context);
-
-        if(f1==null){
-            f1=new ArrayList<Point>();
-        }
-        if(f2==null){
-            f2=new ArrayList<Point>();
-        }
         this.context=context;
         flag=true;
         this.Type=Type;
@@ -79,15 +74,18 @@ public class PaintView extends View {
         }
 
     }
-    public PaintView(Context context,String Type,int viewnumber) {
+    public PaintView(Context context,String Type,int viewnumber,int stagenum) {
         super(context);
         this.viewnumber=viewnumber;
-        if(f1==null){
+        this.stagenum=stagenum;
+        if(viewnumber==1){
+            Log.i("eeeee",System.currentTimeMillis()+"eeee");
             f1=new ArrayList<Point>();
         }
-        if(f2==null){
+        if(viewnumber==2){
             f2=new ArrayList<Point>();
         }
+        starttime=-1;
         this.context=context;
         flag=true;
         this.Type=Type;
@@ -207,6 +205,7 @@ public class PaintView extends View {
                             counter--;
                             if(counter==0 && holdflag==0){
                                 holdflag=-1;
+                                Avg_g();
                                 DiagnosisSync.Instance.drawfinish();
 
                             } else if(holdflag!=0){
@@ -216,21 +215,7 @@ public class PaintView extends View {
                             counter--;
                             if(counter==0&&holdflag==0){
                                 holdflag=-1;//0.9141 0.687 0.7
-                                /*
-                                Log.i("arraysf1", "onTouchEvent: " + f1.toString());
-                                Log.i("arraysf2", "onTouchEvent: " + f2.toString());
-                                Log.i("arraysf2", "onTouchEvent:000 ");*/
                                 Avg_g();
-                                /*
-                                5 - 0.647
-                                5 - 0.656
-                                4 - 0.261
-                                3 - 0.204
-                                2 -
-
-                                 */
-//2021-05-07 02:20:45.727 13402-13402/com.example.myapplication I/arraysf1: onTouchEvent: [0.99920654, 0.0, 16.0., 2.4980469, -1.4981384, 35.0., 5.3855133, -1.9974976, 66.0., 9.228714, -3.6134338, 83.0., 12.713379, -4.901642, 100.0., 18.359558, -7.1406555, 116.0., 24.933426, -8.380127, 133.0., 32.340973, -10.442352, 150.0., 41.552765, -10.986267, 168.0., 52.22061, -10.986267, 183.0., 70.941345, -6.492676, 201.0., 92.257965, 0.74783325, 220.0., 108.871185, 10.560547, 233.0., 122.65631, 20.702942, 250.0., 131.01392, 33.54413, 266.0., 134.13065, 45.003235, 283.0., 135.2851, 55.05777, 300.0., 132.60657, 62.790955, 317.0., 129.89792, 71.91214, 333.0., 124.73505, 83.52252, 350.0., 119.90631, 94.38199, 367.0., 112.53931, 105.864136, 383.0., 103.822876, 116.10745, 400.0., 91.77255, 129.45572, 417.0., 71.59375, 144.1434, 433.0., 51.260162, 157.24081, 451.0., 30.613022, 168.8057, 468.0., 13.783096, 176.56674, 485.0., 0.6930847, 182.46365, 501.0., -9.690582, 185.19308, 519.0., -15.152893, 186.20016, 535.0., -24.503723, 179.04233, 551.0., -36.350296, 166.37552, 569.0., -48.249588, 145.92917, 585.0., -56.455902, 118.35208, 603.0.]
-
                                 TrainSync.Instance.drawfinish();
                             }
                             else if(holdflag!=0){
@@ -300,53 +285,24 @@ public class PaintView extends View {
             ArrayList<Double> percents = new ArrayList<>();
             do{
                 s = g(i * different_time);
-                if (s > 55)
+                if (s > 55-(5*(stagenum-1)))
                     distances.add(false);
                 else
                     distances.add(true);
                 i++;
                 Log.i("fffccc", s + "mm");
             }while(i<max);
-            /*
-            for (int i = (int) (200 / different_time); i < max; i++) {
-                s = g(i * different_time);
-                if (s > 60)
-                    distances.add(false);
-                else
-                    distances.add(true);
-            /*
-            if(s>max_distance){
-                max_distance=s;
-            }*/
 
-                //distances.add(s);
-                //sum=sum+s;
-
-                //if(s!= 0)
-                // count++;
-            //}
-
-            //Collections.sort(distances);
             for (int j = 0; j < distances.size(); j++) {
                 if (distances.get(j) == true) {
                     count++;
                 }
             }
             Log.i("mnnnn", distances + "mm");
-//            sum=sum+percent_calc(j, j + 5, distances);
-//            count++;
-//        }
-            //sum=0;
-            //sum=sum+percent_calc(distances.size()/5, 4*distances.size()/5, distances);
-            // sum=sum+percent_calc(4*distances.size()/5, distances.size(), distances);
-
-
-            /*
-
-             */
-            percent = (float) (((float) count / distances.size()) * 100);
+            percent = (int)(((float) count / distances.size()) * 100);
         }
     }
+    /*
     public double percent_calc(int index1,int index2,ArrayList<Double> arr){
         if(index2>arr.size())
             index2=arr.size();
@@ -361,7 +317,7 @@ public class PaintView extends View {
             count++;
         }
         return 1-(float)((float)sum/((count)*max_distance));
-    }
+    }*/
     public double g(float t){
         Point view2=f(f2,t);
         Point view1=f(f1,t);
@@ -392,14 +348,11 @@ public class PaintView extends View {
             if(Math.abs(points.get(i).gettime()-t )<min){
                 min=Math.abs(points.get(i).gettime()-t );
                 index=i;
-            }//14.126
+            }
         }
-        return points.get(index);//2352.91
-        //if(points.size()>0)
-       // return points.get(points.size()-1);
-       // return null;
+        return points.get(index);
     }
-    public static float getsyncvalue(){
+    public static int getsyncvalue(){
         return percent;
     }
 }
