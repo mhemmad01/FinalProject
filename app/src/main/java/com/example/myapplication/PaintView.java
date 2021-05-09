@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.diagnosis_model.Diagnosis;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PaintView extends View {
     public ViewGroup.LayoutParams params;
@@ -45,7 +47,7 @@ public class PaintView extends View {
     private Point startpoint1=new Point(),startpoint2=new Point();
     static long starttime=-1;
     private long previoustime=-1;
-    private float different_time=350;
+    private float different_time=100;
     static float percent=0;
     public void setFlag2(int flag2){
         this.flag2=flag2;
@@ -176,16 +178,16 @@ public class PaintView extends View {
 
                                 if(viewnumber==1){
                                     Point current=new Point();
-                                    current.setPointx(pointX-startpoint1.getPointx());
-                                    current.setPointy(pointY-startpoint1.getPointy());
+                                    current.setPointx(Math.abs(pointX-startpoint1.getPointx()));
+                                    current.setPointy(Math.abs(pointY-startpoint1.getPointy()));
                                     current.settime(System.currentTimeMillis()-starttime);
                                     Log.i("nn2",System.currentTimeMillis()+"xxxxxxxxxxxxx");
 
                                     f1.add(current);
                                 }else if(viewnumber==2){
                                     Point current=new Point();
-                                    current.setPointx(pointX-startpoint2.getPointx());
-                                    current.setPointy(pointY-startpoint2.getPointy());
+                                    current.setPointx(Math.abs(pointX-startpoint2.getPointx()));
+                                    current.setPointy(Math.abs(pointY-startpoint2.getPointy()));
                                     current.settime(System.currentTimeMillis()-starttime);
                                     f2.add(current);
                                     Log.i("nn0000",System.currentTimeMillis()+"xxxxxxxxxxxxx" + f2.size());
@@ -277,42 +279,124 @@ public class PaintView extends View {
         canvas.drawPath(path,brush);
     }
     public void Avg_g(){
-        int max=Math.max(f1.size(),f2.size());
-        Log.i("cccf1", "Avg_g: "+f1.toString());
-        Log.i("cccf2", "Avg_g: "+f2.toString());
-        double sum=0;
-        int count =0;
-        for(int i=0;i<max;i++){
-            sum=sum+g(i*different_time);
-            if(g(i*different_time)!= 0)
-                count++;
+        if(f1.size()==0 && f2.size()==0) {
+            percent = 100;
         }
-/*
+        else if(f1.size()==0 || f2.size()==0) {
+            percent = 0;
+            Log.i("cccf1", "Avg_g: " + f1.toString());
+            Log.i("cccf2", "Avg_g: " + f2.toString());
+        }
+        else {
+            int max = Math.max(f1.size(), f2.size());
+            Log.i("cccf1", "Avg_g: " + f1.toString());
+            Log.i("cccf2", "Avg_g: " + f2.toString());
+            double sum = 0;
+            int count = 0;
+            double s = 0;
+            double max_distance = 0;
+            int i=(int)(200 / different_time);
+            ArrayList<Boolean> distances = new ArrayList<>();
+            ArrayList<Double> percents = new ArrayList<>();
+            do{
+                s = g(i * different_time);
+                if (s > 55)
+                    distances.add(false);
+                else
+                    distances.add(true);
+                i++;
+                Log.i("fffccc", s + "mm");
+            }while(i<max);
+            /*
+            for (int i = (int) (200 / different_time); i < max; i++) {
+                s = g(i * different_time);
+                if (s > 60)
+                    distances.add(false);
+                else
+                    distances.add(true);
+            /*
+            if(s>max_distance){
+                max_distance=s;
+            }*/
 
- */
-        percent=(float)((float)sum/count);
+                //distances.add(s);
+                //sum=sum+s;
+
+                //if(s!= 0)
+                // count++;
+            //}
+
+            //Collections.sort(distances);
+            for (int j = 0; j < distances.size(); j++) {
+                if (distances.get(j) == true) {
+                    count++;
+                }
+            }
+            Log.i("mnnnn", distances + "mm");
+//            sum=sum+percent_calc(j, j + 5, distances);
+//            count++;
+//        }
+            //sum=0;
+            //sum=sum+percent_calc(distances.size()/5, 4*distances.size()/5, distances);
+            // sum=sum+percent_calc(4*distances.size()/5, distances.size(), distances);
+
+
+            /*
+
+             */
+            percent = (float) (((float) count / distances.size()) * 100);
+        }
+    }
+    public double percent_calc(int index1,int index2,ArrayList<Double> arr){
+        if(index2>arr.size())
+            index2=arr.size();
+        double max_distance=0;
+        double sum=0;
+        int count=0;
+        for(int i=index1;i<index2;i++) {
+            if (arr.get(i) > max_distance) {
+                max_distance = arr.get(i);
+            }
+            sum =sum+arr.get(i);
+            count++;
+        }
+        return 1-(float)((float)sum/((count)*max_distance));
     }
     public double g(float t){
         Point view2=f(f2,t);
         Point view1=f(f1,t);
 
+
+/*
         double norm_a=Math.sqrt((view1.getPointx()*view1.getPointx())+(view1.getPointy()*view1.getPointy()));
         double norm_b=Math.sqrt((view2.getPointx()*view2.getPointx())+(view2.getPointy()*view2.getPointy()));
         if((norm_a*norm_b)==0){
             return 0;
         }
-        return (Math.abs(view1.getPointx()*view2.getPointx())+Math.abs(view1.getPointy()*view2.getPointy()))/(norm_a*norm_b);
+
+        return (Math.abs(view1.getPointx()*view2.getPointx())+Math.abs(view1.getPointy()*view2.getPointy()))/(norm_a*norm_b);*/
+        if(view2==null || view1==null)
+            return 1000;
+        Log.i("fffccc",view2.toString()+"--"+view1.toString()+"ttttt"+t);
+        return Math.sqrt((view1.getPointx()-view2.getPointx())*(view1.getPointx()-view2.getPointx())+((view1.getPointy()-view2.getPointy())*(view1.getPointy()-view2.getPointy())));
     }
 
     public Point f(ArrayList<Point> points, float t){
         int roundedt = Math.round(t);
-        for(int i=0; i< points.size(); i++){
-            if( Math.round(points.get(i).gettime()) >= roundedt ){
-                return points.get(i);
-            }
+        double min=Math.abs(points.get(0).gettime()-t);
+        int index=0;
+        if(t>points.get(points.size()-1).gettime()+100){
+            return null;
         }
+        for(int i=1; i< points.size(); i++){
+            if(Math.abs(points.get(i).gettime()-t )<min){
+                min=Math.abs(points.get(i).gettime()-t );
+                index=i;
+            }//14.126
+        }
+        return points.get(index);//2352.91
         //if(points.size()>0)
-        return points.get(points.size()-1);
+       // return points.get(points.size()-1);
        // return null;
     }
     public static float getsyncvalue(){
