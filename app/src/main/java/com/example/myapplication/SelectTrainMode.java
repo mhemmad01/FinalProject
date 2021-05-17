@@ -285,7 +285,7 @@ public class SelectTrainMode extends AppCompatActivity {
                 lastStage=result[1];
                 if(lastStage>3){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
-                    builder1.setMessage("Good Job you finished all training stages , you can improve some levels at 'my levels' on main page.");
+                    builder1.setMessage("Good Job you finished all motor training stages , you can improve some levels at 'my levels' on main page.");
                     builder1.setCancelable(true);
                     builder1.setPositiveButton(
                             "OK",
@@ -429,7 +429,7 @@ public class SelectTrainMode extends AppCompatActivity {
                 lastSyncStage=result[1];
                 if(lastSyncStage>3){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
-                    builder1.setMessage("Good Job you finished all training stages , you can improve some levels at 'my levels' on main page.");
+                    builder1.setMessage("Good Job you finished all synchronize training stages , you can improve some levels at 'my levels' on main page.");
                     builder1.setCancelable(true);
                     builder1.setPositiveButton(
                             "OK",

@@ -258,14 +258,14 @@ public class TrainMotor extends AppCompatActivity {
         TrainMotor.this.finish();
 
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
         return true;
-    }
+    }*/
     private class AddMotorLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
         int stars;
