@@ -34,6 +34,7 @@ public class MyDiagnosed extends AppCompatActivity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.mydiagnosed);
+            setTitle("My Diagnosed");
             if(User.diagnoseds==null)
                 User.diagnoseds= new ArrayList<>();
             instance=this;

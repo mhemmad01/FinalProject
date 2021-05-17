@@ -3,4 +3,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fullname">...</string>
+    <string name="about">
+       Our project will help people to recognize if they have problems with drawing or handling the pen, it is going to be an application that will later be used in experimental settings and assessed for therapeutic purposes, the app can also discover people with motor movements problems and help them by training to improve their skills.
+         	Also, the app can discover how much two people are related or similar with the way of drawing the shape.
+        </string>
+    <string name="credits">
+    Created By:
+        Mhemmad Abdalla - Mhemmad01@gmail.com
+         Ayman Ouda - aimanouda2309@gmail.com
+    </string>
 </resources>
