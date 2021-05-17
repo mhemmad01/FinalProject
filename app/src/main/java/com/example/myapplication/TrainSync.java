@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,25 +42,26 @@ public class TrainSync extends AppCompatActivity {
     private int stars;
     static int counter222=0;
     public static int[][] textureArrayWin = {
-            {       R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
+            {       R.drawable.level1_stage1,
+                    R.drawable.level2_stage1,
+                    R.drawable.level3_stage1,
             },
             {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
+                    R.drawable.level1_stage2,
+                    R.drawable.level2_stage2,
+                    R.drawable.level3_stage2,
             },
             {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
+                    R.drawable.level1_stage3,
+                    R.drawable.level2_stage3,
+                    R.drawable.level3_stage3,
             }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.traningsync);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Instance=this;
         ImageView myImageView;
         final ActionBar abar = getSupportActionBar();

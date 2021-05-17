@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -55,19 +56,19 @@ public class TrainMotor extends AppCompatActivity {
     public static Dialog dialog3=null;
     static String Type=null;
     public static int[][] textureArrayWin = {
-            {R.drawable.qw,
-            R.drawable.ss2,
-            R.drawable.qw,
+            {       R.drawable.level1_stage1,
+                    R.drawable.level2_stage1,
+                    R.drawable.level3_stage1,
             },
             {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
+                    R.drawable.level1_stage2,
+                    R.drawable.level2_stage2,
+                    R.drawable.level3_stage2,
             },
             {
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
+                    R.drawable.level1_stage3,
+                    R.drawable.level2_stage3,
+                    R.drawable.level3_stage3,
             }
     };
     @Override
@@ -76,6 +77,7 @@ public class TrainMotor extends AppCompatActivity {
         ImageView myImageView;
         Instance=this;
         setContentView(R.layout.trainingmotor);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //getSupportActionBar().setTitle("Training Motor");
         final ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar

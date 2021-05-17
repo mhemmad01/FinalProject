@@ -47,7 +47,7 @@
                     android:layout_height="485dp"
                     android:layout_weight="1"
                     android:background="@drawable/my_border3"
-                    app:srcCompat="@drawable/ss2"
+
                     tools:srcCompat="@drawable/ss2_removebg_preview" />
             </LinearLayout>
 

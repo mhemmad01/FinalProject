@@ -89,7 +89,7 @@
                         android:layout_weight="1"
 
                         android:background="@drawable/my_border3"
-                        app:srcCompat="@drawable/ss2" />
+                         />
 
                     <TextView
                         android:id="@+id/textView4"

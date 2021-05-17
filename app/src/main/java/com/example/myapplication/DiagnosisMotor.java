@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -36,11 +37,11 @@ public class DiagnosisMotor extends AppCompatActivity {
     static Dialog dialog3=null;
     static  DiagnosisMotor Instance;
     public static int[] textureArrayWin = {
-            R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
-                    R.drawable.ss2,
-                    R.drawable.qw,
+                    R.drawable.level3_stage1,
+                    R.drawable.level1_stage2,
+                    R.drawable.level2_stage2,
+                    R.drawable.level3_stage2,
+                    R.drawable.level1_stage3,
 
     };
     @Override
@@ -49,6 +50,7 @@ public class DiagnosisMotor extends AppCompatActivity {
         ImageView myImageView;
         Instance=this;
         setContentView(R.layout.diagnsismotor);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //getSupportActionBar().setTitle("Training Motor");
         final ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
@@ -77,13 +79,14 @@ public class DiagnosisMotor extends AppCompatActivity {
         if(dialog3!=null)
             dialog3.dismiss();
     }
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
         return true;
-    }
+    }*/
     public void drawfinish(){
         if(imgnum==5){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);

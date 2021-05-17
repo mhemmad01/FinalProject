@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class SelectTrainMode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         a=this;
         setContentView(R.layout.trainingselect);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         final androidx.appcompat.app.ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
@@ -104,13 +106,14 @@ public class SelectTrainMode extends AppCompatActivity {
         dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
         return true;
-    }
+    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -280,7 +283,21 @@ public class SelectTrainMode extends AppCompatActivity {
             if (result!=null) {
                 lastLevel=result[0];
                 lastStage=result[1];
-                if(lastLevel==1 &&lastStage>1&&stars<(lastStage-1)*6+(lastStage-1)){
+                if(lastStage>3){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
+                    builder1.setMessage("Good Job you finished all training stages , you can improve some levels at 'my levels' on main page.");
+                    builder1.setCancelable(true);
+                    builder1.setPositiveButton(
+                            "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog2, int id) {
+                                    dialog2.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+               else if(lastLevel==1 &&lastStage>1&&stars<(lastStage-1)*6+(lastStage-1)){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
                     builder1.setMessage("You don't have enougth stars to start stage "+lastStage+" " +
                             "please improve some of previous levels of stage "+(lastStage-1)+" " +
@@ -410,7 +427,21 @@ public class SelectTrainMode extends AppCompatActivity {
             if (result!=null) {
                 lastSyncLevel=result[0];
                 lastSyncStage=result[1];
-                if(lastSyncLevel==1 &&lastSyncStage>1&&syncstars<(lastSyncStage-1)*6+(lastSyncStage-1)){
+                if(lastSyncStage>3){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
+                    builder1.setMessage("Good Job you finished all training stages , you can improve some levels at 'my levels' on main page.");
+                    builder1.setCancelable(true);
+                    builder1.setPositiveButton(
+                            "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog2, int id) {
+                                    dialog2.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+                else if(lastSyncLevel==1 &&lastSyncStage>1&&syncstars<(lastSyncStage-1)*6+(lastSyncStage-1)){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(a);
                     builder1.setMessage("You don't have enougth stars to start stage "+lastSyncStage+" " +
                             "please improve some of previous levels of stage "+(lastSyncStage-1)+" " +

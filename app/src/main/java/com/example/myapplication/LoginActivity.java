@@ -4,6 +4,7 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -29,7 +30,7 @@ public class LoginActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         instance = this;
         getSupportActionBar().hide();
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();

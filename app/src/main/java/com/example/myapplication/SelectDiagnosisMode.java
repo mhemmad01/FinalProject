@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         a=this;
         setContentView(R.layout.diagnosisselect);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         final androidx.appcompat.app.ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
@@ -152,12 +154,13 @@ public class SelectDiagnosisMode extends AppCompatActivity {
         //intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
         //startActivity(intent);
     }
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
-    }
+    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {

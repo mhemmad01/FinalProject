@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -79,6 +80,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosticresults);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         ((TextView) findViewById(R.id.selectedDiagnosedUsername)).setText("Diagnosed: " + Diagnosed.selected.getFullName());
         instance = this;
         if (MotorResult.selected == null) {
