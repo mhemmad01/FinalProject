@@ -47,19 +47,9 @@
             android:textColor="@color/blue_light2"
             android:textSize="22sp" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Search"
-            android:inputType="textPersonName"
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"/>
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="327dp"
-            android:layout_height="146dp"
+            android:layout_width="320dp"
+            android:layout_height="218dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/my_border2">

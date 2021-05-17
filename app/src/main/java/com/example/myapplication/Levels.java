@@ -106,14 +106,14 @@ public class Levels extends AppCompatActivity implements ImproveLevelsFragment.C
 
         }
     };
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
         return true;
-    }
+    }*/
     public void gotoMyDiagnosed(View view) {
         Intent myIntent = new Intent(this, MyDiagnosed.class);
         this.startActivity(myIntent);

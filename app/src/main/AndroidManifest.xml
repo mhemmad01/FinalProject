@@ -37,6 +37,10 @@
             android:parentActivityName=".MainDiagnosed"></activity>
         <activity android:name=".TrainSync" android:screenOrientation="landscape"
             android:parentActivityName=".SelectTrainMode"></activity>
+        <activity android:name=".AboutActivity"
+            android:parentActivityName=".MainDiagnostic"></activity>
+        <activity android:name=".AboutActivity_Diagnosed"
+            android:parentActivityName=".MainDiagnosed"></activity>
         <activity android:name=".TrainMotor" android:screenOrientation="landscape"
             android:parentActivityName=".SelectTrainMode"></activity>
         <activity android:name=".MyDiagnosed"  android:screenOrientation="landscape" android:parentActivityName=".MainDiagnostic"></activity>

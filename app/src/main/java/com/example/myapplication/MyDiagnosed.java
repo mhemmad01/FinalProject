@@ -36,6 +36,7 @@ public class MyDiagnosed extends AppCompatActivity{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.mydiagnosed);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            setTitle("My Diagnosed");
             if(User.diagnoseds==null)
                 User.diagnoseds= new ArrayList<>();
             instance=this;

@@ -52,6 +52,11 @@ public class MainDiagnosed extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void gotoAbout(View view) {
+        Intent intent = new Intent(getApplicationContext(), AboutActivity_Diagnosed.class);
+        startActivity(intent);
+    }
+
     public void gotoImproveLevels(View view) {
         LoadResults l = new LoadResults(User.currentUser.getUsername());
         l.execute();

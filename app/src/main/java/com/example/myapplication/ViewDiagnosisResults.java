@@ -81,6 +81,7 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosticresults);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setTitle("Results");
         ((TextView) findViewById(R.id.selectedDiagnosedUsername)).setText("Diagnosed: " + Diagnosed.selected.getFullName());
         instance = this;
         if (MotorResult.selected == null) {
@@ -373,6 +374,10 @@ public class ViewDiagnosisResults extends AppCompatActivity implements TrainingR
         protected void onPostExecute(Boolean result) {
             if (!result) {
                 Toast.makeText(ViewDiagnosisResults.this, "Error", Toast.LENGTH_SHORT)
+                        .show();
+            }
+            else {
+                Toast.makeText(ViewDiagnosisResults.this, "Data Saved Successfully in DB", Toast.LENGTH_SHORT)
                         .show();
             }
 
