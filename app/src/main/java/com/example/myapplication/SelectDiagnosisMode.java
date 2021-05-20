@@ -87,6 +87,8 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
     public void StartSyncDiagnosis(View view) {
         SetDiagnosisMode("Sync");
+        if(DiagnosisAdapter.last!=null)
+            DiagnosisAdapter.last.setBackgroundColor(Color.BLACK);
         if(DiagnosisAdapter.temp==null){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Please Select diagnosed from the list above.");
@@ -122,6 +124,8 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
     public void StartMotorDiagnosis(View view) {
         SetDiagnosisMode("Motor");
+        if(DiagnosisAdapter.last!=null)
+            DiagnosisAdapter.last.setBackgroundColor(Color.BLACK);
         if(DiagnosisAdapter.temp==null){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Please Select diagnosed from the list above.");

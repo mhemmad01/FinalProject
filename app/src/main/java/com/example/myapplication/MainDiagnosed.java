@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -25,13 +26,15 @@ import java.util.ArrayList;
 
 public class MainDiagnosed extends AppCompatActivity {
     static String Username;
-
+    static Dialog dialog3=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosted_mainpage);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getSupportActionBar().hide();
+        if(dialog3!=null)
+            dialog3.dismiss();
         if(User.currentUser!=null)
         ((TextView)findViewById(R.id.diagnosedTitle)).setText("Hi "+User.currentUser.getFullName());
 
@@ -51,13 +54,21 @@ public class MainDiagnosed extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SelectTrainMode.class);
         startActivity(intent);
     }
-
+    public void LoadingShow(){
+        // custom dialog
+        dialog3 = new Dialog(this);
+        dialog3.setContentView(R.layout.loadingicon);
+        dialog3.setTitle("Loading");
+        dialog3.setCanceledOnTouchOutside(false);
+        dialog3.show();
+    }
     public void gotoAbout(View view) {
         Intent intent = new Intent(getApplicationContext(), AboutActivity_Diagnosed.class);
         startActivity(intent);
     }
 
     public void gotoImproveLevels(View view) {
+        LoadingShow();
         LoadResults l = new LoadResults(User.currentUser.getUsername());
         l.execute();
     }
@@ -90,10 +101,14 @@ public class MainDiagnosed extends AppCompatActivity {
         protected void onPostExecute(ArrayList<MotorResult>  result) {
             if (result.size()>0) {
                 Log.i("hhhh", "ccc");
+                if(dialog3!=null)
+                dialog3.dismiss();
                 MotorResult.selected=result;
                 Intent intent = new Intent(getApplicationContext(), Levels.class);
                 startActivity(intent);
             } else {
+                if(dialog3!=null)
+                dialog3.dismiss();
                 Log.i("hhhh", "ffffff");
             }
 

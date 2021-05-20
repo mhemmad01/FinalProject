@@ -107,7 +107,7 @@ public class TrainMotor extends AppCompatActivity {
             currentStage = Integer.parseInt(lastStage2);
             level.setText("Level " + currentlevel + " Stage " + currentStage);
             myImageView = (ImageView) findViewById(R.id.imageView4);
-            myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2) - 1][Integer.parseInt(lastStage2) - 1]);
+            myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastStage2)- 1][Integer.parseInt(lastLevel2)  - 1]);
             MotorDiagnosisView1 = new PaintView(this,"motor");
             MotorviewGroup1 = (ViewGroup) findViewById(R.id.MotorTrain);
             MotorviewGroup1.addView(MotorDiagnosisView1);

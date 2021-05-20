@@ -92,7 +92,7 @@ public class TrainSync extends AppCompatActivity {
         currentStage = Integer.parseInt(lastStage2);
         level.setText("Level " + currentlevel + " Stage " + currentStage);
         myImageView = (ImageView) findViewById(R.id.imageView17);
-        myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastLevel2) - 1][Integer.parseInt(lastStage2) - 1]);
+        myImageView.setImageResource(textureArrayWin[Integer.parseInt(lastStage2) - 1][Integer.parseInt(lastLevel2) - 1]);
         SyncTrainView1=new PaintView(this,"Sync",1,currentStage);
         SyncTrainView1.setFlag2(1);
         //SyncTrainView1.setviewnumber(1);

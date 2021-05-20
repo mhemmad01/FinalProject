@@ -31,7 +31,7 @@ public class dbConnection {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(url, user, pass);
-            } catch (SQLException | ClassNotFoundException throwables) {
+            } catch ( Exception throwables) {
                 throwables.printStackTrace();
             }
         return conn;

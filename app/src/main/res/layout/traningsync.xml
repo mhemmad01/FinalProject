@@ -126,7 +126,6 @@
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Mode: Training Synchronize"
                 android:textColor="@color/white"
                 android:textSize="40sp" />
 
@@ -136,20 +135,9 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:text="70%"
+                android:text="Result"
                 android:textColor="@color/white"
                 android:textSize="40sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/blue_light"
-                android:rotationY="180"
-                android:scaleType="fitStart"
-                app:srcCompat="@drawable/abc_vector_test"
-                tools:srcCompat="@drawable/abc_vector_test" />
 
         </LinearLayout>
 
