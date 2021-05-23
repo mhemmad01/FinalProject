@@ -39,7 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
+//The user start train on motor mode
 public class TrainMotor extends AppCompatActivity {
     public static TrainMotor Instance;
     PaintView MotorDiagnosisView1;
@@ -55,6 +55,7 @@ public class TrainMotor extends AppCompatActivity {
     private int stars;
     public static Dialog dialog3=null;
     static String Type=null;
+    //matrix of motor stages and levels
     public static int[][] textureArrayWin = {
             {       R.drawable.level1_stage1,
                     R.drawable.level2_stage1,
@@ -115,6 +116,7 @@ public class TrainMotor extends AppCompatActivity {
                 dialog3.dismiss();
 
     }
+    //The user move up his finger and finished the draw
     public void drawfinish(){
         if(Type.equals("improve")){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -228,6 +230,7 @@ public class TrainMotor extends AppCompatActivity {
             alert11.show();
         }
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -235,12 +238,14 @@ public class TrainMotor extends AppCompatActivity {
         dialog3.setTitle("Loading");
         dialog3.show();
     }
+    //The user could restart the current level
     public void Restart() {
         Intent intent = new Intent();
         intent.putExtra("action", "RESTART");
         setResult(Activity.RESULT_OK, intent);
         TrainMotor.this.finish();
     }
+    //The user move to the next level
     public void Next(){
         Bitmap mydraw=MotorDiagnosisView1.get();
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -258,14 +263,8 @@ public class TrainMotor extends AppCompatActivity {
         TrainMotor.this.finish();
 
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
 
-        return true;
-    }*/
+    //Thread to save the motor train in DB
     private class AddMotorLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
         int stars;
@@ -306,7 +305,7 @@ public class TrainMotor extends AppCompatActivity {
 
         }
     }
-
+        //Thread to get the motor img that the user draw at specific stage and level
         private class getmotorImg extends AsyncTask<String, Void, String> {
             String usr;
             int stage;
@@ -346,6 +345,7 @@ public class TrainMotor extends AppCompatActivity {
             }
 
         }
+    //Thread to change the result of the specific motor train level and stage at DB
     private class EditMotorLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
         int stars;

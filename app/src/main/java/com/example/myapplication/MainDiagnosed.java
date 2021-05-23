@@ -23,7 +23,7 @@ import com.example.myapplication.improvelevel_model.MotorResult;
 import com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult;
 
 import java.util.ArrayList;
-
+//Main page for the diagnosed
 public class MainDiagnosed extends AppCompatActivity {
     static String Username;
     static Dialog dialog3=null;
@@ -45,15 +45,18 @@ public class MainDiagnosed extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+    //Logout from the user and back to login page
     public void Logout(View view) {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
         this.finish();
     }
+    //Move to Select train page where the user can type of train
     public void StartTrain(View view) {
         Intent intent = new Intent(getApplicationContext(), SelectTrainMode.class);
         startActivity(intent);
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -62,18 +65,19 @@ public class MainDiagnosed extends AppCompatActivity {
         dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
+    //Display about page where user cansee explain about the aplications and about the inventors.
     public void gotoAbout(View view) {
         Intent intent = new Intent(getApplicationContext(), AboutActivity_Diagnosed.class);
         startActivity(intent);
     }
-
+    //Display improve level page where the user can see his level and choose which level he want to improve
     public void gotoImproveLevels(View view) {
         LoadingShow();
         LoadResults l = new LoadResults(User.currentUser.getUsername());
         l.execute();
     }
 
-
+    //Thread to load levels to the improve level page
     private class LoadResults extends AsyncTask<String, Void, ArrayList<MotorResult>> {
         String usr;
 

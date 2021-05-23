@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
+//Main activity (this is the first activity that start)
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -30,7 +30,7 @@ import com.example.myapplication.diagnosis_model.DiagnosisAdapter;
 import com.example.myapplication.diagnosis_model.DiagnosisViewModel;
 
 import java.util.ArrayList;
-
+//In this Page the diagnostic could select the diagnosed and the diagnosis mode
 public class SelectDiagnosisMode extends AppCompatActivity {
     static String DiagnosisMode;
     SelectDiagnosisMode a;
@@ -84,7 +84,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
         }
     };
-
+    //Diagnostic chose the sync diagnosis mode
     public void StartSyncDiagnosis(View view) {
         SetDiagnosisMode("Sync");
         if(DiagnosisAdapter.last!=null)
@@ -113,6 +113,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
             s.execute();
         }
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -121,7 +122,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
         dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
-
+    //Diagnostic chose the motor diagnosis mode
     public void StartMotorDiagnosis(View view) {
         SetDiagnosisMode("Motor");
         if(DiagnosisAdapter.last!=null)
@@ -149,22 +150,8 @@ public class SelectDiagnosisMode extends AppCompatActivity {
             GetLastdiagnosisimg s = new GetLastdiagnosisimg(DiagnosedUsername);
             s.execute();
         }
-        // Start the SecondActivity
-    //    model.getSelected().getValue().
-       // Intent intent = new Intent(SelectDiagnosisMode.this, TrainMotor.class);
-        //intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
-        //SelectDiagnosisMode.this.startActivityForResult(intent, 1);
-       // Intent intent = new Intent(getApplicationContext(), TrainMotor.class);
-        //intent.putExtra("NextLevel", Integer.toString(a.lastLevel));
-        //startActivity(intent);
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }*/
+    //Here we pass the users between the levels
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -225,7 +212,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
     public void SetDiagnosisMode(String DiagnosisMode){
         this.DiagnosisMode=DiagnosisMode;
     }
-
+    //Thread to get the diagnosis img where the user must draw it at the next motor level
     private class GetLastdiagnosisimg extends AsyncTask<String, Void, int[]> {
         String usr;
 
@@ -268,6 +255,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
         }
     }
+    //Thread to get the diagnosis img where the users must draw it at the next sync level
     private class GetLastdiagnosissyncimg extends AsyncTask<String, Void, int[]> {
         String usr;
 
@@ -310,6 +298,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
         }
     }
+    //Thread to save the user img of diagnosis motor
     private class SaveLastdiagnosisimg extends AsyncTask<String, Void, Boolean> {
         String usr;
         int lastimgnum;
@@ -347,6 +336,7 @@ public class SelectDiagnosisMode extends AppCompatActivity {
 
         }
     }
+    //Thread to save the users img of diagnosis sync
     private class SaveLastdiagnosisimgsync extends AsyncTask<String, Void, Boolean> {
         String usr;
         int lastimgnumsync;

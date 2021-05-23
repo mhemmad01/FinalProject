@@ -36,6 +36,7 @@ public class dbConnection {
             }
         return conn;
     }
+    //The user improved motor Level and we update it on DB
     public static boolean editmotorlevel(String usr, int stars, int stage, int level, String img){
         Statement st = null;
         try {
@@ -48,6 +49,7 @@ public class dbConnection {
             return false;
         }
     }
+    //The user improved sync Level and we update it on DB
     public static boolean edittrainlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent){
         Statement st = null;
         try {
@@ -84,6 +86,7 @@ public class dbConnection {
         }
         return false;
     }
+    //save the img of diagnosis motor for specific user
     public static boolean savelastdiagnosisimg(String usr, int diagnosisnum, int imgnum){
         Statement st = null;
         try {
@@ -96,6 +99,7 @@ public class dbConnection {
             return false;
         }
     }
+    //save the images of diagnosis sync for specific user
     public static boolean savelastdiagnosisimgsync(String usr, int diagnosisnum, int imgnum){
         Statement st = null;
         try {
@@ -108,7 +112,7 @@ public class dbConnection {
             return false;
         }
     }
-
+    //Insert a new motor diagnosis img to DB for specific user
     public static boolean addmotordiagnosisimg(String usr, int diagnosisnum, int imgnum, String img){
         Statement st = null;
         try {
@@ -121,6 +125,7 @@ public class dbConnection {
             return false;
         }
     }
+    //Insert a new sync diagnosis images to DB for specific user
     public static boolean adddiagnosisSync(String usr, int diagnosisnum, int imgnum, String img1,String img2,int percent){
         Statement st = null;
         try {
@@ -133,6 +138,7 @@ public class dbConnection {
             return false;
         }
     }
+    //Get last diagnosis motor img num and diagnosis num for specific user
     public static int[] getlastdiagnosismotorimg(String user){
         try {
 
@@ -156,6 +162,7 @@ public class dbConnection {
         }
         return null;
     }
+    //Get last diagnosis sync img num and diagnosis num for specific user
     public static int[] getlastdiagnosissyncimg(String user){
         try {
 
@@ -203,7 +210,7 @@ public class dbConnection {
         }
         return false;
     }
-
+    //Get sum of stars for train motor for specific user
     public static float getstars(User user){
         Statement st = null;
         float stars=0;
@@ -222,6 +229,7 @@ public class dbConnection {
             return -1;
         }
     }
+    //Get sum of stars for train sync for specific user
     public static float getstarssync(User user){
         Statement st = null;
         float stars=0;
@@ -279,6 +287,7 @@ public class dbConnection {
             return null;
         }
     }
+    //update last motor level num and last motor stage num in DB for specific user
     public static Boolean savelastmotorlevel(User usr, int lastmotorlevel, int lastmotorstage) {
         Statement st = null;
         try {
@@ -291,6 +300,7 @@ public class dbConnection {
             return false;
         }
     }
+    //update last sync level num and last sync stage num in DB for specific user
     public static Boolean savelastmotorlevelSync(User usr, int lastsynclevel, int lastsyncstage) {
         Statement st = null;
         try {
@@ -303,7 +313,7 @@ public class dbConnection {
             return false;
         }
     }
-
+    //Get last train sync img level and last train sync level num for specific user
     public static int[] getlastsyncStagelevel(User usr) {
         Statement st = null;
         try {
@@ -324,6 +334,7 @@ public class dbConnection {
             return null;
         }
     }
+    //Get last train motor img level and last train motor level num for specific user
     public static int[] getlastmotorStagelevel(User usr) {
         Statement st = null;
         try {
@@ -344,7 +355,7 @@ public class dbConnection {
             return null;
         }
     }
-
+    //Insert new motor train level for specific user in DB
     public static Boolean addmotorlevel(String usr, int stars, int stage, int level, String img) {
         Statement st = null;
         try {
@@ -357,7 +368,7 @@ public class dbConnection {
             return false;
         }
     }
-
+    //Insert new sync train level for specific user in DB
     public static Boolean addtrainlevelSync(String usr, int stars, int stage, int level, String img1,String img2,int percent) {
         Statement st = null;
         try {
@@ -578,7 +589,7 @@ public class dbConnection {
             return null;
         }
     }
-
+    //Get img of specific user at level and stage of motor train
     public static String getimg(String username,int level,int stage) {
         Statement st = null;
         try {

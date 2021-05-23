@@ -35,6 +35,7 @@ public class LoginActivity  extends AppCompatActivity {
         getSupportActionBar().hide();
         //dialog.getWindow().setLayout(800,400);       // getSupportActionBar().hide();
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -49,6 +50,7 @@ public class LoginActivity  extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+    //User Login action
     public void login(View view){
         String Username = ((EditText)findViewById(R.id.editTextUsername1)).getText().toString();
         String Password = ((EditText)findViewById(R.id.editTextPassword1)).getText().toString();
@@ -58,6 +60,7 @@ public class LoginActivity  extends AppCompatActivity {
         check.execute("");
 
     }
+    //Thread to check details of login that the user entered
     private class CheckUsernamePassword extends AsyncTask<String, Void, Boolean>{
         String usr;
         String pass;
@@ -109,7 +112,7 @@ public class LoginActivity  extends AppCompatActivity {
     }
 
 
-
+    //switch to registration activity
     public void gotoRegistration(View view){
         Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
         LoginActivity.this.startActivity(myIntent);

@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.diagnosis_model.DiagnosisAdapter;
 
 import java.io.ByteArrayOutputStream;
-
+//Diagnosis sync page where the user start his sync diagnosis
 public class DiagnosisSync extends AppCompatActivity {
     int imgnum;
     int diagnosisnum;
@@ -38,6 +38,7 @@ public class DiagnosisSync extends AppCompatActivity {
 
     static Dialog dialog3=null;
     static  DiagnosisSync Instance;
+    //array of diagnosis sync img levels
     public static int[] textureArrayWin = {
             R.drawable.level3_stage1,
             R.drawable.level1_stage2,
@@ -86,14 +87,7 @@ public class DiagnosisSync extends AppCompatActivity {
         if(dialog3!=null)
             dialog3.dismiss();
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-
-        return true;
-    }*/
+    //Create new board to draw
     public void addviewfun(int viewnumber){
         if(viewnumber==1){
             SyncviewGroup1.removeView(SyncDiagnosisView1);
@@ -107,6 +101,7 @@ public class DiagnosisSync extends AppCompatActivity {
             SyncviewGroup2.addView(SyncDiagnosisView2);
         }
     }
+    //When both players move up there fingers from the screen the drawing is finished and save the results
     public void drawfinish(){
         int percent=PaintView.getsyncvalue();
         if(imgnum==5){
@@ -181,6 +176,7 @@ public class DiagnosisSync extends AppCompatActivity {
             alert11.show();
         }
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -188,12 +184,14 @@ public class DiagnosisSync extends AppCompatActivity {
         dialog3.setTitle("Loading");
         dialog3.show();
     }
+    //The user could restart the current level
     public void Restart() {
         Intent intent = new Intent();
         intent.putExtra("action", "RESTARTSYNC");
         setResult(Activity.RESULT_OK, intent);
         DiagnosisSync.this.finish();
     }
+    //The user move to the next level
     public void Next(int percent){
         Bitmap mydraw1=SyncDiagnosisView1.get();
         Bitmap mydraw2=SyncDiagnosisView2.get();
@@ -219,6 +217,7 @@ public class DiagnosisSync extends AppCompatActivity {
         DiagnosisSync.this.finish();
 
     }
+    //Thread to save the sync diagnosis in DB
     private class AddSyncLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
         int diagnosisnum;

@@ -27,7 +27,7 @@ import com.example.myapplication.diagnosis_model.Diagnosis;
 import com.example.myapplication.diagnosis_model.DiagnosisAdapter;
 
 import java.io.ByteArrayOutputStream;
-
+//Diagnosis motor page where the user start his motor diagnosis
 public class DiagnosisMotor extends AppCompatActivity {
     int imgnum;
     int diagnosisnum;
@@ -36,6 +36,7 @@ public class DiagnosisMotor extends AppCompatActivity {
     private ViewGroup MotorviewGroup1;
     static Dialog dialog3=null;
     static  DiagnosisMotor Instance;
+    //array of diagnosis motor img levels
     public static int[] textureArrayWin = {
                     R.drawable.level3_stage1,
                     R.drawable.level1_stage2,
@@ -87,6 +88,7 @@ public class DiagnosisMotor extends AppCompatActivity {
 
         return true;
     }*/
+    //When player move up his finger from the screen the drawing is finished and save the results
     public void drawfinish(){
         if(imgnum==5){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -155,6 +157,7 @@ public class DiagnosisMotor extends AppCompatActivity {
             alert11.show();
         }
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -162,12 +165,14 @@ public class DiagnosisMotor extends AppCompatActivity {
         dialog3.setTitle("Loading");
         dialog3.show();
     }
+    //The user could restart the current level
     public void Restart() {
         Intent intent = new Intent();
         intent.putExtra("action", "RESTART");
         setResult(Activity.RESULT_OK, intent);
         DiagnosisMotor.this.finish();
     }
+    //The user move to the next level
     public void Next(){
         Bitmap mydraw=MotorDiagnosisView1.get();
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -185,6 +190,7 @@ public class DiagnosisMotor extends AppCompatActivity {
         DiagnosisMotor.this.finish();
 
     }
+    //Thread to save the motor diagnosis in DB
     private class AddMotorDiagnosisImg extends AsyncTask<String, Void, Boolean> {
         String usr;
         int diagnosisnum;

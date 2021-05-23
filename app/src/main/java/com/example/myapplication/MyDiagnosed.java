@@ -22,7 +22,7 @@ import com.example.myapplication.diagnosed_model.DiagnosedViewModel;
 import com.example.myapplication.trainingresultmotor.MotorResult;
 
 import java.util.ArrayList;
-
+//Diagnosed page where the diagnostic could see his diagnosed and add new diagnosed
 public class MyDiagnosed extends AppCompatActivity{
         RecyclerView rvDiagnosed;
         DiagnosedViewModel model;

@@ -20,7 +20,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-
+//Registration Activity where the user could create account on the app
 public class RegistrationActivity extends AppCompatActivity {
 
     private static final String url = "jdbc:mysql://freedb.tech:3306/freedbtech_FinalProject";
@@ -43,11 +43,13 @@ public class RegistrationActivity extends AppCompatActivity {
         dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
+    //Back to login page
     public void gotoLogin(View view){
         Intent myIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
         RegistrationActivity.this.startActivity(myIntent);
         finish();
     }
+    //Save user registration details at DB
      public void registration(View view){
         String Username = ((EditText)findViewById(R.id.editTextUsername)).getText().toString();
         String FullName = ((EditText)findViewById(R.id.editTextFullName)).getText().toString();
@@ -59,6 +61,7 @@ public class RegistrationActivity extends AppCompatActivity {
          connectMySql.execute("");
 
     }
+    //Thread to Save user details at DB
     private class ConnectMySql_Registration extends AsyncTask<String, Void, String> {
         String res = "";
         String Username;

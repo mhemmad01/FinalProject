@@ -22,7 +22,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
-
+//The user start train on sync mode
 public class TrainSync extends AppCompatActivity {
     public static TrainSync Instance;
     static String Type=null;
@@ -41,6 +41,7 @@ public class TrainSync extends AppCompatActivity {
     private int currentStage;
     private int stars;
     static int counter222=0;
+    //matrix of sync stages and levels
     public static int[][] textureArrayWin = {
             {       R.drawable.level1_stage1,
                     R.drawable.level2_stage1,
@@ -106,6 +107,7 @@ public class TrainSync extends AppCompatActivity {
         if (dialog3 != null)
             dialog3.dismiss();
     }
+    //change the viewnumber fun of board for the paintview object
     public void addviewfun(int viewnumber){
         if(viewnumber==1){
             SyncviewGroup1.removeView(SyncTrainView1);
@@ -119,6 +121,7 @@ public class TrainSync extends AppCompatActivity {
             SyncviewGroup2.addView(SyncTrainView2);
         }
     }
+    //Both users move up there finger and finished the draw
     public void drawfinish(){
         int percent=PaintView.getsyncvalue();
         TextView percent_view=(findViewById(R.id.textView12));
@@ -246,6 +249,7 @@ public class TrainSync extends AppCompatActivity {
             alert11.show();
         }
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -253,12 +257,14 @@ public class TrainSync extends AppCompatActivity {
         dialog3.setTitle("Loading");
         dialog3.show();
     }
+    //The user could restart the current level
     public void Restart() {
         Intent intent = new Intent();
         intent.putExtra("action", "RESTART");
         setResult(Activity.RESULT_OK, intent);
         TrainSync.this.finish();
     }
+    //The user move to the next level
     public void Next(){
         int percent1=PaintView.getsyncvalue();
         Bitmap mydraw1=SyncTrainView1.get();
@@ -285,6 +291,7 @@ public class TrainSync extends AppCompatActivity {
         TrainSync.this.finish();
 
     }
+    //Thread to save the sync train in DB
     private class AddSyncLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
         int stars;
@@ -328,6 +335,7 @@ public class TrainSync extends AppCompatActivity {
 
         }
     }
+    //Thread to change the result of the specific sync train level and stage at DB
     private class EditSyncLevel extends AsyncTask<String, Void, Boolean> {
         String usr;
         int stars;

@@ -24,7 +24,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-
+//In this Page the diagnosed could select the train mode
 public class SelectTrainMode extends AppCompatActivity {
     static String TrainMode;
     SelectTrainMode a;
@@ -85,6 +85,7 @@ public class SelectTrainMode extends AppCompatActivity {
     public void SetTrainMode(String TrainMode){
         this.TrainMode=TrainMode;
     }
+    //The diagnosed want to start train on sync
     public void StartSyncTrain(View view) {
         SetTrainMode("Sync");
 
@@ -92,12 +93,14 @@ public class SelectTrainMode extends AppCompatActivity {
         getStarsSync s=new getStarsSync(User.currentUser);
         s.execute();
     }
+    //The diagnosed want to start train on motor
     public void StartMotorTrain(View view) {
         LoadingShow();
         getStarsMotor s=new getStarsMotor(User.currentUser);
         s.execute();
 
     }
+    //display loading icon
     public void LoadingShow(){
         // custom dialog
         dialog3 = new Dialog(this);
@@ -106,14 +109,7 @@ public class SelectTrainMode extends AppCompatActivity {
         dialog3.setCanceledOnTouchOutside(false);
         dialog3.show();
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-
-        return true;
-    }*/
+    //Here we pass the diagnosed between the train levels
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -184,6 +180,7 @@ public class SelectTrainMode extends AppCompatActivity {
             }
         }
     }
+    //Thread to save the user img of train motor
     private class SaveLastStageLevel extends AsyncTask<String, Void, Boolean> {
         User usr;
         int lastmotorlevel;
@@ -221,6 +218,7 @@ public class SelectTrainMode extends AppCompatActivity {
 
         }
     }
+    //Thread to save the users img of train sync
     private class SaveLastStageLevelSync extends AsyncTask<String, Void, Boolean> {
         User usr;
         int lastsynclevel;
@@ -258,6 +256,7 @@ public class SelectTrainMode extends AppCompatActivity {
 
         }
     }
+    //Thread to get the last level and last stage of train motor
     private class GetLastStageLevel extends AsyncTask<String, Void, int[]> {
         User usr;
 
@@ -332,6 +331,7 @@ public class SelectTrainMode extends AppCompatActivity {
 
         }
     }
+    //Thread to get the sum of stars of motor for the user to check if he could continue to the next stage
     private class getStarsMotor extends AsyncTask<String, Void, Float> {
         User usr;
 
@@ -367,6 +367,7 @@ public class SelectTrainMode extends AppCompatActivity {
 
         }
     }
+    //Thread to get the sum of stars of sync for the user to check if he could continue to the next stage
     private class getStarsSync extends AsyncTask<String, Void, Float> {
         User usr;
 
@@ -402,6 +403,7 @@ public class SelectTrainMode extends AppCompatActivity {
 
         }
     }
+    //Thread to get last level and stage of the sync train mode
     private class GetLastStageLevelSync extends AsyncTask<String, Void, int[]> {
         User usr;
 

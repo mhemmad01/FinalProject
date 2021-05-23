@@ -104,12 +104,14 @@ public class PaintView extends View {
         }
 
     }
+    //Set board number of the object
     public void setviewnumber(int i){
         this.viewnumber=i;
     }
     public Bitmap get(){
         return this.getDrawingCache();
     }
+    //Draw on the board function and save draw position point each different_time
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(Type.equals("Sync")){
@@ -176,16 +178,16 @@ public class PaintView extends View {
 
                                 if(viewnumber==1){
                                     Point current=new Point();
-                                    current.setPointx(Math.abs(pointX-startpoint1.getPointx()));
-                                    current.setPointy(Math.abs(pointY-startpoint1.getPointy()));
+                                    current.setPointx(pointX-startpoint1.getPointx());
+                                    current.setPointy(pointY-startpoint1.getPointy());
                                     current.settime(System.currentTimeMillis()-starttime);
                                     Log.i("nn2",System.currentTimeMillis()+"xxxxxxxxxxxxx");
 
                                     f1.add(current);
                                 }else if(viewnumber==2){
                                     Point current=new Point();
-                                    current.setPointx(Math.abs(pointX-startpoint2.getPointx()));
-                                    current.setPointy(Math.abs(pointY-startpoint2.getPointy()));
+                                    current.setPointx(pointX-startpoint2.getPointx());
+                                    current.setPointy(pointY-startpoint2.getPointy());
                                     current.settime(System.currentTimeMillis()-starttime);
                                     f2.add(current);
                                     Log.i("nn0000",System.currentTimeMillis()+"xxxxxxxxxxxxx" + f2.size());
@@ -258,7 +260,7 @@ public class PaintView extends View {
             return false;
         }
     }
-
+    //Calculate the sync percent of two users
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawPath(path,brush);
@@ -302,41 +304,18 @@ public class PaintView extends View {
             percent = (int)(((float) count / distances.size()) * 100);
         }
     }
-    /*
-    public double percent_calc(int index1,int index2,ArrayList<Double> arr){
-        if(index2>arr.size())
-            index2=arr.size();
-        double max_distance=0;
-        double sum=0;
-        int count=0;
-        for(int i=index1;i<index2;i++) {
-            if (arr.get(i) > max_distance) {
-                max_distance = arr.get(i);
-            }
-            sum =sum+arr.get(i);
-            count++;
-        }
-        return 1-(float)((float)sum/((count)*max_distance));
-    }*/
+
+    //calculate the distance between two point at time t
     public double g(float t){
         Point view2=f(f2,t);
         Point view1=f(f1,t);
 
-
-/*
-        double norm_a=Math.sqrt((view1.getPointx()*view1.getPointx())+(view1.getPointy()*view1.getPointy()));
-        double norm_b=Math.sqrt((view2.getPointx()*view2.getPointx())+(view2.getPointy()*view2.getPointy()));
-        if((norm_a*norm_b)==0){
-            return 0;
-        }
-
-        return (Math.abs(view1.getPointx()*view2.getPointx())+Math.abs(view1.getPointy()*view2.getPointy()))/(norm_a*norm_b);*/
         if(view2==null || view1==null)
             return 1000;
         Log.i("fffccc",view2.toString()+"--"+view1.toString()+"ttttt"+t);
         return Math.sqrt((view1.getPointx()-view2.getPointx())*(view1.getPointx()-view2.getPointx())+((view1.getPointy()-view2.getPointy())*(view1.getPointy()-view2.getPointy())));
     }
-
+    //return the finger position at time t
     public Point f(ArrayList<Point> points, float t){
         int roundedt = Math.round(t);
         double min=Math.abs(points.get(0).gettime()-t);
@@ -352,6 +331,7 @@ public class PaintView extends View {
         }
         return points.get(index);
     }
+    //return sync percent value of two users
     public static int getsyncvalue(){
         return percent;
     }
