@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 public class Diagnosis extends User {
 
+    /*
+        This Class is Responsible for Diagnosis View And Adapter And Functions
+    */
+
     public Diagnosis(User user){
         super(user.getId(),user.getUsername(),user.getFullName(),user.isDiagnostic(),user.getAge());
     }

@@ -13,6 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
+/*
+This Class is Responsible for Diagnosis Results
+ */
+
 public class DiagnosisResultsFragment extends Fragment implements OnClickListener{
 	ClickHandler listener;
 

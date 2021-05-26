@@ -5,6 +5,10 @@ import com.example.myapplication.User;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*
+This Class is Responsible for Diagnoseds View And Adapter And Functions
+ */
+
 public class Diagnosed extends User {
     public static Diagnosed selected;
 

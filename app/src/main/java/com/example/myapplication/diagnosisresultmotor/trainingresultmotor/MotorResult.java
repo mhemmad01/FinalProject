@@ -8,7 +8,9 @@ public class MotorResult extends com.example.myapplication.trainingresultmotor.M
     public static ArrayList<MotorResult> selected;
     public static ArrayList<String> diagnosisIds;
     public static Map<String, ArrayList<MotorResult>> diagnosis= new HashMap<>();
-
+    /*
+        This Class is Responsible for Motor Results View And Adapter And Functions
+    */
     public String username;
     public String original;
     public String img;

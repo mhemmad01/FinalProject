@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
+/*
+This Class is Responsible for Diagnoseds View And Adapter And Functions
+ */
 
 public class DiagnosedViewModel extends ViewModel {
     private static MutableLiveData<ArrayList<Diagnosed>> diagnoseds;

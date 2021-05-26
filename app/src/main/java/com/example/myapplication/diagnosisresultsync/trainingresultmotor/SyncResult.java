@@ -8,7 +8,9 @@ public class SyncResult extends com.example.myapplication.trainingresultmotor.Mo
     public static ArrayList<SyncResult> selected;
     public static ArrayList<String> diagnosisIds;
     public static Map<String, ArrayList<SyncResult>> diagnosis= new HashMap<>();
-
+    /*
+          This Classes is Responsible for Sync Results View And Adapter And Functions
+      */
     public String username;
     public String original;
     public String img;

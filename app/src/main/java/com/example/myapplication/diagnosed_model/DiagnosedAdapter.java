@@ -27,7 +27,9 @@ import com.example.myapplication.trainingresultsync.trainingresultmotor.SyncResu
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+This Class is Responsible for Diagnoseds View And Adapter And Functions
+ */
 public class DiagnosedAdapter extends RecyclerView.Adapter<DiagnosedAdapter.ViewHolder> {
 
     public List<Diagnosed> mDiagnoseds;

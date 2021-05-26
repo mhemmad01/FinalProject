@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+/*
+This Class is Responsible for Improving Levels and there  Activity
+ */
 
 public class ImproveLevelsFragment extends Fragment implements OnClickListener{
 	ClickHandler listener;

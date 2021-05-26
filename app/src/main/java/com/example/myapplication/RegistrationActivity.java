@@ -23,9 +23,9 @@ import java.sql.Statement;
 //Registration Activity where the user could create account on the app
 public class RegistrationActivity extends AppCompatActivity {
 
-    private static final String url = "jdbc:mysql://freedb.tech:3306/freedbtech_FinalProject";
-    private static final String user = "freedbtech_mhemmad";
-    private static final String pass = "Mhmd12345.";
+    private static final String url = dbConnection.url;
+    private static final String user = dbConnection.user;
+    private static final String pass = dbConnection.pass;
     static Dialog dialog3=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

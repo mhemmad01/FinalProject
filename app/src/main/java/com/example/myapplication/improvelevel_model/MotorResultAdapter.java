@@ -32,7 +32,9 @@ import java.util.List;
 public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.ViewHolder>  {
 
     public List<MotorResult> motorResults;
-
+    /*
+          This Classes is Responsible for Motor Results View And Adapter And Functions
+      */
     public static MotorResultAdapter instance;
     public static ViewHolder toImprove;
     // Pass in the contact array into the constructor

@@ -30,7 +30,9 @@ import java.util.List;
 
 
 public class SyncResultAdapter extends RecyclerView.Adapter<SyncResultAdapter.ViewHolder> {
-
+    /*
+          This Classes is Responsible for Sync Results View And Adapter And Functions
+      */
     public List<SyncResult> syncResults;
     public static SyncResultAdapter instance;
     // Pass in the contact array into the constructor

@@ -19,7 +19,9 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-
+/*
+This Class is Responsible for Training Results
+ */
 public class TrainingResultsFragment extends Fragment implements OnClickListener{
 	ClickHandler listener;
 
