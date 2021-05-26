@@ -130,7 +130,14 @@ public class TrainSync extends AppCompatActivity {
         percent_view.setText(percent+"%");
         if(Type.equals("improve")){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("Good job");
+            if(percent >90)
+                builder1.setMessage("EXCELLENT");
+            else if(percent >75)
+                builder1.setMessage("very good");
+            else if(percent >50)
+                builder1.setMessage("good");
+            else
+                builder1.setMessage("You can do better");
             //builder1.setCancelable(true);
 
             builder1.setPositiveButton(
@@ -228,7 +235,14 @@ public class TrainSync extends AppCompatActivity {
             alert11.show();
         }else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("NICE");
+            if(percent >90)
+                builder1.setMessage("EXCELLENT");
+            else if(percent >75)
+                builder1.setMessage("very good");
+            else if(percent >50)
+                builder1.setMessage("good");
+            else
+                builder1.setMessage("You can do better");
             //builder1.setCancelable(true);
             builder1.setPositiveButton(
                     "RESTART",
