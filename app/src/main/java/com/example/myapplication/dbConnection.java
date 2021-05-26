@@ -16,6 +16,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class dbConnection {
@@ -63,6 +64,25 @@ public class dbConnection {
         }
     }
 
+    public static boolean savesynctraindata(String usr,int stage,int level,ArrayList<Point> f1,ArrayList<Point> f2){
+        Statement st = null;
+        try {
+            st = getConnection().createStatement();
+            for(int i=0;i<Math.max(f1.size(), f2.size());i++) {
+                if(i>=f1.size())
+                    st.executeUpdate("INSERT INTO synctrainresult (user, stage, level, time1,point1x,point1y,time2,point2x,point2y)  VALUES('" + usr + "', '" + Integer.toString(stage) + "','" + Integer.toString(level) + "','"+String.valueOf(f2.get(i).gettime())+ "','" + "-1" + "','" +"-1" + "','"+String.valueOf(f2.get(i).gettime())+"','" + String.valueOf(f2.get(i).getPointx()) + "','" + String.valueOf(f2.get(i).getPointy()) + "')");
+                else if(i>=f2.size())
+                    st.executeUpdate("INSERT INTO synctrainresult (user, stage, level, time1,point1x,point1y,time2,point2x,point2y)  VALUES('" + usr + "', '" + Integer.toString(stage) + "','" + Integer.toString(level) +"','"+String.valueOf(f1.get(i).gettime())+ "','" + String.valueOf(f1.get(i).getPointx()) + "','" + String.valueOf(f1.get(i).getPointy()) + "','"+String.valueOf(f1.get(i).gettime())+"','" + "-1" + "','" + "-1" + "')");
+                else
+                    st.executeUpdate("INSERT INTO synctrainresult (user, stage, level, time1,point1x,point1y,time2,point2x,point2y)  VALUES('" + usr + "', '" + Integer.toString(stage) + "','" + Integer.toString(level) + "','" +String.valueOf(f1.get(i).gettime())+"','"+ String.valueOf(f1.get(i).getPointx()) + "','" + String.valueOf(f1.get(i).getPointy()) + "','" + String.valueOf(f2.get(i).gettime())+"','"+String.valueOf(f2.get(i).getPointx()) + "','" + String.valueOf(f2.get(i).getPointy()) + "')");
+            }
+            st.close();
+            return true;
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
     public static boolean validatePassword(String username, String password){
         try {
 

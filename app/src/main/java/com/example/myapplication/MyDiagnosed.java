@@ -6,10 +6,13 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -36,7 +39,20 @@ public class MyDiagnosed extends AppCompatActivity{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.mydiagnosed);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            setTitle("My Diagnosed");
+            final androidx.appcompat.app.ActionBar abar = getSupportActionBar();
+            abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_toolbar));//line under the action bar
+            View viewActionBar = getLayoutInflater().inflate(R.layout.abs_layout, null);
+            androidx.appcompat.app.ActionBar.LayoutParams params = new androidx.appcompat.app.ActionBar.LayoutParams(//Center the textview in the ActionBar !
+                    androidx.appcompat.app.ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.MATCH_PARENT,
+                    Gravity.CENTER);
+            TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
+            textviewTitle.setText("My Diagnoseds");
+            abar.setCustomView(viewActionBar, params);
+            abar.setDisplayShowCustomEnabled(true);
+            abar.setDisplayShowTitleEnabled(false);
+            abar.setDisplayHomeAsUpEnabled(true);
+            abar.setHomeButtonEnabled(true);
             if(User.diagnoseds==null)
                 User.diagnoseds= new ArrayList<>();
             instance=this;

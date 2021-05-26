@@ -22,6 +22,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+
 //The user start train on sync mode
 public class TrainSync extends AppCompatActivity {
     public static TrainSync Instance;
@@ -201,6 +203,8 @@ public class TrainSync extends AppCompatActivity {
                             String temp2= Base64.encodeToString(b2, Base64.DEFAULT);
                             TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent);
                             s.execute("");
+                            TrainSync.SaveSyncTrainData s2=new TrainSync.SaveSyncTrainData(User.currentUser.getUsername(),currentStage,currentlevel,PaintView.f1,PaintView.f2);
+                            s2.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
                             setResult(Activity.RESULT_OK, intent);
@@ -285,6 +289,9 @@ public class TrainSync extends AppCompatActivity {
         SyncviewGroup2.layout(0, 0, SyncviewGroup2.getMeasuredWidth(), SyncviewGroup2.getMeasuredHeight());
         TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent1);
         s.execute("");
+        TrainSync.SaveSyncTrainData s2=new TrainSync.SaveSyncTrainData(User.currentUser.getUsername(),currentStage,currentlevel,PaintView.f1,PaintView.f2);
+        s2.execute("");
+
         Intent intent = new Intent();
         intent.putExtra("action", "NEXT");
         setResult(Activity.RESULT_OK, intent);
@@ -365,6 +372,46 @@ public class TrainSync extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... params) {
             return dbConnection.edittrainlevelSync(usr, stars, stage, level, img1,img2,percent);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                Log.i("hhhh", "ccc");
+                //getmotorImg a = new getmotorImg(usr, stage, level);
+                //a.execute("");
+            } else {
+                Log.i("hhhh", "ffffff");
+            }
+
+        }
+    }
+    private class SaveSyncTrainData extends AsyncTask<String, Void, Boolean> {
+        String usr;
+        int stage;
+        int level;
+        ArrayList<Point> f1;
+        ArrayList<Point> f2;
+        public SaveSyncTrainData(String usr, int stage, int level, ArrayList<Point> f1,ArrayList<Point> f2) {
+            this.usr = usr;
+            this.stage = stage;
+            this.level = level;
+            this.f1=f1;
+            this.f2=f2;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Toast.makeText(LoginActivity.this, "Please wait...", Toast.LENGTH_SHORT)
+            //    .show();
+        }
+
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            Log.i("gg",usr+","+stage+","+level+","+f1.size()+","+f2.size());
+            return dbConnection.savesynctraindata(usr,stage,level,f1,f2);
         }
 
         @Override

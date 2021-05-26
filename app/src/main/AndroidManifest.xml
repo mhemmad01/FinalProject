@@ -47,6 +47,15 @@
         <activity android:name=".SelectDiagnosisMode"  android:screenOrientation="landscape" android:parentActivityName=".MainDiagnostic"></activity>
         <activity android:name=".ViewDiagnosisResults"  android:screenOrientation="landscape" android:parentActivityName=".MyDiagnosed"></activity>
         <activity android:name=".Levels"  android:screenOrientation="landscape" android:parentActivityName=".MainDiagnosed"></activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.myapplication.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

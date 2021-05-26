@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,9 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.example.myapplication.diagnosis_model.Diagnosis;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -266,6 +271,7 @@ public class PaintView extends View {
         canvas.drawPath(path,brush);
     }
     public void Avg_g(){
+        Log.i("ffff", "mmmmm: ");
         if(f1.size()==0 && f2.size()==0) {
             percent = 100;
         }
@@ -275,7 +281,33 @@ public class PaintView extends View {
             Log.i("cccf2", "Avg_g: " + f2.toString());
         }
         else {
+
             int max = Math.max(f1.size(), f2.size());
+            //generate data
+            /*
+            StringBuilder data = new StringBuilder();
+            data.append("Time,Pointx1,Pointy1,Pointx2,Pointx2");
+            for(int i = 0; i<max; i++){
+                if(i<f1.size())
+                    data.append("\n"+String.valueOf(f1.get(i).gettime())+"," +String.valueOf(f1.get(i).getPointx())+","+String.valueOf(f1.get(i).getPointy()));
+                else
+                    data.append("\n"+String.valueOf(f1.get(f1.size()-1).gettime())+","+String.valueOf(f1.get(f1.size()-1).getPointx())+","+String.valueOf(f1.get(f1.size()-1).getPointy()));
+                if(i<f2.size())
+                    data.append(String.valueOf(f2.get(i).gettime())+","+String.valueOf(f2.get(i).getPointx())+","+String.valueOf(f2.get(i).getPointy()));
+                else
+                    data.append(String.valueOf(f2.get(f2.size()-1).gettime())+","+String.valueOf(f2.get(f2.size()-1).getPointx())+","+String.valueOf(f2.get(f2.size()-1).getPointy()));
+            }
+
+            try{
+                //saving the file into device
+                FileOutputStream out = context.openFileOutput("data.csv", Context.MODE_PRIVATE);
+                out.write((data.toString()).getBytes());
+                out.close();
+                Log.i("ffff", "mmmmm: ");
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }*/
             Log.i("cccf1", "Avg_g: " + f1.toString());
             Log.i("cccf2", "Avg_g: " + f2.toString());
             double sum = 0;
