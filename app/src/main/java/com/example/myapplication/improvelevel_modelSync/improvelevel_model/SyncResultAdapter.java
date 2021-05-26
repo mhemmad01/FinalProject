@@ -65,7 +65,7 @@ public class SyncResultAdapter extends RecyclerView.Adapter<SyncResultAdapter.Vi
         image2.setImageBitmap(bmp1);
 
         ImageView original =  holder.original;
-        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.stage-1]);
+        original.setImageResource(TrainSync.textureArrayWin[current.stage-1][current.level-1]);
 
         holder.percent.setText("Sync: "+current.percent+"%");
         if(syncResults.get(position).stars>=0)

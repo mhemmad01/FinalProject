@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.TrainMotor;
+import com.example.myapplication.TrainSync;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class SyncResultAdapter extends RecyclerView.Adapter<SyncResultAdapter.Vi
         image2.setImageBitmap(bmp1);
         holder.percent.setText("Sync: "+current.percent+"%");
         ImageView original =  holder.original;
-        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.level-1]);
+        original.setImageResource(TrainSync.textureArrayWin[current.stage-1][current.level-1]);
 
         if(syncResults.get(position).stars>=0)
             holder.motorStars.setRating(syncResults.get(position).stars);

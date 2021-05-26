@@ -54,7 +54,7 @@ public class MotorResultAdapter extends RecyclerView.Adapter<MotorResultAdapter.
         image.setImageBitmap(bmp);
 
         ImageView original =  holder.original;
-        original.setImageResource(TrainMotor.textureArrayWin[current.level-1][current.level-1]);
+        original.setImageResource(TrainMotor.textureArrayWin[current.stage-1][current.level-1]);
 
         if(motorResults.get(position).stars>=0)
             holder.motorStars.setRating(motorResults.get(position).stars);
