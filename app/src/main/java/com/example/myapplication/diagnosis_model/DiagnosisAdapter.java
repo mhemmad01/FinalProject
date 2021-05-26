@@ -20,6 +20,10 @@ import java.util.List;
 
 public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.ViewHolder> {
 
+    /*
+    This Class is Responsible for Diagnosis View And Adapter And Functions
+    */
+
     public List<Diagnosed> mDiagnoseds;
     public static DiagnosisAdapter instance;
     public static Diagnosed temp=null;

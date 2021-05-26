@@ -27,6 +27,11 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class PaintView extends View {
+
+    /*
+This Class is Responsible for Paint View and managing painting and drawing
+ */
+
     public ViewGroup.LayoutParams params;
     private Path path=new Path();
     private Paint brush=new Paint();

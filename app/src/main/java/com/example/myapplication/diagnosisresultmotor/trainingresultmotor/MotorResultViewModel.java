@@ -12,7 +12,9 @@ public class MotorResultViewModel extends ViewModel {
     private final MutableLiveData<MotorResult> selected = new MutableLiveData<MotorResult>();
     public ArrayList<MotorResult> transactionsArrayList;
     private static MotorResultViewModel instance;
-
+    /*
+          This Class is Responsible for Motor Results View And Adapter And Functions
+      */
     public static MotorResultViewModel getInstance(){
         if(instance==null)
             instance=new MotorResultViewModel();

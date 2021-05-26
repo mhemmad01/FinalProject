@@ -14,7 +14,9 @@ public class DiagnosisViewModel extends ViewModel {
     private final MutableLiveData<Diagnosed> selected = new MutableLiveData<Diagnosed>();
     public ArrayList<Diagnosed> transactionsArrayList;
     private static DiagnosisViewModel instance;
-
+    /*
+        This Class is Responsible for Diagnosis View And Adapter And Functions
+    */
     public static DiagnosisViewModel getInstance(){
         if(instance==null)
             instance=new DiagnosisViewModel();

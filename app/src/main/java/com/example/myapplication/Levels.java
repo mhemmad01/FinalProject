@@ -33,6 +33,9 @@ import java.util.ArrayList;
 public class Levels extends AppCompatActivity implements ImproveLevelsFragment.ClickHandler {
 
 
+    /*
+    This Class is Responsible for Managing Levels
+     */
 
     RecyclerView rvMotorResult;
     MotorResultViewModel model;

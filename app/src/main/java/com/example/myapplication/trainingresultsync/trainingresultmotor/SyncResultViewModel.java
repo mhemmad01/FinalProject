@@ -12,7 +12,9 @@ public class SyncResultViewModel extends ViewModel {
     private final MutableLiveData<SyncResult> selected = new MutableLiveData<SyncResult>();
     public ArrayList<SyncResult> transactionsArrayList;
     private static SyncResultViewModel instance;
-
+    /*
+          This Classes is Responsible for Sync Results View And Adapter And Functions
+      */
     public static SyncResultViewModel getInstance(){
         if(instance==null)
             instance=new SyncResultViewModel();

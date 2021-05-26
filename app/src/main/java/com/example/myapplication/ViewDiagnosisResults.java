@@ -40,7 +40,9 @@ import java.util.ArrayList;
 public class ViewDiagnosisResults extends AppCompatActivity implements TrainingResultsFragment.ClickHandler,DiagnosisResultsFragment.ClickHandler {
 
 
-
+    /*
+    This Class is Responsible for View Diagnosis results Activity and functions
+     */
     RecyclerView rvMotorResult;
     MotorResultViewModel model;
     Spinner sp1;

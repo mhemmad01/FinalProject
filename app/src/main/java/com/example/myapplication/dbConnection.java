@@ -20,17 +20,20 @@ import java.util.List;
 
 public class dbConnection {
 
-    private static final String url = "jdbc:mysql://freedb.tech:3306/freedbtech_FinalProject";
-    private static final String user = "freedbtech_mhemmad";
-    private static final String pass = "Mhmd12345.";
+    public static final String url = "jdbc:mysql://bnntwd7hikulfy4quorz-mysql.services.clever-cloud.com:3306/bnntwd7hikulfy4quorz";
+    public static final String user = "uypnrj7rpuan2nnl";
+    public static final String pass = "ry4OYPlLA06HCHRERlrF";
     private static Connection conn;
 
-
+    /*
+    This Class is Responsible for DB Functions
+     */
     public static Connection getConnection() {
         if(conn==null)
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                conn = DriverManager.getConnection(url, user, pass);
+//                conn = DriverManager.getConnection(url, user, pass);
+                conn = DriverManager.getConnection(url +  "?user="+user+"&password="+pass+"&characterEncoding=utf8&useSSL=false&useUnicode=true");
             } catch ( Exception throwables) {
                 throwables.printStackTrace();
             }

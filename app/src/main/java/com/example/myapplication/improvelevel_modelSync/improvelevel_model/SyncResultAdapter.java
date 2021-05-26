@@ -28,7 +28,9 @@ import java.util.List;
 public class SyncResultAdapter extends RecyclerView.Adapter<SyncResultAdapter.ViewHolder>  {
 
     public List<SyncResult> syncResults;
-
+    /*
+          This Classes is Responsible for Sync Results View And Adapter And Functions
+      */
     public static SyncResultAdapter instance;
     public static ViewHolder toImprove;
     // Pass in the contact array into the constructor
