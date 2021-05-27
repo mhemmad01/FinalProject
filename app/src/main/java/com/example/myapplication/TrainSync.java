@@ -210,8 +210,8 @@ public class TrainSync extends AppCompatActivity {
                             String temp2= Base64.encodeToString(b2, Base64.DEFAULT);
                             TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent);
                             s.execute("");
-                            TrainSync.SaveSyncTrainData s2=new TrainSync.SaveSyncTrainData(User.currentUser.getUsername(),currentStage,currentlevel,PaintView.f1,PaintView.f2);
-                            s2.execute("");
+                            //TrainSync.SaveSyncTrainData s2=new TrainSync.SaveSyncTrainData(User.currentUser.getUsername(),currentStage,currentlevel,PaintView.f1,PaintView.f2);
+                            //s2.execute("");
                             Intent intent = new Intent();
                             intent.putExtra("action", "FINISH");
                             setResult(Activity.RESULT_OK, intent);
@@ -303,8 +303,8 @@ public class TrainSync extends AppCompatActivity {
         SyncviewGroup2.layout(0, 0, SyncviewGroup2.getMeasuredWidth(), SyncviewGroup2.getMeasuredHeight());
         TrainSync.AddSyncLevel s=new TrainSync.AddSyncLevel(User.currentUser.getUsername(),0,currentStage,currentlevel,temp1,temp2,percent1);
         s.execute("");
-        TrainSync.SaveSyncTrainData s2=new TrainSync.SaveSyncTrainData(User.currentUser.getUsername(),currentStage,currentlevel,PaintView.f1,PaintView.f2);
-        s2.execute("");
+        //TrainSync.SaveSyncTrainData s2=new TrainSync.SaveSyncTrainData(User.currentUser.getUsername(),currentStage,currentlevel,PaintView.f1,PaintView.f2);
+        //s2.execute("");
 
         Intent intent = new Intent();
         intent.putExtra("action", "NEXT");
@@ -400,6 +400,7 @@ public class TrainSync extends AppCompatActivity {
 
         }
     }
+    /*
     private class SaveSyncTrainData extends AsyncTask<String, Void, Boolean> {
         String usr;
         int stage;
@@ -439,5 +440,5 @@ public class TrainSync extends AppCompatActivity {
             }
 
         }
-    }
+    }*/
 }
