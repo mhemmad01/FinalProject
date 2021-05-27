@@ -71,11 +71,13 @@
 
                 <RatingBar
                     android:id="@+id/motorTrainingStars"
-                    android:layout_width="143dp"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.RatingBar"
+                    android:layout_width="146dp"
+                    android:layout_height="46dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:clickable="false"
+                    android:isIndicator="false"
                     android:numStars="3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -271,6 +271,8 @@ public class dbConnection {
             return -1;
         }
     }
+
+    //get User details from DB
     public static User getUser(String username) {
         Statement st = null;
         try {
@@ -290,7 +292,7 @@ public class dbConnection {
         }
     }
 
-
+    //get Diagnosed for users from DB
     public static ArrayList<Diagnosed> getDiagnosedForUser(String username) {
         Statement st = null;
         ArrayList<Diagnosed> users = new ArrayList<>();
@@ -404,6 +406,8 @@ public class dbConnection {
             return false;
         }
     }
+
+    //get train motor details from DB
     public static ArrayList<com.example.myapplication.improvelevel_model.MotorResult> getTrainMotorResultsImprove(String username){
         Statement st = null;
         ArrayList<com.example.myapplication.improvelevel_model.MotorResult> temp = new ArrayList<>();
@@ -432,7 +436,7 @@ public class dbConnection {
         }
     }
 
-
+    //get train motor results and details from DB
     public static ArrayList<MotorResult> getTrainMotorResults(String username){
         Statement st = null;
         ArrayList<MotorResult> temp = new ArrayList<>();
@@ -461,7 +465,7 @@ public class dbConnection {
         }
     }
 
-
+    //get Sync trainings results and details from DB
     public static ArrayList<SyncResult> getTrainSyncResults(String username){
         Statement st = null;
         ArrayList<SyncResult> temp = new ArrayList<>();
@@ -492,6 +496,7 @@ public class dbConnection {
         }
     }
 
+    //get Sync trainings results and details from DB
     public static ArrayList<com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult> getTrainSyncResults_ImproveLever(String username){
         Statement st = null;
         ArrayList<com.example.myapplication.improvelevel_modelSync.improvelevel_model.SyncResult> temp = new ArrayList<>();
@@ -521,6 +526,8 @@ public class dbConnection {
             return null;
         }
     }
+
+    //get Diagnosis Ids and details from DB
     public static ArrayList<String> getDiagnosisIds(String username ){
         Statement st = null;
         ArrayList<String> temp = new ArrayList<>();
@@ -540,6 +547,7 @@ public class dbConnection {
         }
     }
 
+    //get Diagnosis Ids and details for sync from DB
     public static ArrayList<String> getDiagnosisIdsSync(String username ){
         Statement st = null;
         ArrayList<String> temp = new ArrayList<>();
@@ -585,7 +593,7 @@ public class dbConnection {
     }
 
 
-
+    //get Diagnosis Results and details from DB
     public static ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult> getDiagnosisSyncResults(String username, String diagnosisID ){
         Statement st = null;
         ArrayList<com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult> temp = new ArrayList<>();
@@ -633,7 +641,7 @@ public class dbConnection {
         }
     }
 
-
+    //update motor stars in DB
     public static Boolean updateMotorResultStars(MotorResult result) {
         Statement st = null;
         try {
@@ -646,6 +654,8 @@ public class dbConnection {
             return false;
         }
     }
+
+    //update motor score in DB
     public static Boolean updateDiagnosisMotorScore(com.example.myapplication.diagnosisresultmotor.trainingresultmotor.MotorResult result) {
         Statement st = null;
         try {
@@ -659,6 +669,7 @@ public class dbConnection {
         }
     }
 
+    //update sync result  in DB
     public static Boolean updateSyncResultStars(SyncResult result) {
         Statement st = null;
         try {
@@ -672,8 +683,7 @@ public class dbConnection {
         }
     }
 
-
-
+    //update sync score  in DB
     public static Boolean updateDiagnosisSyncScore(com.example.myapplication.diagnosisresultsync.trainingresultmotor.SyncResult result) {
         Statement st = null;
         try {
