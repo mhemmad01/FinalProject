@@ -113,6 +113,8 @@ public class MainDiagnosed extends AppCompatActivity {
             } else {
                 if(dialog3!=null)
                 dialog3.dismiss();
+                Intent intent = new Intent(getApplicationContext(), Levels.class);
+                startActivity(intent);
                 Log.i("hhhh", "ffffff");
             }
 
